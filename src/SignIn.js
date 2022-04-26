@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Box, TextField, Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, CardHeader, Alert } from '@mui/material';
 import { useForm } from "react-hook-form";
 import swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
 
     const [status, setStatus] = useState('lookingForJob');
     const [name, setName] = useState('')
+
+    const navigate = useNavigate();
 
     const handleRadioChange = (event) => {
         setStatus(event.target.value);
@@ -26,7 +29,7 @@ const SignIn = () => {
                 <Grid item sx={{
                     p: 1,
                     margin: 'auto',
-                    width:'50vw'
+                    width: '50vw'
 
                 }}>
                     <Grid
@@ -103,6 +106,12 @@ const SignIn = () => {
                                         text: '!!! פרטיך נקלטו בהצלחה במערכת',
                                         confirmButtonText: 'המשך',
                                         confirmButtonColor: '#3085d6',
+                                    }).then(() => {
+                                        if (status === 'employer')
+                                            navigate('employerDetails')
+                                        else
+                                            navigate('disabledForm')
+
                                     })
                                 }}
 

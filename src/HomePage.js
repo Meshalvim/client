@@ -3,7 +3,12 @@ import VolunteerActivismRoundedIcon from '@mui/icons-material/VolunteerActivismR
 import VolunteerActivismTwoToneIcon from '@mui/icons-material/VolunteerActivismTwoTone';
 import { Grid, Button } from '@mui/material'
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+
 const HomePage = () => {
+
+    const navigate= useNavigate();
+
     return (
         <>
 
@@ -49,6 +54,7 @@ const HomePage = () => {
                             variant="contained"
                             size="large"
                             onClick={() => {
+                                 navigate('/signIn')
                             }}
 
                         >לכניסה</Button>
