@@ -1,0 +1,11 @@
+/* *{
+  box-sizing: border-box;
+  color: rgb(224, 0, 75);
+}
+
+*:hover,:active,:focus{
+  color: rgb(224, 0, 75);
+}
+TextField,TextField:hover,:active,:focus{
+  color: rgb(224, 0, 75);
+} */
