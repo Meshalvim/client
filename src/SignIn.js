@@ -93,29 +93,42 @@ const SignIn = () => {
                             </FormControl>
                         </Grid>
 
-                        <Grid item sx={{
-                            p: 1,
-                            margin: 'auto',
-                        }}>
-                            <Button
-                                variant="contained"
-                                onClick={() => {
-                                    new swal({
-                                        title: '!!!' + ' שלום ' + name,
-                                        icon: 'success',
-                                        text: '!!! פרטיך נקלטו בהצלחה במערכת',
-                                        confirmButtonText: 'המשך',
-                                        confirmButtonColor: '#3085d6',
-                                    }).then(() => {
-                                        if (status === 'employer')
-                                            navigate('employerDetails')
-                                        else
-                                            navigate('disabledForm')
+                        <Grid container direction="row"  >
 
-                                    })
-                                }}
+                            <Grid item sx={{
+                                p: 1,
+                                margin: 'auto',
+                            }}>
+                                <Button
+                                    variant="contained"
+                                    onClick={() => {
+                                        new swal({
+                                            title:'!!!'+name+' שלום ',
+                                            icon: 'success',
+                                            text:'!!!פרטיך נקלטו בהצלחה במערכת',
+                                            confirmButtonText: 'המשך',
+                                            confirmButtonColor: '#3085d6',
+                                        }).then(() => {
+                                            if (status === 'employer')
+                                                navigate('../employerDetails')
+                                            else
+                                                navigate('../disabledForm')
 
-                            >להרשמה</Button>
+                                        })
+                                    }}
+
+                                >להרשמה</Button>
+                            </Grid>
+
+                            <Grid item sx={{
+                                p: 1,
+                                margin: 'auto',
+                            }}>
+                                <Button
+                                    variant="striped"
+                                    onClick={() => { navigate('../logIn') }}
+                                >משתמש רשום?</Button>
+                            </Grid>
                         </Grid>
 
                     </Grid>

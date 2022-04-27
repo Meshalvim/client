@@ -24,7 +24,7 @@ function App() {
         {/* <DisabledForm />
             <Manage />
             <SignIn />
-            <LogIn />
+            <LogIn /> 
             <EmployerDetails /> */}
       </BrowserRouter>
     </div>
