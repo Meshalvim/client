@@ -181,19 +181,6 @@ const EmployerDetails = () => {
                             type="submit"
                             disabled={!dirty || !isValid}
                             variant="contained"
-                            onClick={() => {
-                                Swal.fire({
-                                    title:'!!!שים לב',
-                                    text: 'כעת עליך למלא את הטופס על פי הדרישות על מנת שהתוצאה תצא מושלמת השתדל לדייק בנתונים ככל האפשר' ,
-                                    icon: 'info',
-                                    confirmButtonText: 'המשך',
-                                    confirmButtonColor: '#3085d6',
-                                }).then((result)=>{
-                                    if(result.isConfirmed)
-                                    navigate('../employerDemands')
-                                })
-                            }}
-
                         >להמשך התהליך</Button>
                     </Grid >
                 </Grid>
