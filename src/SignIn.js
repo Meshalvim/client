@@ -14,7 +14,7 @@ const validationSchema = Yup.object({
 
 const SignIn = () => {
 
-    const { handleSubmit, handleChange, handleBlur, values, errors, touched, isValid } = useFormik({
+    const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
         initialValues: {
             name: '',
             password: '',
@@ -22,8 +22,24 @@ const SignIn = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-            alert(JSON.stringify(values))
-        },
+            // alert(JSON.stringify(values)).then(
+            new swal({
+                title: '!!!' + values.name + ' שלום ',
+                icon: 'success',
+                text: '!!!פרטיך נקלטו בהצלחה במערכת',
+                confirmButtonText: 'המשך',
+                confirmButtonColor: '#3085d6',
+            }).then(
+                (result) => {
+                    if (result.isConfirmed) {
+                        if (status === 'employer')
+                            navigate('../employerDetails')
+                        else
+                            navigate('../disabledForm')
+                    }
+                })
+            // )
+        }
     })
 
     const [status, setStatus] = useState('lookingForJob');
@@ -40,7 +56,6 @@ const SignIn = () => {
 
         <form onSubmit={handleSubmit}>
             <Grid container direction="column" sx={{ p: 5 }}>
-                {JSON.stringify(errors)}
                 <Grid item sx={{
                     p: 1,
                     margin: 'auto',
@@ -155,26 +170,9 @@ const SignIn = () => {
                                 margin: 'auto',
                             }}>
                                 <Button
-                                    disabled={!isValid}
+                                    type='submit'
+                                    disabled={!dirty || !isValid}
                                     variant="contained"
-                                    onClick={() => {
-                                        new swal({
-                                            title: '!!!' + values.name + ' שלום ',
-                                            icon: 'success',
-                                            text: '!!!פרטיך נקלטו בהצלחה במערכת',
-                                            confirmButtonText: 'המשך',
-                                            confirmButtonColor: '#3085d6',
-                                        }).then(
-                                            (result) => {
-                                                if (result.isConfirmed) {
-                                                    if (status === 'employer')
-                                                        navigate('../employerDetails')
-                                                    else
-                                                        navigate('../disabledForm')
-                                                }
-                                            })
-                                    }}
-
                                 >להרשמה</Button>
                             </Grid>
 

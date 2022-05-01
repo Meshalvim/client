@@ -12,18 +12,48 @@ const validationSchema = Yup.object({
 
 const LogIn = () => {
 
-    const { handleSubmit, handleChange, handleBlur, values, errors, touched, isValid } = useFormik({
+    const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
         initialValues: {
             name: '',
             password: '',
         },
         validationSchema,
         onSubmit: (values) => {
-           alert( JSON.stringify(values))
+            //    alert( JSON.stringify(values))
+            const exists = checkIfExist()
+            if (exists)
+                Swal.fire({
+                    title: '!!!' + ' שלום ' + values.name,
+                    icon: 'info',
+                    text: '!!!אתה מועבר לטופס לבקשת עבודה, בהצלחה',
+                    confirmButtonText: 'המשך',
+                    confirmButtonColor: '#3085d6',
+                })
+            else {
+                Swal.fire({
+                    title: 'שגיאה!',
+                    icon: 'error',
+                    text: 'משתמש לא קיים!',
+                    confirmButtonText: 'מעבר לרישום',
+                    showCancelButton: true,
+                    cancelButtonText: 'להזנת הפרטים מחדש',
+                    confirmButtonClass: 'btn-danger',
+                    cancelButtonClass: 'btn-danger',
+                    // confirmButtonColor: '#3085d6',
+                }).then(
+                    (result) => {
+                        if (result.isConfirmed)
+                            navigate('../signIn')
+                    })
+            }
         },
     })
 
     const navigate = useNavigate();
+    const checkIfExist = () => {
+        //this function need to check in the server if the user exists or not
+        return false;
+    }
 
     return (
         <form onSubmit={handleSubmit} >
@@ -88,38 +118,9 @@ const LogIn = () => {
                         margin: 'auto',
                     }}>
                         <Button
-                            disabled={!isValid}
+                            disabled={!dirty || !isValid}
                             type="submit"
                             variant="contained"
-                        // onClick={() => {
-                        //     const exists = checkIfExist()
-                        //     if (exists)
-                        //         Swal.fire({
-                        //             title: '!!!' + ' שלום ' + values.name,
-                        //             icon: 'info',
-                        //             text: '!!!אתה מועבר לטופס לבקשת עבודה, בהצלחה',
-                        //             confirmButtonText: 'המשך',
-                        //             confirmButtonColor: '#3085d6',
-                        //         })
-                        //     else {
-                        //         Swal.fire({
-                        //             title: 'שגיאה!',
-                        //             icon: 'error',
-                        //             text: 'משתמש לא קיים!',
-                        //             confirmButtonText: 'מעבר לרישום',
-                        //             showCancelButton: true,
-                        //             cancelButtonText: 'להזנת הפרטים מחדש',
-                        //             confirmButtonClass: 'btn-danger',
-                        //             cancelButtonClass: 'btn-danger',
-                        //             // confirmButtonColor: '#3085d6',
-                        //         }).then(
-                        //             (result) => {
-                        //                 if (result.isConfirmed)
-                        //                     navigate('../signIn')
-                        //             })
-                        //     }
-
-                        // }}
                         >לכניסה</Button>
                     </Grid>
 

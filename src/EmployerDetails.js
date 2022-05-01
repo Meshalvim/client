@@ -21,7 +21,7 @@ const EmployerDetails = () => {
         'ירושלים', 'תל אביב', 'בני ברק', 'רמת גן', 'אלעד', 'בית שמש'
     ]
 
-    const { handleSubmit, handleChange, handleBlur, values, errors, touched, isValid, setFieldValue } = useFormik({
+    const { handleSubmit, handleChange, handleBlur, values, errors, touched, isValid, dirty } = useFormik({
         initialValues: {
             name: '',
             tel: '',
@@ -31,7 +31,22 @@ const EmployerDetails = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-            alert(JSON.stringify(values))
+            alert(JSON.stringify(values)).then(
+                () => {
+                    Swal.fire({
+                        title: '!!!שים לב',
+                        text: 'כעת עליך למלא את הטופס על פי הדרישות, על מנת שהתוצאה תצא מושלמת השתדל לדייק בנתונים ככל האפשר',
+                        icon: 'info',
+                        confirmButtonText: 'המשך',
+                        confirmButtonColor: '#3085d6',
+                    }).then(
+                        (result) => {
+                            if (result.isConfirmed) {
+                                navigate('../manage')
+                            }
+                        })
+                }
+            )
         },
     })
 
@@ -140,7 +155,7 @@ const EmployerDetails = () => {
                         <FormControl
                             fullWidth
                             variant="standard">
-                             {/* sx={{ m: 1, minWidth: 120 }} */}
+                            {/* sx={{ m: 1, minWidth: 120 }} */}
                             <InputLabel id="select-label">עיר העסק</InputLabel>
                             <Select
                                 error={errors.city && touched.city}
@@ -167,23 +182,8 @@ const EmployerDetails = () => {
                         margin: 'auto',
                     }}>
                         <Button
-                            disabled={!isValid}
+                            disabled={!dirty || !isValid}
                             variant="contained"
-                            onClick={() => {
-                                Swal.fire({
-                                    title: '!!!שים לב',
-                                    text: 'כעת עליך למלא את הטופס על פי הדרישות, על מנת שהתוצאה תצא מושלמת השתדל לדייק בנתונים ככל האפשר',
-                                    icon: 'info',
-                                    confirmButtonText: 'המשך',
-                                    confirmButtonColor: '#3085d6',
-                                }).then(
-                                    (result) => {
-                                        if (result.isConfirmed) {
-                                            navigate('../manage')
-                                        }
-                                    })
-                            }}
-
                         >להמשך התהליך</Button>
                     </Grid >
                 </Grid>
