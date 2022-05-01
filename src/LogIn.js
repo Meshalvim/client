@@ -52,6 +52,7 @@ const LogIn = () => {
                     }}>
                         <TextField
                             fullWidth
+                            error={errors.name && touched.name}
                             name="name"
                             id="name"
                             label="שם"
@@ -69,6 +70,7 @@ const LogIn = () => {
                     }}>
                         <TextField
                             fullWidth
+                            error={errors.password && touched.password}
                             name='password'
                             id='password'
                             type='password'

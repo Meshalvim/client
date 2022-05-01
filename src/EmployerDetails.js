@@ -17,14 +17,9 @@ const EmployerDetails = () => {
 
     const navigate = useNavigate()
 
-const cityList=[
-    {value:'Jerusalem',label:'Jerusalem'},
-    {value:'TelAviv',label:'TelAviv'},
-    {value:'BneBrak',label:'BneBrak'},
-    {value:'RamatGan',label:'RamatGan'},
-    {value:'Elad',label:'Elad'},
-    {value:'BetShemesh',label:'BetShemesh'}
-]
+    const cityList = [
+        'ירושלים', 'תל אביב', 'בני ברק', 'רמת גן', 'אלעד', 'בית שמש'
+    ]
 
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, isValid, setFieldValue } = useFormik({
         initialValues: {
@@ -67,6 +62,7 @@ const cityList=[
                     }}>
                         <TextField
                             fullWidth
+                            error={errors.name && touched.name}
                             name="name"
                             id="name"
                             label="שם העסק"
@@ -85,6 +81,7 @@ const cityList=[
                     }}>
                         <TextField
                             fullWidth
+                            error={errors.tel && touched.tel}
                             name="tel"
                             type="text"
                             id="tel"
@@ -103,6 +100,7 @@ const cityList=[
                     }}>
                         <TextField
                             fullWidth
+                            error={errors.email && touched.email}
                             name="email"
                             type="email"
                             id="email"
@@ -122,6 +120,7 @@ const cityList=[
                     }}>
                         <TextField
                             fullWidth
+                            error={errors.password && touched.password}
                             name="password"
                             id="password"
                             type="password"
@@ -140,10 +139,11 @@ const cityList=[
                     }}>
                         <FormControl
                             fullWidth
-                            variant="standard"
-                            sx={{ m: 1, minWidth: 120 }}>
+                            variant="standard">
+                             {/* sx={{ m: 1, minWidth: 120 }} */}
                             <InputLabel id="select-label">עיר העסק</InputLabel>
                             <Select
+                                error={errors.city && touched.city}
                                 labelId="select-label"
                                 id="city"
                                 name="city"
@@ -152,18 +152,13 @@ const cityList=[
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                             >
-                            {cityList.map((city)=>{
-                                debugger
-                                <MenuItem key={city.value} value={city.value} >{city.label}</MenuItem>
-                            })}
-                                 <MenuItem value='Jerusalem'>ירושלים</MenuItem>
-                               {/* <MenuItem value={'TelAviv'}>תל אביב</MenuItem>
-                                <MenuItem value={'BneBrak'}>בני ברק</MenuItem>
-                                <MenuItem value={'Jerusalem'}>רמת גן</MenuItem>
-                                <MenuItem value={'Elad'}>אלעד</MenuItem>
-                                <MenuItem value={'other'}>אחר</MenuItem> */}
+                                {/* <MenuItem value="">בחר עיר...</MenuItem> */}
+                                {cityList.map((item, i) => {
+                                    return <MenuItem key={i} value={item} className="menuItemAge">{item}</MenuItem>
+                                })}
                             </Select>
                         </FormControl>
+                        {errors.city && touched.city && <Alert severity="error">{errors.city}</Alert>}
                     </Grid>
 
 

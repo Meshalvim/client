@@ -82,6 +82,7 @@ const SignIn = () => {
                         }}>
                             <TextField
                                 fullWidth
+                                error={errors.name && touched.name}
                                 name="name"
                                 id="name"
                                 label="שם"
@@ -99,6 +100,7 @@ const SignIn = () => {
                         }}>
                             <TextField
                                 fullWidth
+                                error={errors.password && touched.password}
                                 id="password"
                                 type="password"
                                 label="סיסמא"
@@ -116,6 +118,7 @@ const SignIn = () => {
                         }}>
                             <TextField
                                 fullWidth
+                                error={errors.email && touched.email}
                                 id="email"
                                 type="email"
                                 label="אימייל"
