@@ -1,8 +1,24 @@
 import { useState } from "react";
 import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button } from "@mui/material";
 import Swal from "sweetalert2"
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 
 const EmployerDemands = () => {
+    const formik=useFormik({
+        initialValues:{
+            abilities:'',
+            disabilities:'',
+            gender:'',
+            age:Number,
+            experience:Number,
+            positionType:'',
+            sumEmploeds:Number,
+        },
+        onSubmit:values=>{
+            alert(JSON.stringify(values,null,2))
+        }
+    })
     //אולי צריך להפוך לרשימת יכולות
     const [abilities, setAbilities] = useState();
     const [status, setStatus] = useState('');
@@ -23,6 +39,7 @@ const EmployerDemands = () => {
 
     const ages = ["18 - 22", "23 - 28", "29 - 33", "34 - 38", "39 - 43", "44 - 48", "49 - 53", "54 - 60"];
 
+    const navigate = useNavigate()
     return (
         <>
             <Grid container direction="column" sx={{
@@ -92,56 +109,108 @@ const EmployerDemands = () => {
                         </FormControl>
                     </Grid>
 
-                    <Grid item sx={{
-                        p: 1,
-                        margin: 'auto',
+                    <Grid container direction="row" sx={{
+                        p: 5
                     }}>
-                        <FormControl>
-                            <FormLabel>מין</FormLabel>
-                            <RadioGroup
-                                name="gender"
-                                id="gender"
-                                value={status}
-                                onChange={handleRadioChangeStatus}
-                            >
-                                <FormControlLabel value="male" control={<Radio />} label="זכר" />
-                                <FormControlLabel value="female" control={<Radio />} label="נקבה" />
-                            </RadioGroup>
-                        </FormControl>
+                        <Grid item sx={{
+                            p: 1,
+                            width: '20%'
+                        }}>
+                            <TextField
+                                type="number"
+                                fullWidth name="experience"
+                                id="score"
+                                label="ניקוד דרישה"
+                                variant="standard" />
+                        </Grid>
+                        <Grid item sx={{
+                            p: 4,
+                            margin: 'auto',
+                            width: '80%'
+                        }}>
+                            <FormControl>
+                                <FormLabel>מין</FormLabel>
+                                <RadioGroup
+                                    name="gender"
+                                    id="gender"
+                                    value={status}
+                                    onChange={handleRadioChangeStatus}
+                                >
+                                    <FormControlLabel value="male" control={<Radio />} label="זכר" />
+                                    <FormControlLabel value="female" control={<Radio />} label="נקבה" />
+                                </RadioGroup>
+                            </FormControl>
+                        </Grid>
                     </Grid>
 
-                    <Grid item sx={{
-                        p: 1,
-                        margin: 'auto',
+                    <Grid container direction="row" sx={{
+                        p: 5
                     }}>
-                        <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                            <InputLabel id="age">טווח גילאים נדרש</InputLabel>
-                            <Select
+                        <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                            width: '20%'
+                        }}>
+                            <TextField
+                                className="score"
+                                type="number"
+                                fullWidth name="experience"
+                                id="score"
+                                label="ניקוד דרישה"
+                                variant="standard"
+                                />
+                        </Grid>
+                        <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                            width: '80%'
+                        }}>
+                            <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                                <InputLabel id="age">טווח גילאים נדרש</InputLabel>
+                                <Select
 
-                                labelId="age"
-                                id="age"
-                                value={age}
-                                onChange={handleChangeDisabilities}
-                                label="age"
-                            >
-                                {ages.map((item, i) => {
-                                    return <MenuItem key={i} value={item} className="menuItemAge">{item}</MenuItem>
-                                })}
-                            </Select>
-                        </FormControl>
+                                    labelId="age"
+                                    id="age"
+                                    value={age}
+                                    onChange={handleChangeDisabilities}
+                                    label="age"
+                                >
+                                    {ages.map((item, i) => {
+                                        return <MenuItem key={i} value={item} className="menuItemAge">{item}</MenuItem>
+                                    })}
+                                </Select>
+                            </FormControl>
+                        </Grid>
                     </Grid>
 
-                    
-                    <Grid item sx={{
-                        p: 1,
-                        margin: 'auto',
+                    <Grid container direction="row" sx={{
+                        p: 5
                     }}>
-                        <TextField
-                            type="number"
-                            fullWidth name="experience"
-                            id="experience"
-                            label="מספר שנות ניסיון"
-                            variant="standard" />
+                        <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                            width: '20%'
+                        }}>
+                            <TextField
+                             className="score"
+                                type="number"
+                                fullWidth name="experience"
+                                id="score"
+                                label="ניקוד דרישה"
+                                variant="standard" />
+                        </Grid>
+                        <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                            width: '80%'
+                        }}>
+                            <TextField
+                                type="number"
+                                fullWidth name="experience"
+                                id="experience"
+                                label="מספר שנות ניסיון"
+                                variant="standard" />
+                        </Grid>
                     </Grid>
 
                     <Grid item sx={{

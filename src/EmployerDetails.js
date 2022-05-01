@@ -1,10 +1,12 @@
 import { Grid, TextField, FormLabel, Button } from "@mui/material";
 import Swal from "sweetalert2"
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const EmployerDetails = () => {
 
     const [name, setName] = useState('')
+    const navigate=useNavigate()
 
     return (
         <>
@@ -72,6 +74,9 @@ const EmployerDetails = () => {
                                     icon: 'info',
                                     confirmButtonText: 'המשך',
                                     confirmButtonColor: '#3085d6',
+                                }).then((result)=>{
+                                    if(result.isConfirmed)
+                                    navigate('../employerDemands')
                                 })
                             }}
 

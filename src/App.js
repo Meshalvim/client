@@ -21,6 +21,7 @@ function App() {
           <Route path="/employerDetails" element={<EmployerDetails />} />
           <Route path="/manage" element={<Manage />} />
           <Route path="/DisabledForm" element={<DisabledForm />} />
+          <Route path="/employerDemands" element={<EmployerDemands />} />
         </Routes>
       </BrowserRouter> 
     </div>
