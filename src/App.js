@@ -5,7 +5,6 @@ import SignIn from './SignIn';
 import LogIn from './LogIn';
 import HomePage from './HomePage';
 import EmployerDetails from './EmployerDetails';
-import EmployerForm from './EmployerForm';
 import Manage from './Manage';
 import DisabledForm from './DisabledForm';
 import EmployerDemands from './EmployerDemands';
@@ -21,7 +20,6 @@ function App() {
           <Route path="/employerDetails" element={<EmployerDetails />} />
           <Route path="/manage" element={<Manage />} />
           <Route path="/disabledForm" element={<DisabledForm />} />
-          <Route path="/DisabledForm" element={<DisabledForm />} />
         </Routes>
       </BrowserRouter>
     </div>
