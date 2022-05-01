@@ -11,7 +11,6 @@ const HomePage = () => {
 
     return (
         <>
-
             <Grid container sx={{
                 p: 15
             }}>

@@ -4,22 +4,19 @@ import swal from "sweetalert2";
 
 const DisabledForm = () => {
 
-    const [city, setCity] = useState();
     const [status, setStatus] = useState('');
     const [workingTime, setWorkingTime] = useState('');
+    const [city, setCity] = useState();
 
+    const handleCityChange = (e) => {
+        setCity(e.target.value);
+    };
     const handleRadioChangeStatus = (e) => {
         setStatus(e.target.value);
     }
     const handleRadioChangeWorkingTime = (e) => {
         setWorkingTime(e.target.value);
     }
-
-
-
-    const handleChange = (e) => {
-        setCity(e.target.value);
-    };
 
     return (
         <>
@@ -78,7 +75,7 @@ const DisabledForm = () => {
                                 labelId="demo-simple-select-standard-label"
                                 id="demo-simple-select-standard"
                                 value={city}
-                                onChange={handleChange}
+                                onChange={handleCityChange}
                                 label="Age"
                             >
                                 <MenuItem value="">
@@ -87,66 +84,66 @@ const DisabledForm = () => {
                                 <MenuItem value={'Jerusalem'}>ירושלים</MenuItem>
                                 <MenuItem value={'TelAviv'}>תל אביב</MenuItem>
                                 <MenuItem value={'BneBrak'}>בני ברק</MenuItem>
+                                <MenuItem value={'Jerusalem'}>רמת גן</MenuItem>
+                                <MenuItem value={'Jerusalem'}>אלעד</MenuItem>
+                                <MenuItem value={'Jerusalem'}>אחר</MenuItem>
                             </Select>
                         </FormControl>
+                    </Grid>
 
-                        <Grid item sx={{
-                            p: 2,
-                            margin: 'auto',
-                        }}>
-                            <FormControl>
-                                <FormLabel>מין</FormLabel>
-                                <RadioGroup
-                                    name="controlled-radio-buttons-group"
-                                    value={status}
-                                    onChange={handleRadioChangeStatus}
-                                >
-                                    <FormControlLabel value="male" control={<Radio />} label="זכר" />
-                                    <FormControlLabel value="female" control={<Radio />} label="נקבה" />
-                                </RadioGroup>
-                            </FormControl>
-                        </Grid>
+                    <Grid item sx={{
+                        p: 2,
+                        margin: 'auto',
+                    }}>
+                        <FormControl>
+                            <FormLabel>מין</FormLabel>
+                            <RadioGroup
+                                name="controlled-radio-buttons-group"
+                                value={status}
+                                onChange={handleRadioChangeStatus}
+                            >
+                                <FormControlLabel value="male" control={<Radio />} label="זכר" />
+                                <FormControlLabel value="female" control={<Radio />} label="נקבה" />
+                            </RadioGroup>
+                        </FormControl>
+                    </Grid>
 
-                        <Grid item sx={{
-                            p: 2,
-                            margin: 'auto',
-                        }}>
-                            <FormControl>
-                                <FormLabel>היקף משרה רצוי</FormLabel>
-                                <RadioGroup
-                                    name="controlled-radio-buttons-group"
-                                    value={workingTime}
-                                    onChange={handleRadioChangeWorkingTime}
-                                >
-                                    <FormControlLabel value="full" control={<Radio />} label="משרה מלאה" />
-                                    <FormControlLabel value="mornning" control={<Radio />} label="בוקר" />
-                                    <FormControlLabel value="afternoon" control={<Radio />} label="אחרי צהריים" />
-                                    <FormControlLabel value="evening" control={<Radio />} label="ערב" />
-                                    <FormControlLabel value="shifts" control={<Radio />} label="משמרות" />
-                                </RadioGroup>
-                            </FormControl>
-                        </Grid>
+                    <Grid item sx={{
+                        p: 2,
+                        margin: 'auto',
+                    }}>
+                        <FormControl>
+                            <FormLabel>היקף משרה רצוי</FormLabel>
+                            <RadioGroup
+                                name="controlled-radio-buttons-group"
+                                value={workingTime}
+                                onChange={handleRadioChangeWorkingTime}
+                            >
+                                <FormControlLabel value="full" control={<Radio />} label="משרה מלאה" />
+                                <FormControlLabel value="mornning" control={<Radio />} label="בוקר" />
+                                <FormControlLabel value="afternoon" control={<Radio />} label="אחרי צהריים" />
+                                <FormControlLabel value="evening" control={<Radio />} label="ערב" />
+                                <FormControlLabel value="shifts" control={<Radio />} label="משמרות" />
+                            </RadioGroup>
+                        </FormControl>
+                    </Grid>
 
- <Grid item sx={{
-                            p: 1,
-                            margin: 'auto',
-                        }}>
-                            <Button
-                                variant="contained"
-                                onClick={() => {
-                                   new swal({
-                                        title: 'תודה שהשתתפת במיזם!',
-                                        icon: 'success',
-                                        text:'פרטיך נקלטו בהצלחה במערכת!!!',
-                                        confirmButtonText: 'המשך',
-                                        confirmButtonColor: '#3085d6',
-                                    })
-                                }}
-
-                            >שמור</Button>
-                        </Grid>
-
-
+                    <Grid item sx={{
+                        p: 1,
+                        margin: 'auto',
+                    }}>
+                        <Button
+                            variant="contained"
+                            onClick={() => {
+                                new swal({
+                                    title: 'תודה שהשתתפת במיזם!',
+                                    icon: 'success',
+                                    text: 'פרטיך נקלטו בהצלחה במערכת!!!',
+                                    confirmButtonText: 'המשך',
+                                    confirmButtonColor: '#3085d6',
+                                })
+                            }}
+                        >שמור</Button>
                     </Grid>
                 </Grid>
             </Grid>

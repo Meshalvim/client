@@ -5,6 +5,7 @@ import SignIn from './SignIn';
 import LogIn from './LogIn';
 import HomePage from './HomePage';
 import EmployerDetails from './EmployerDetails';
+import EmployerForm from './EmployerForm';
 import Manage from './Manage';
 import DisabledForm from './DisabledForm';
 
@@ -18,14 +19,9 @@ function App() {
           <Route path="/logIn" element={<LogIn />} />
           <Route path="/employerDetails" element={<EmployerDetails />} />
           <Route path="/manage" element={<Manage />} />
-          <Route path="/DisabledForm" element={<DisabledForm />} />
-
+          <Route path="/disabledForm" element={<DisabledForm />} />
+          <Route path="/employerForm" element={<EmployerForm />} />
         </Routes>
-        {/* <DisabledForm />
-            <Manage />
-            <SignIn />
-            <LogIn /> 
-            <EmployerDetails /> */}
       </BrowserRouter>
     </div>
   );
