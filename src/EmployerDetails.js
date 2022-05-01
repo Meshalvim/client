@@ -31,22 +31,18 @@ const EmployerDetails = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-            alert(JSON.stringify(values)).then(
-                () => {
-                    Swal.fire({
-                        title: '!!!שים לב',
-                        text: 'כעת עליך למלא את הטופס על פי הדרישות, על מנת שהתוצאה תצא מושלמת השתדל לדייק בנתונים ככל האפשר',
-                        icon: 'info',
-                        confirmButtonText: 'המשך',
-                        confirmButtonColor: '#3085d6',
-                    }).then(
-                        (result) => {
-                            if (result.isConfirmed) {
-                                navigate('../manage')
-                            }
-                        })
-                }
-            )
+            Swal.fire({
+                title: '!!!שים לב',
+                text: 'כעת עליך למלא את הטופס על פי הדרישות, על מנת שהתוצאה תצא מושלמת השתדל לדייק בנתונים ככל האפשר',
+                icon: 'info',
+                confirmButtonText: 'המשך',
+                confirmButtonColor: '#3085d6',
+            }).then(
+                (result) => {
+                    if (result.isConfirmed) {
+                        navigate('../manage')
+                    }
+                })
         },
     })
 
@@ -182,6 +178,7 @@ const EmployerDetails = () => {
                         margin: 'auto',
                     }}>
                         <Button
+                            type="submit"
                             disabled={!dirty || !isValid}
                             variant="contained"
                         >להמשך התהליך</Button>
