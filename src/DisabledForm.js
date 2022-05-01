@@ -11,11 +11,10 @@ const DisabledForm = () => {
     const handleRadioChangeStatus = (e) => {
         setStatus(e.target.value);
     }
+    
     const handleRadioChangeWorkingTime = (e) => {
         setWorkingTime(e.target.value);
     }
-
-
 
     const handleChange = (e) => {
         setCity(e.target.value);

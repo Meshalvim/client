@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const LogIn = () => {
 
-    const [name, setName]= useState('')
+    const [name, setName] = useState('')
 
     return (
         <Grid container direction="column" sx={{
@@ -16,7 +16,7 @@ const LogIn = () => {
                     border: '2px solid lightGrey',
                     borderRadius: '1vw',
                     margin: 'auto',
-                    width:'50vw'
+                    width: '50vw'
 
                 }}>
 
@@ -25,14 +25,16 @@ const LogIn = () => {
                         fontSize: '20px',
                         color: '#1976d2',
                     }}
-                >כניסה</FormLabel>
+                >
+                    כניסה
+                </FormLabel>
 
                 <Grid item sx={{
                     p: 1,
                     margin: 'auto',
                 }}>
-                    <TextField fullWidth name="name" id="name" label="שם" variant="standard" 
-                        onChange={(e)=>setName(e.target.value)}/>
+                    <TextField fullWidth name="name" id="name" label="שם" variant="standard"
+                        onChange={(e) => setName(e.target.value)} />
                 </Grid>
 
                 <Grid item sx={{

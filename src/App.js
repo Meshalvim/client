@@ -7,10 +7,12 @@ import HomePage from './HomePage';
 import EmployerDetails from './EmployerDetails';
 import Manage from './Manage';
 import DisabledForm from './DisabledForm';
+import EmployerDemands from './EmployerDemands';
 
 function App() {
   return (
     <div>
+      {/* <EmployerDemands></EmployerDemands> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -19,14 +21,8 @@ function App() {
           <Route path="/employerDetails" element={<EmployerDetails />} />
           <Route path="/manage" element={<Manage />} />
           <Route path="/DisabledForm" element={<DisabledForm />} />
-
         </Routes>
-        {/* <DisabledForm />
-            <Manage />
-            <SignIn />
-            <LogIn />
-            <EmployerDetails /> */}
-      </BrowserRouter>
+      </BrowserRouter> 
     </div>
   );
 }

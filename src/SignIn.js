@@ -108,9 +108,9 @@ const SignIn = () => {
                                         confirmButtonColor: '#3085d6',
                                     }).then(() => {
                                         if (status === 'employer')
-                                            navigate('employerDetails')
+                                            navigate('../employerDetails')
                                         else
-                                            navigate('disabledForm')
+                                            navigate('../disabledForm')
 
                                     })
                                 }}
