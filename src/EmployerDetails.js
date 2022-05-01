@@ -2,24 +2,19 @@ import { Grid, TextField, FormLabel, Button, MenuItem, FormControl, InputLabel, 
 import Swal from "sweetalert2"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const EmployerDetails = () => {
-
-    const [name, setName] = useState('')
-    const navigate=useNavigate()
 import { useFormik } from "formik";
 import * as Yup from "yup"
 
-const validationSchema = Yup.object({
-    name: Yup.string().required('שם זהו שדה חובה'),
-    tel: Yup.string().required('טלפון זהו שדה חובה').matches(/^[0-9]+$/, 'מכיל רק ספרות').min(9, 'מינימום 7 ספרות').max(10, 'מקסימום 10 ספרות'),
-    password: Yup.string().required('סיסמא זהו שדה חובה'),
-    email: Yup.string().email('נא התאם לתבנית אימייל').required('אימייל זהו שדה חובה'),
-    city: Yup.string().required('עיר זהו שדה חובה'),
-})
+
 
 const EmployerDetails = () => {
-
+    const validationSchema = Yup.object({
+        name: Yup.string().required('שם זהו שדה חובה'),
+        tel: Yup.string().required('טלפון זהו שדה חובה').matches(/^[0-9]+$/, 'מכיל רק ספרות').min(9, 'מינימום 7 ספרות').max(10, 'מקסימום 10 ספרות'),
+        password: Yup.string().required('סיסמא זהו שדה חובה'),
+        email: Yup.string().email('נא התאם לתבנית אימייל').required('אימייל זהו שדה חובה'),
+        city: Yup.string().required('עיר זהו שדה חובה'),
+    })
     const navigate = useNavigate()
 
     const cityList = [
@@ -186,7 +181,6 @@ const EmployerDetails = () => {
                             type="submit"
                             disabled={!dirty || !isValid}
                             variant="contained"
-<<<<<<< HEAD
                             onClick={() => {
                                 Swal.fire({
                                     title:'!!!שים לב',
@@ -200,8 +194,6 @@ const EmployerDetails = () => {
                                 })
                             }}
 
-=======
->>>>>>> 5e300a22dd3e5f874f883f5cd696c92f9974e083
                         >להמשך התהליך</Button>
                     </Grid >
                 </Grid>
