@@ -12,7 +12,6 @@ import EmployerDemands from './EmployerDemands';
 function App() {
   return (
     <div>
-      {/* <EmployerDemands></EmployerDemands> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -23,7 +22,7 @@ function App() {
           <Route path="/DisabledForm" element={<DisabledForm />} />
           <Route path="/employerDemands" element={<EmployerDemands />} />
         </Routes>
-      </BrowserRouter> 
+      </BrowserRouter>
     </div>
   );
 }

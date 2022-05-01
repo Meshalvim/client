@@ -1,10 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { Box, TextField, Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, CardHeader, Alert } from '@mui/material';
-import { useForm } from "react-hook-form";
+import React, { useState } from 'react';
+import { TextField, Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert } from '@mui/material';
 import swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
+import { useFormik } from "formik";
+import * as Yup from "yup"
+
+const validationSchema = Yup.object({
+    name: Yup.string().required('שם זהו שדה חובה'),
+    password: Yup.string().required('סיסמא זהו שדה חובה'),
+    email: Yup.string().email('נא התאם לתבנית אימייל').required('אימייל זהו שדה חובה'),
+})
 
 const SignIn = () => {
+
+    const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
+        initialValues: {
+            name: '',
+            password: '',
+            email: '',
+        },
+        validationSchema,
+        onSubmit: (values) => {
+            // alert(JSON.stringify(values)).then(
+            new swal({
+                title: '!!!' + values.name + ' שלום ',
+                icon: 'success',
+                text: '!!!פרטיך נקלטו בהצלחה במערכת',
+                confirmButtonText: 'המשך',
+                confirmButtonColor: '#3085d6',
+            }).then(
+                (result) => {
+                    if (result.isConfirmed) {
+                        if (status === 'employer')
+                            navigate('../employerDetails')
+                        else
+                            navigate('../disabledForm')
+                    }
+                })
+            // )
+        }
+    })
 
     const [status, setStatus] = useState('lookingForJob');
     const [name, setName] = useState('')
@@ -15,17 +51,11 @@ const SignIn = () => {
         setStatus(event.target.value);
     }
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-
-    const onSubmit = (data) => {
-        console.log(data);
-    }
 
     return (
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit}>
             <Grid container direction="column" sx={{ p: 5 }}>
-                {JSON.stringify(errors)}
                 <Grid item sx={{
                     p: 1,
                     margin: 'auto',
@@ -40,25 +70,25 @@ const SignIn = () => {
                             margin: 'auto',
                         }}>
 
-                        <FormLabel
-                            sx={{
-                                fontSize: '20px',
-                                color: '#1976d2',
-                            }}
-                        >הרשמה</FormLabel>
+                        <Grid
+                            container
+                            direction='row'
+                            justifyContent="space-between">
 
-                        <Grid item sx={{
-                            p: 1,
-                            margin: 'auto',
-                        }}>
-                            <TextField fullWidth name="name" id="name" label="שם" variant="standard" onChange={(e) => setName(e.target.value)} />
-                        </Grid>
+                            <FormLabel
+                                sx={{
+                                    fontSize: '20px',
+                                    color: '#1976d2',
+                                }}
+                            >הרשמה</FormLabel>
 
-                        <Grid item sx={{
-                            p: 1,
-                            margin: 'auto',
-                        }}>
-                            <TextField fullWidth id="password" type="password" label="סיסמא" variant="standard" />
+                            <Button
+                                variant="outlined"
+                                endIcon={<ArrowBackRoundedIcon />}
+                                onClick={() => { navigate('/') }}
+                            >
+                                חזרה לדף הבית...
+                            </Button>
                         </Grid>
 
                         <Grid item sx={{
@@ -67,13 +97,53 @@ const SignIn = () => {
                         }}>
                             <TextField
                                 fullWidth
-                                {...register("email", {
-                                    pattern: { value: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i, message: 'Please enter a valid email' }
-                                })}
-                                id="email" type="email" label="אימייל" variant="standard"
+                                error={errors.name && touched.name}
+                                name="name"
+                                id="name"
+                                label="שם"
+                                variant="standard"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.name}
+                            />
+                            {errors.name && touched.name && <Alert severity="error">{errors.name}</Alert>}
+                        </Grid>
+
+                        <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                        }}>
+                            <TextField
+                                fullWidth
+                                error={errors.password && touched.password}
+                                id="password"
+                                type="password"
+                                label="סיסמא"
+                                variant="standard"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.password}
+                            />
+                            {errors.password && touched.password && <Alert severity="error">{errors.password}</Alert>}
+                        </Grid>
+
+                        <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                        }}>
+                            <TextField
+                                fullWidth
+                                error={errors.email && touched.email}
+                                id="email"
+                                type="email"
+                                label="אימייל"
+                                variant="standard"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.email}
                             />
                             {/* <Alert severity="error">בתבנית אימייל!!!</Alert> */}
-                            {errors.email && <Alert severity="error">בתבנית אימייל!!!</Alert>}
+                            {errors.email && errors.email && touched.email && <Alert severity="error">{errors.email}</Alert>}
                         </Grid>
 
                         <Grid item sx={{
@@ -100,23 +170,9 @@ const SignIn = () => {
                                 margin: 'auto',
                             }}>
                                 <Button
+                                    type='submit'
+                                    disabled={!dirty || !isValid}
                                     variant="contained"
-                                    onClick={() => {
-                                        new swal({
-                                            title:'!!!'+name+' שלום ',
-                                            icon: 'success',
-                                            text:'!!!פרטיך נקלטו בהצלחה במערכת',
-                                            confirmButtonText: 'המשך',
-                                            confirmButtonColor: '#3085d6',
-                                        }).then(() => {
-                                            if (status === 'employer')
-                                                navigate('../employerDetails')
-                                            else
-                                                navigate('../disabledForm')
-
-                                        })
-                                    }}
-
                                 >להרשמה</Button>
                             </Grid>
 
@@ -125,7 +181,7 @@ const SignIn = () => {
                                 margin: 'auto',
                             }}>
                                 <Button
-                                    variant="striped"
+                                    variant="outlined"
                                     onClick={() => { navigate('../logIn') }}
                                 >משתמש רשום?</Button>
                             </Grid>

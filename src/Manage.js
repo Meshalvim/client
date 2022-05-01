@@ -6,8 +6,19 @@ const Manage = () => {
 
     const algorithm = () => {
         setShowBackdrop(true)
-        console.log('start '+showBackdrop)
-        
+        console.log('start ' + showBackdrop)
+        getRiverInformation().then(
+            d => setShowBackdrop(d)
+        )
+    }
+
+
+    const getRiverInformation = () => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(false)
+            }, 10000)
+        })
     }
 
 
@@ -16,13 +27,13 @@ const Manage = () => {
             <Button variant="contained" color="success"
                 onClick={() => { algorithm() }}
             >
-                  ... לשיבוץ עובדים על פי הנתונים שנשמרו 
+                ... לשיבוץ עובדים על פי הנתונים שנשמרו
             </Button>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={showBackdrop}
             >
-                <CircularProgress color="inherit"/>
+                <CircularProgress color="inherit" />
                 <h1 width='100vw'>  ...אנא המתן</h1>
             </Backdrop>
         </>
