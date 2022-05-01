@@ -8,6 +8,7 @@ import EmployerDetails from './EmployerDetails';
 import EmployerForm from './EmployerForm';
 import Manage from './Manage';
 import DisabledForm from './DisabledForm';
+import EmployerDemands from './EmployerDemands';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/employerDetails" element={<EmployerDetails />} />
           <Route path="/manage" element={<Manage />} />
           <Route path="/disabledForm" element={<DisabledForm />} />
-          <Route path="/employerForm" element={<EmployerForm />} />
+          <Route path="/DisabledForm" element={<DisabledForm />} />
         </Routes>
       </BrowserRouter>
     </div>
