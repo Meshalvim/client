@@ -2,11 +2,6 @@ import { Grid, TextField, FormLabel, Button, MenuItem, FormControl, InputLabel, 
 import Swal from "sweetalert2"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const EmployerDetails = () => {
-
-    const [name, setName] = useState('')
-    const navigate=useNavigate()
 import { useFormik } from "formik";
 import * as Yup from "yup"
 
@@ -186,22 +181,6 @@ const EmployerDetails = () => {
                             type="submit"
                             disabled={!dirty || !isValid}
                             variant="contained"
-<<<<<<< HEAD
-                            onClick={() => {
-                                Swal.fire({
-                                    title:'!!!שים לב',
-                                    text: 'כעת עליך למלא את הטופס על פי הדרישות על מנת שהתוצאה תצא מושלמת השתדל לדייק בנתונים ככל האפשר' ,
-                                    icon: 'info',
-                                    confirmButtonText: 'המשך',
-                                    confirmButtonColor: '#3085d6',
-                                }).then((result)=>{
-                                    if(result.isConfirmed)
-                                    navigate('../employerDemands')
-                                })
-                            }}
-
-=======
->>>>>>> 5e300a22dd3e5f874f883f5cd696c92f9974e083
                         >להמשך התהליך</Button>
                     </Grid >
                 </Grid>
