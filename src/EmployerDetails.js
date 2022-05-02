@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup"
 
-
-
 const EmployerDetails = () => {
     const validationSchema = Yup.object({
         name: Yup.string().required('שם זהו שדה חובה'),
@@ -40,7 +38,7 @@ const EmployerDetails = () => {
             }).then(
                 (result) => {
                     if (result.isConfirmed) {
-                        navigate('../manage')
+                        navigate('../employerDemands')
                     }
                 })
         },

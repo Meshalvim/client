@@ -1,47 +1,54 @@
 import { useState } from "react";
-import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button } from "@mui/material";
+import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, ListItemText, Checkbox } from "@mui/material";
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import * as Yup from "yup";
+import { Input, TouchAppRounded } from "@mui/icons-material";
 
+const validationSchema = Yup.object({
+    experience: Yup.number().min(0, 'לא יתכן מספר שלילי').required('נסיון זהו שדה חובה'),
+    sumEmploeds: Yup.number().min(1, 'לפחות אחד').required('מספר עובדים זהו שדה חובה'),
+
+});
 const EmployerDemands = () => {
-    const formik=useFormik({
-        initialValues:{
-            abilities:'',
-            disabilities:'',
-            gender:'',
-            age:Number,
-            experience:Number,
-            positionType:'',
-            sumEmploeds:Number,
+    const { handleBlur, handleChange, handleSubmit, errors, values, touched, isValid, dirty } = useFormik({
+        initialValues: {
+            abilities: [],
+            disabilities: '',
+            gender: '',
+            age: '',
+            experience: '',
+            positionType: '',
+            sumEmploeds: '',
         },
-        onSubmit:values=>{
-            alert(JSON.stringify(values,null,2))
+        validationSchema,
+        onSubmit: (values) => {
+            Swal.fire({
+                title: '',
+                text: 'הפרטים נקלטו בהצלחה!! המשך יום מוצלח!!! ',
+                icon: 'success',
+                confirmButtonText: 'המשך',
+                confirmButtonColor: '#3085d6',
+            })
         }
-    })
-    //אולי צריך להפוך לרשימת יכולות
-    const [abilities, setAbilities] = useState();
-    const [status, setStatus] = useState('');
-    const [disabilities, setDisabilities] = useState();
-    const [age, setAge] = useState();
-    const [positionType, setPositionType] = useState();
-
-    const handleChangeAbilities = (e) => {
-        setAbilities(e.target.value);
-    };
-
-    const handleRadioChangeStatus = (e) => {
-        setStatus(e.target.value);
-    }
-    const handleChangeDisabilities = (e) => {
-        setDisabilities(e.target.value);
-    }
+    });
 
     const ages = ["18 - 22", "23 - 28", "29 - 33", "34 - 38", "39 - 43", "44 - 48", "49 - 53", "54 - 60"];
-
+    const abilitiesArr=["פיזית","מנטלית","ריאלית","תקשורתית","מוטורית"];
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+      PaperProps: {
+        style: {
+          maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+          width: 250,
+        },
+      },
+    };
     const navigate = useNavigate()
     return (
-        <>
+        <form onSubmit={handleSubmit} >
             <Grid container direction="column" sx={{
                 p: 5
             }}>
@@ -66,14 +73,37 @@ const EmployerDemands = () => {
                         p: 1,
                         margin: 'auto',
                     }}>
-                        <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                        <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }} >
+                        <InputLabel id="abilities">כישורים נדרשים</InputLabel>
+                            <Select
+                                labelId="abilities"
+                                id="abilities"
+                                multiple
+                                value={values.abilities}
+                                onChange={handleChange}
+                               // input={<Input />}
+                                renderValue={(selected) => selected.join(', ')}
+                                MenuProps={MenuProps}
+                            >
+                                {abilitiesArr.map((abl,i) => (
+                                    <MenuItem key={i} value={abl}>
+                                        <Checkbox checked={values.abilities.indexOf(abl) > -1} />
+                                        <ListItemText primary={abl} />
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+
+
+
+                        {/* <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
                             <InputLabel id="abilities">כישורים נדרשים</InputLabel>
                             <Select
 
                                 labelId="abilities"
                                 id="abilities"
-                                value={abilities}
-                                onChange={handleChangeAbilities}
+                                value={values.abilities}
+                                onChange={handleChange}
                                 label="abilities"
                             >
                                 <MenuItem value={'physically'}>פיזית</MenuItem>
@@ -83,7 +113,7 @@ const EmployerDemands = () => {
                                 <MenuItem value={'Motor'}>מוטורית</MenuItem>
 
                             </Select>
-                        </FormControl>
+                        </FormControl> */}
                     </Grid>
 
                     <Grid item sx={{
@@ -96,8 +126,8 @@ const EmployerDemands = () => {
 
                                 labelId="disabilities"
                                 id="disabilities"
-                                value={disabilities}
-                                onChange={handleChangeDisabilities}
+                                value={values.disabilities}
+                                onChange={handleChange}
                                 label="disabilities"
                             >
                                 <MenuItem value={'physically'}>פיזית</MenuItem>
@@ -118,7 +148,8 @@ const EmployerDemands = () => {
                         }}>
                             <TextField
                                 type="number"
-                                fullWidth name="experience"
+                                fullWidth
+                                name=""
                                 id="score"
                                 label="ניקוד דרישה"
                                 variant="standard" />
@@ -133,11 +164,12 @@ const EmployerDemands = () => {
                                 <RadioGroup
                                     name="gender"
                                     id="gender"
-                                    value={status}
-                                    onChange={handleRadioChangeStatus}
+                                    value={values.gender}
+                                    onChange={handleChange}
                                 >
                                     <FormControlLabel value="male" control={<Radio />} label="זכר" />
                                     <FormControlLabel value="female" control={<Radio />} label="נקבה" />
+                                    <FormControlLabel value="both" control={<Radio />} label="לא משנה" />
                                 </RadioGroup>
                             </FormControl>
                         </Grid>
@@ -154,11 +186,11 @@ const EmployerDemands = () => {
                             <TextField
                                 className="score"
                                 type="number"
-                                fullWidth name="experience"
+                                fullWidth name=""
                                 id="score"
                                 label="ניקוד דרישה"
                                 variant="standard"
-                                />
+                            />
                         </Grid>
                         <Grid item sx={{
                             p: 1,
@@ -171,8 +203,8 @@ const EmployerDemands = () => {
 
                                     labelId="age"
                                     id="age"
-                                    value={age}
-                                    onChange={handleChangeDisabilities}
+                                    value={values.age}
+                                    onChange={handleChange}
                                     label="age"
                                 >
                                     {ages.map((item, i) => {
@@ -192,9 +224,9 @@ const EmployerDemands = () => {
                             width: '20%'
                         }}>
                             <TextField
-                             className="score"
+                                className="score"
                                 type="number"
-                                fullWidth name="experience"
+                                fullWidth name=""
                                 id="score"
                                 label="ניקוד דרישה"
                                 variant="standard" />
@@ -206,10 +238,18 @@ const EmployerDemands = () => {
                         }}>
                             <TextField
                                 type="number"
-                                fullWidth name="experience"
+                                fullWidth
+                                name="experience"
                                 id="experience"
                                 label="מספר שנות ניסיון"
-                                variant="standard" />
+                                variant="standard"
+                                value={values.experience}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                error={errors.experience && touched.experience}
+                            // value={values.experience}
+                            />
+                            {errors.experience && touched.experience && <Alert severity="error">{errors.experience}</Alert>}
                         </Grid>
                     </Grid>
 
@@ -223,15 +263,15 @@ const EmployerDemands = () => {
 
                                 labelId="positionType"
                                 id="positionType"
-                                value={positionType}
-                                onChange={handleChangeDisabilities}
+                                value={values.positionType}
+                                onChange={handleChange}
                                 label="positionType"
                             >
-                                <MenuItem value={'physically'}>משרה מלאה</MenuItem>
-                                <MenuItem value={'Mentally'}>בוקר</MenuItem>
-                                <MenuItem value={'Realistic'}>אחה"צ</MenuItem>
-                                <MenuItem value={'Communicative'}>ערב</MenuItem>
-                                <MenuItem value={'Motor'}>משמרות</MenuItem>
+                                <MenuItem value={'full'}>משרה מלאה</MenuItem>
+                                <MenuItem value={'morning'}>בוקר</MenuItem>
+                                <MenuItem value={'afternoon'}>אחה"צ</MenuItem>
+                                <MenuItem value={'evening'}>ערב</MenuItem>
+                                <MenuItem value={'shifts'}>משמרות</MenuItem>
                             </Select>
                         </FormControl>
                     </Grid>
@@ -245,7 +285,12 @@ const EmployerDemands = () => {
                             fullWidth name="sumEmploeds"
                             id="sumEmploeds"
                             label="מספר עובדים נדרש"
-                            variant="standard" />
+                            variant="standard"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.sumEmploeds && touched.sumEmploeds}
+                        />
+                        {errors.sumEmploeds && touched.sumEmploeds && <Alert severity="error">{errors.sumEmploeds}</Alert>}
                     </Grid>
 
                     <Grid item sx={{
@@ -253,22 +298,15 @@ const EmployerDemands = () => {
                         margin: 'auto',
                     }}>
                         <Button
+                            disabled={!dirty || !isValid}
+                            type="submit"
                             variant="contained"
-                            onClick={() => {
-                                Swal.fire({
-                                    title: '',
-                                    text: 'הפרטים נקלטו בהצלחה!! המשך יום מוצלח!!! ',
-                                    icon: 'success',
-                                    confirmButtonText: 'המשך',
-                                    confirmButtonColor: '#3085d6',
-                                })
-                            }}
                         >אישור</Button>
                     </Grid >
 
                 </Grid>
             </Grid >
-        </>
+        </form>
     );
 }
 
