@@ -10,7 +10,6 @@ import * as Yup from "yup"
 const EmployerDetails = () => {
     const validationSchema = Yup.object({
         name: Yup.string().required('שם זהו שדה חובה'),
-        tel: Yup.string().required('טלפון זהו שדה חובה').matches(/^[0-9]+$/, 'מכיל רק ספרות').min(9, 'מינימום 7 ספרות').max(10, 'מקסימום 10 ספרות'),
         password: Yup.string().required('סיסמא זהו שדה חובה'),
         email: Yup.string().email('נא התאם לתבנית אימייל').required('אימייל זהו שדה חובה'),
         city: Yup.string().required('עיר זהו שדה חובה'),
@@ -40,7 +39,7 @@ const EmployerDetails = () => {
             }).then(
                 (result) => {
                     if (result.isConfirmed) {
-                        navigate('../manage')
+                        navigate('../employerDemands')
                     }
                 })
         },
@@ -163,7 +162,6 @@ const EmployerDetails = () => {
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                             >
-                                {/* <MenuItem value="">בחר עיר...</MenuItem> */}
                                 {cityList.map((item, i) => {
                                     return <MenuItem key={i} value={item} className="menuItemAge">{item}</MenuItem>
                                 })}
