@@ -3,13 +3,17 @@ import { TextField, Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, 
 import swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useFormik } from "formik";
 import * as Yup from "yup"
 
 const validationSchema = Yup.object({
     name: Yup.string().required('שם זהו שדה חובה'),
     password: Yup.string().required('סיסמא זהו שדה חובה'),
+    identity: Yup.string().length(9,'ת.ז. מכילה 9 ספרות').required('ת.ז. זהו שדה חובה').matches(/^[0-9]+$/, 'צריך להכיל רק ספרות'),
+    tel: Yup.string().required('טלפון זהו שדה חובה').matches(/^[0-9]+$/, 'צריך להכיל רק ספרות').min(9, 'מינימום 9 ספרות').max(10, 'מקסימום 10 ספרות'),
     email: Yup.string().email('נא התאם לתבנית אימייל').required('אימייל זהו שדה חובה'),
+    city: Yup.string().required('עיר זהו שדה חובה'),
 })
 
 const SignIn = () => {
@@ -18,7 +22,10 @@ const SignIn = () => {
         initialValues: {
             name: '',
             password: '',
+            identity: '',
+            tel: '',
             email: '',
+            city: '',
         },
         validationSchema,
         onSubmit: (values) => {
@@ -89,6 +96,13 @@ const SignIn = () => {
                             >
                                 חזרה לדף הבית...
                             </Button>
+                            <Button
+                                variant="outlined"
+                                endIcon={<HomeRoundedIcon />}
+                                onClick={() => { navigate('/') }}
+                            >
+                                חזרה לדף הבית...
+                            </Button>
                         </Grid>
 
                         <Grid item sx={{
@@ -133,6 +147,42 @@ const SignIn = () => {
                         }}>
                             <TextField
                                 fullWidth
+                                error={errors.identity && touched.identity}
+                                name="identity"
+                                id="identity"
+                                label="ת.ז."
+                                variant="standard"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.identity}
+                            />
+                            {errors.identity && touched.identity && <Alert severity="error">{errors.identity}</Alert>}
+                        </Grid>
+
+                        <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                        }}>
+                            <TextField
+                                fullWidth
+                                error={errors.tel && touched.tel}
+                                name="tel"
+                                id="tel"
+                                label="טלפון"
+                                variant="standard"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.tel}
+                            />
+                            {errors.tel && touched.tel && <Alert severity="error">{errors.tel}</Alert>}
+                        </Grid>
+
+                        <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                        }}>
+                            <TextField
+                                fullWidth
                                 error={errors.email && touched.email}
                                 id="email"
                                 type="email"
@@ -147,6 +197,24 @@ const SignIn = () => {
                         </Grid>
 
                         <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                        }}>
+                            <TextField
+                                fullWidth
+                                error={errors.city && touched.city}
+                                name="city"
+                                id="city"
+                                label="עיר"
+                                variant="standard"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.city}
+                            />
+                            {errors.city && touched.city && <Alert severity="error">{errors.city}</Alert>}
+                        </Grid>
+
+                        {/* <Grid item sx={{
                             p: 2,
                             margin: 'auto',
                         }}>
@@ -161,7 +229,7 @@ const SignIn = () => {
                                     <FormControlLabel value="lookingForJob" control={<Radio />} label="מחפש עבודה" />
                                 </RadioGroup>
                             </FormControl>
-                        </Grid>
+                        </Grid> */}
 
                         <Grid container direction="row"  >
 

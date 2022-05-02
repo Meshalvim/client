@@ -48,15 +48,6 @@ const DisabledForm = () => {
                         <TextField fullWidth name="lName" id="lName" label="שם משפחה" variant="standard" />
                     </Grid>
 
-                    <Grid item sx={{
-                        p: 1,
-                        margin: 'auto',
-                    }}>
-                        <TextField
-                            fullWidth
-                            // pattern=/^[0-9]/
-                            name="tel" type="text" id="tel" label="טלפון" variant="standard" />
-                    </Grid>
 
                     <Grid item sx={{
                         p: 1,
