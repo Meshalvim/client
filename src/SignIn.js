@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert } from '@mui/material';
+import { TextField, Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, IconButton } from '@mui/material';
 import swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
@@ -10,7 +10,7 @@ import * as Yup from "yup"
 const validationSchema = Yup.object({
     name: Yup.string().required('שם זהו שדה חובה'),
     password: Yup.string().required('סיסמא זהו שדה חובה'),
-    identity: Yup.string().length(9,'ת.ז. מכילה 9 ספרות').required('ת.ז. זהו שדה חובה').matches(/^[0-9]+$/, 'צריך להכיל רק ספרות'),
+    identity: Yup.string().length(9, 'ת.ז. מכילה 9 ספרות').required('ת.ז. זהו שדה חובה').matches(/^[0-9]+$/, 'צריך להכיל רק ספרות'),
     tel: Yup.string().required('טלפון זהו שדה חובה').matches(/^[0-9]+$/, 'צריך להכיל רק ספרות').min(9, 'מינימום 9 ספרות').max(10, 'מקסימום 10 ספרות'),
     email: Yup.string().email('נא התאם לתבנית אימייל').required('אימייל זהו שדה חובה'),
     city: Yup.string().required('עיר זהו שדה חובה'),
@@ -29,23 +29,25 @@ const SignIn = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-            // alert(JSON.stringify(values)).then(
-            new swal({
-                title: '!!!' + values.name + ' שלום ',
-                icon: 'success',
-                text: '!!!פרטיך נקלטו בהצלחה במערכת',
-                confirmButtonText: 'המשך',
-                confirmButtonColor: '#3085d6',
-            }).then(
-                (result) => {
-                    if (result.isConfirmed) {
-                        if (status === 'employer')
-                            navigate('../employerDetails')
-                        else
-                            navigate('../disabledForm')
-                    }
-                })
-            // )
+            localStorage.setItem('user', JSON.stringify(values))
+            {
+                new swal({
+                    title: '!!!' + values.name + ' שלום ',
+                    icon: 'success',
+                    text: '!!!פרטיך נקלטו בהצלחה במערכת',
+                    confirmButtonText: 'המשך',
+                    confirmButtonColor: '#3085d6',
+                }).then(
+                    (result) => {
+                        if (result.isConfirmed) {
+                            if (status === 'employer')
+                                navigate('../employerDetails')
+                            else
+                                navigate('../disabledForm')
+                        }
+                    })
+            }
+
         }
     })
 
@@ -89,20 +91,13 @@ const SignIn = () => {
                                 }}
                             >הרשמה</FormLabel>
 
-                            <Button
+                            <IconButton
                                 variant="outlined"
-                                endIcon={<ArrowBackRoundedIcon />}
                                 onClick={() => { navigate('/') }}
                             >
-                                חזרה לדף הבית...
-                            </Button>
-                            <Button
-                                variant="outlined"
-                                endIcon={<HomeRoundedIcon />}
-                                onClick={() => { navigate('/') }}
-                            >
-                                חזרה לדף הבית...
-                            </Button>
+                                <ArrowBackRoundedIcon />
+
+                            </IconButton>
                         </Grid>
 
                         <Grid item sx={{

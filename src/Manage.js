@@ -24,6 +24,7 @@ const Manage = () => {
 
     return (
         <>
+            
             <Button variant="contained" color="success"
                 onClick={() => { algorithm() }}
             >

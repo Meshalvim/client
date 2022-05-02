@@ -13,8 +13,8 @@ import AppBar from './AppBar';
 function App() {
   return (
     <div>
-      <AppBar></AppBar>
       <BrowserRouter>
+      <AppBar></AppBar>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/signIn" element={<SignIn />} />

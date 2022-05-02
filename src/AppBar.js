@@ -1,24 +1,27 @@
 import * as React from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-// import Box from '@mui/material/Box';
-// import Toolbar from '@mui/material/Toolbar';
-// import IconButton from '@mui/material/IconButton';
-// import Typography from '@mui/material/Typography';
-// import Menu from '@mui/material/Menu';
-// import Container from '@mui/material/Container';
-// import Avatar from '@mui/material/Avatar';
-// import Button from '@mui/material/Button';
-// import Tooltip from '@mui/material/Tooltip';
-// import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from 'react-router-dom';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+
+const pages = [];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [currUser, setCurUser] = React.useState(JSON.parse(localStorage.getItem('user')))
+
+    const navigate = useNavigate()
+
+    React.useEffect(() => {
+        const u = JSON.parse(localStorage.getItem('user'));
+        if (u) {
+         setCurUser(u);
+        }
+      }, null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -36,17 +39,23 @@ const ResponsiveAppBar = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="sticky">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
+                    <IconButton
+                        onClick={() => navigate('/')}
+                        color="inherit"
+                        aria-label="add to shopping cart">
+                        <HomeRoundedIcon />
+                    </IconButton>
                     <Typography
                         variant="h6"
                         noWrap
                         component="div"
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        LOGO
-          </Typography>
+                        MESHALVIM
+                    </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -84,14 +93,14 @@ const ResponsiveAppBar = () => {
                             ))}
                         </Menu>
                     </Box>
-                    <Typography
+                    {/* <Typography
                         variant="h6"
                         noWrap
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
                     >
                         LOGO
-          </Typography>
+                    </Typography> */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
@@ -104,39 +113,61 @@ const ResponsiveAppBar = () => {
                         ))}
                     </Box>
 
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton
-                                size="large"
-                                color="inherit" 
-                                onClick={handleOpenUserMenu} 
-                                sx={{ p: 0 }}>
-                                <AccountCircle  fontSize="inherit"/>
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
+                    {currUser != null && localStorage.getItem('user') != null ?
+                        <>
+
+                            <Typography sx={{ margin: 3 }} textAlign="center">{currUser.name}</Typography>
+                            <Box sx={{ flexGrow: 0 }}>
+                                <Tooltip title="Open settings">
+                                    <IconButton
+                                        size="large"
+                                        color="inherit"
+                                        onClick={handleOpenUserMenu}
+                                        sx={{ p: 0 }}>
+                                        <AccountCircle fontSize="inherit" />
+                                    </IconButton>
+                                </Tooltip>
+                                <Menu
+                                    sx={{ mt: '45px' }}
+                                    id="menu-appbar"
+                                    anchorEl={anchorElUser}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorElUser)}
+                                    onClose={handleCloseUserMenu}
+                                >
+                                    {settings.map((setting) => (
+                                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                            <Typography textAlign="center">{setting}</Typography>
+                                        </MenuItem>
+                                    ))}
+                                    <Button
+                                        fullWidth
+                                        variant="contained"
+                                        color='error'
+                                        onClick={() => {
+                                            // לקרוא לפונקצית מחיקה
+                                            localStorage.removeItem('user')
+                                            setCurUser(null)
+                                        }}
+
+                                    >מחק</Button>
+                                </Menu>
+                            </Box>
+                        </> :
+                        <Button
+                            variant="contained"
+                            color='success'
+                            onClick={() => { navigate('/logIn') }}>
+                            לכניסה
+                        </Button>}
                 </Toolbar>
             </Container>
         </AppBar>
