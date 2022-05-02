@@ -8,10 +8,12 @@ import EmployerDetails from './EmployerDetails';
 import Manage from './Manage';
 import DisabledForm from './DisabledForm';
 import EmployerDemands from './EmployerDemands';
+import AppBar from './AppBar';
 
 function App() {
   return (
     <div>
+      <AppBar></AppBar>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />

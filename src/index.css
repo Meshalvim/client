@@ -12,10 +12,10 @@ code {
     monospace;
 }
 
-*{
+/* *{
   box-sizing: border-box;
   direction: rtl;
-}
+} */
 
 .menuItemAge{
   direction: ltr;
