@@ -28,7 +28,11 @@ const LogIn = () => {
                     text: '!!!אתה מועבר לטופס לבקשת עבודה, בהצלחה',
                     confirmButtonText: 'המשך',
                     confirmButtonColor: '#3085d6',
-                })
+                }).then(
+                    (result) => {
+                        if (result.isConfirmed)
+                            navigate('../employerDemands')
+                    })
             else {
                 Swal.fire({
                     title: 'שגיאה!',
