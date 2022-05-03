@@ -23,13 +23,14 @@ const EmployerDemands = () => {
     // const navigate = useNavigate()
     const { handleBlur, handleChange, handleSubmit, errors, values, touched, isValid, dirty } = useFormik({
         initialValues: {
-            abilities: [{ ability: '', score: null }],
+            abilities: [],
             disabilities: '',
             gender: '',
             age: '',
             experience: '',
             sumEmploeds: '',
             positionType: '',
+            abilitiesScore: [],
             ageScore: '',
             experienceScore: '',
             genderScore: '',
@@ -63,11 +64,11 @@ const EmployerDemands = () => {
     return (
         <form onSubmit={handleSubmit} >
             <Grid container direction="column" sx={{
-                p: 5
+                p: 1
             }}>
                 <Grid
                     sx={{
-                        p: 4,
+                        p: 1,
                         border: '2px solid lightGrey',
                         borderRadius: '1vw',
                         margin: 'auto',
@@ -107,11 +108,10 @@ const EmployerDemands = () => {
                                 onBlur={handleBlur}
                                 error={errors.abilities && touched.abilities}
                             >
-
-                                {abilities.map((obj, i) => (
-                                    <MenuItem key={i} value={obj.ability}>
-                                        <Checkbox checked={values.abilities.indexOf(obj) > -1} />
-                                        <ListItemText primary={obj.ability} />
+                                {abilitiesArr.map((obj, i) => (
+                                    <MenuItem key={i} value={obj}>
+                                        <Checkbox checked={values.abilities.indexOf(obj) != -1} />
+                                        <ListItemText primary={obj} />
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -186,7 +186,7 @@ const EmployerDemands = () => {
                     </Grid>
 
                     <Grid container direction="row" sx={{
-                        p: 5
+                        p: 1
                     }}>
                         <Grid item sx={{
                             p: 1,
@@ -205,7 +205,7 @@ const EmployerDemands = () => {
                             {errors.genderScore && touched.genderScore && <Alert severity="error">{errors.genderScore}</Alert>}
                         </Grid>
                         <Grid item sx={{
-                            p: 4,
+                            p: 1,
                             margin: 'auto',
                             width: '80%'
                         }}>
@@ -229,7 +229,7 @@ const EmployerDemands = () => {
                     </Grid>
 
                     <Grid container direction="row" sx={{
-                        p: 5
+                        p: 1
                     }}>
                         <Grid item sx={{
                             p: 1,
@@ -278,7 +278,7 @@ const EmployerDemands = () => {
                     </Grid>
 
                     <Grid container direction="row" sx={{
-                        p: 5
+                        p: 1
                     }}>
                         <Grid item sx={{
                             p: 1,
