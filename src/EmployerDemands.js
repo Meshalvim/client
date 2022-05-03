@@ -8,9 +8,9 @@ import { Input, TouchAppRounded } from "@mui/icons-material";
 import { number } from "yup/lib/locale";
 
 const validationSchema = Yup.object({
-    // abilities: Yup.array().required('זהו שדה חובה'),
+    abilities: Yup.array().required('זהו שדה חובה'),
     disabilities: Yup.string().required('זהו שדה חובה'),
-    gender: Yup.string().required('מין זהו שדה חובה'),
+    // gender: Yup.string().required('מין זהו שדה חובה'),
     age: Yup.string().required('זהו שדה חובה'),
     experience: Yup.number().min(0, 'לא יתכן מספר שלילי').required('זהו שדה חובה'),
     sumEmploeds: Yup.number().min(1, 'לפחות אחד').required('זהו שדה חובה'),
@@ -144,26 +144,6 @@ const EmployerDemands = () => {
                         p: 1,
                         margin: 'auto',
                     }}>
-                        {values.abilities.map((obj, i) => (
-                            <TextField
-                                key={i}
-                                value={obj.score}
-                                type="number"
-                                fullWidth
-                                name="ablScore"
-                                id="ablScore"
-                                label={obj.ability}
-                                variant="standard"
-                                value={values.abilities.score}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />))}
-                    </Grid>
-
-                    <Grid item sx={{
-                        p: 1,
-                        margin: 'auto',
-                    }}>
                         <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
                             <InputLabel id="disabilities">סוגי מוגבלויות אפשריות</InputLabel>
                             <Select
@@ -198,7 +178,7 @@ const EmployerDemands = () => {
                                 name="genderScore"
                                 id="genderScore"
                                 label="ניקוד דרישה"
-                                variant="standard"
+                                variant="outlined"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 error={errors.genderScore && touched.genderScore} />
@@ -243,7 +223,7 @@ const EmployerDemands = () => {
                                 name="ageScore"
                                 id="ageScore"
                                 label="ניקוד דרישה"
-                                variant="standard"
+                                variant="outlined"
                                 value={values.ageScore}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -292,7 +272,7 @@ const EmployerDemands = () => {
                                 name="experienceScore"
                                 id="experienceScore"
                                 label="ניקוד דרישה"
-                                variant="standard"
+                                variant="outlined"
                                 value={values.experienceScore}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
