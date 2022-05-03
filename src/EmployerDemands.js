@@ -18,12 +18,11 @@ const validationSchema = Yup.object({
     ageScore: Yup.number().min(1, 'הניקוד מתחיל מאחד').required('זהו שדה חובה'),
     experienceScore: Yup.number().min(1, 'הניקוד מתחיל מאחד').required('זהו שדה חובה'),
     genderScore: Yup.number().min(1, 'הניקוד מתחיל מאחד').required('זהו שדה חובה'),
-    // ablScore: Yup.number().min(1, 'הדירוג מתחיל מאחד').required('זהו שדה חובה'),
 });
 const EmployerDemands = () => {
     const { handleBlur, handleChange, handleSubmit, errors, values, touched, isValid, dirty } = useFormik({
         initialValues: {
-            abilities: ['',number],
+            abilities: [{ability:"",score:null}],
             disabilities: '',
             gender: '',
             age: '',
@@ -33,7 +32,6 @@ const EmployerDemands = () => {
             ageScore: '',
             experienceScore: '',
             genderScore: '',
-            // ablScore: ''
         },
         validationSchema,
         onSubmit: (values) => {
@@ -50,6 +48,7 @@ const EmployerDemands = () => {
 
     const ages = ["18 - 22", "23 - 28", "29 - 33", "34 - 38", "39 - 43", "44 - 48", "49 - 53", "54 - 60"];
     const abilitiesArr = ["פיזית", "מנטלית", "ריאלית", "תקשורתית", "מוטורית"];
+    const abilities = [{ability:"מוטורית",score:null}, {ability:"תקשורתית",score:null}, {ability:"ריאלית",score:null}, {ability:"מנטלית",score:null}, {ability:"פיזית",score:null}]
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -101,10 +100,10 @@ const EmployerDemands = () => {
                                 onBlur={handleBlur}
                                 error={errors.abilities && touched.abilities}
                             >
-                                {abilitiesArr.map((abl, i) => (
-                                    <MenuItem key={i} value={abl}>
-                                        <Checkbox checked={values.abilities.indexOf(abl) > -1} />
-                                        <ListItemText primary={abl} />
+                                {abilities.map((obj, i) => (
+                                    <MenuItem key={i} value={obj.ability}>
+                                        <Checkbox checked={values.abilities.ability.indexOf(obj) > -1} />
+                                        <ListItemText primary={obj.ability} />
                                         <Grid item sx={{
                                             p: 1,
                                             width: '20%'
@@ -116,7 +115,7 @@ const EmployerDemands = () => {
                                                 id="ablScore"
                                                 label="דירוג"
                                                 variant="standard"
-                                                // value={values.ablScore}
+                                                value={values.abilities.score}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                             />
