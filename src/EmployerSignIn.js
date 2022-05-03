@@ -40,10 +40,7 @@ const SignIn = () => {
                 }).then(
                     (result) => {
                         if (result.isConfirmed) {
-                            if (status === 'employer')
                                 navigate('../employerDetails')
-                            else
-                                navigate('../disabledForm')
                         }
                     })
             }
@@ -51,7 +48,7 @@ const SignIn = () => {
         }
     })
 
-    const [status, setStatus] = useState('employer');
+    const [status, setStatus] = useState('lookingForJob');
     const [name, setName] = useState('')
 
     const navigate = useNavigate();

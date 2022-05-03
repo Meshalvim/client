@@ -8,7 +8,7 @@ import { Input, TouchAppRounded } from "@mui/icons-material";
 import { number } from "yup/lib/locale";
 
 const validationSchema = Yup.object({
-    abilities: Yup.array().required('זהו שדה חובה'),
+    // abilities: Yup.array().required('זהו שדה חובה'),
     disabilities: Yup.string().required('זהו שדה חובה'),
     gender: Yup.string().required('מין זהו שדה חובה'),
     age: Yup.string().required('זהו שדה חובה'),
@@ -20,9 +20,10 @@ const validationSchema = Yup.object({
     genderScore: Yup.number().min(1, 'הניקוד מתחיל מאחד').required('זהו שדה חובה'),
 });
 const EmployerDemands = () => {
+    // const navigate = useNavigate()
     const { handleBlur, handleChange, handleSubmit, errors, values, touched, isValid, dirty } = useFormik({
         initialValues: {
-            abilities: [{ability:"",score:null}],
+            abilities: [{ability:'',score:null}],
             disabilities: '',
             gender: '',
             age: '',
@@ -45,7 +46,6 @@ const EmployerDemands = () => {
             })
         }
     });
-
     const ages = ["18 - 22", "23 - 28", "29 - 33", "34 - 38", "39 - 43", "44 - 48", "49 - 53", "54 - 60"];
     const abilitiesArr = ["פיזית", "מנטלית", "ריאלית", "תקשורתית", "מוטורית"];
     const abilities = [{ability:"מוטורית",score:null}, {ability:"תקשורתית",score:null}, {ability:"ריאלית",score:null}, {ability:"מנטלית",score:null}, {ability:"פיזית",score:null}]
@@ -59,7 +59,7 @@ const EmployerDemands = () => {
             },
         },
     };
-    const navigate = useNavigate()
+    
     return (
         <form onSubmit={handleSubmit} >
             <Grid container direction="column" sx={{
@@ -102,7 +102,7 @@ const EmployerDemands = () => {
                             >
                                 {abilities.map((obj, i) => (
                                     <MenuItem key={i} value={obj.ability}>
-                                        <Checkbox checked={values.abilities.ability.indexOf(obj) > -1} />
+                                        <Checkbox checked={values.abilities.indexOf(obj) > -1} />
                                         <ListItemText primary={obj.ability} />
                                         <Grid item sx={{
                                             p: 1,

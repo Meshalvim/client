@@ -43,7 +43,7 @@ const LogIn = () => {
                 }).then(
                     (result) => {
                         if (result.isConfirmed)
-                            navigate('../signIn')
+                            navigate('../EmployerSignIn')
                     })
             }
         },
