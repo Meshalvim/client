@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, Tooltip, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 
 
-const pages = [];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+// const pages = [];
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -19,9 +19,9 @@ const ResponsiveAppBar = () => {
     React.useEffect(() => {
         const u = JSON.parse(localStorage.getItem('user'));
         if (u) {
-         setCurUser(u);
+            setCurUser(u);
         }
-      }, null);
+    }, null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -86,11 +86,11 @@ const ResponsiveAppBar = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
+                            {/* {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
-                            ))}
+                            ))} */}
                         </Menu>
                     </Box>
                     {/* <Typography
@@ -102,15 +102,25 @@ const ResponsiveAppBar = () => {
                         LOGO
                     </Typography> */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
+                        <Button
+                            onClick={()=>
+                                {
+                                    handleCloseNavMenu()
+                                    navigate('/about')
+                            }}
+                            sx={{ my: 2, color: 'white', display: 'block', fontSize:'20px' }}
+                        >
+                            אודות
+                        </Button>
+                        {/* {pages.map((page) => ( */}
+                        {/* <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 {page}
-                            </Button>
-                        ))}
+                            </Button> */}
+                        {/* ))} */}
                     </Box>
 
                     {currUser != null && localStorage.getItem('user') != null ?
@@ -143,23 +153,38 @@ const ResponsiveAppBar = () => {
                                     open={Boolean(anchorElUser)}
                                     onClose={handleCloseUserMenu}
                                 >
-                                    {settings.map((setting) => (
-                                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                            <Typography textAlign="center">{setting}</Typography>
-                                        </MenuItem>
-                                    ))}
-                                    <Button
-                                        fullWidth
-                                        variant="contained"
-                                        color='error'
+                                    {/* {settings.map((setting) => ( */}
+                                    <MenuItem
                                         onClick={() => {
-                                            // לקרוא לפונקצית מחיקה
-                                            localStorage.removeItem('user')
-                                            setCurUser(null)
-                                            navigate('/')
-                                        }}
+                                            handleCloseUserMenu()
+                                            //לנווט לטופס הרשמה עם פרופס של המשתמש
+                                        }}>
+                                        <Typography textAlign="center">עריכת פרטים</Typography>
+                                    </MenuItem>
+                                    <MenuItem onClick={() => {
+                                        handleCloseUserMenu()
+                                        localStorage.removeItem('user')
+                                        setCurUser(null)
+                                        navigate('/')
+                                    }}>
+                                        <Typography textAlign="center">יציאה</Typography>
+                                    </MenuItem>
+                                    {/* ))} */}
+                                    <MenuItem>
+                                        <Button
+                                            fullWidth
+                                            variant="contained"
+                                            color='error'
+                                            onClick={() => {
+                                                handleCloseUserMenu()
+                                                // לקרוא לפונקצית מחיקה
+                                                localStorage.removeItem('user')
+                                                setCurUser(null)
+                                                navigate('/')
+                                            }}
 
-                                    >מחק משתמש</Button>
+                                        >מחק משתמש</Button>
+                                    </MenuItem>
                                 </Menu>
                             </Box>
                         </> :

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { TextField, Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, IconButton } from '@mui/material';
+import { TextField, Grid, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, IconButton } from '@mui/material';
 import swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useFormik } from "formik";
 import * as Yup from "yup"
 
@@ -40,10 +39,7 @@ const SignInWorker = () => {
                 }).then(
                     (result) => {
                         if (result.isConfirmed) {
-                            if (status === 'employer')
-                                navigate('../employerDetails')
-                            else
-                                navigate('../disabledForm')
+                            navigate('../disabledForm')
                         }
                     })
             }
@@ -68,7 +64,7 @@ const SignInWorker = () => {
                 <Grid item sx={{
                     p: 1,
                     margin: 'auto',
-                    width: '50vw'
+                    width: '45vw'
 
                 }}>
                     <Grid
@@ -91,13 +87,8 @@ const SignInWorker = () => {
                                 }}
                             >הרשמה</FormLabel>
 
-                            <IconButton
-                                variant="outlined"
-                                onClick={() => { navigate('/') }}
-                            >
-                                <ArrowBackRoundedIcon />
+                            <IconButton onClick={() => { navigate('/') }}><ArrowBackRoundedIcon /></IconButton>
 
-                            </IconButton>
                         </Grid>
 
                         <Grid item sx={{

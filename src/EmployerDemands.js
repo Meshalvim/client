@@ -1,11 +1,8 @@
-import { useState } from "react";
-import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, ListItemText, Checkbox, Chip, ListItemAvatar, Avatar, ListItem } from "@mui/material";
+import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, ListItemText, Checkbox, Chip, ListItem } from "@mui/material";
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Input, TouchAppRounded } from "@mui/icons-material";
-import { number } from "yup/lib/locale";
 
 const validationSchema = Yup.object({
     abilities: Yup.array().min(1,'זהו שדה חובה'),
@@ -115,7 +112,9 @@ const EmployerDemands = () => {
                         {errors.abilities && touched.abilities && <Alert severity="error">{errors.abilities}</Alert>}
                     </Grid>
 
+                    {values.abilities.length!=0&&
                     <Grid>
+                        <FormLabel sx={{m:2}}>נקד את עדיפותך ביכולות שבחרת</FormLabel>
                         {values.abilities.map((ability, index) => {
                             return(
                             <ListItem key={index} sx={{
@@ -134,7 +133,7 @@ const EmployerDemands = () => {
                                 />
                             </ListItem>)
                         })}
-                    </Grid>
+                    </Grid>}
 
                     <Grid item sx={{
                         p: 2,

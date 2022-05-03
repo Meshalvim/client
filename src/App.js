@@ -5,6 +5,7 @@ import SignInWorker from './SignInWorker';
 import SignInEmployer from './SignInEmployer';
 import LogIn from './LogIn';
 import HomePage from './HomePage';
+import About from './About';
 import EmployerDetails from './EmployerDetails';
 import Manage from './Manage';
 import DisabledForm from './DisabledForm';
@@ -18,6 +19,7 @@ function App() {
       <AppBar></AppBar>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<About />} />
           <Route path="/signInWorker" element={<SignInWorker />} />
           <Route path="/SignInEmployer" element={<SignInEmployer />} />
           <Route path="/logIn" element={<LogIn />} />

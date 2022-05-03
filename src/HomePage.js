@@ -1,6 +1,4 @@
 import SvgIcon from '@mui/icons-material/VolunteerActivism';
-import VolunteerActivismRoundedIcon from '@mui/icons-material/VolunteerActivismRounded';
-import VolunteerActivismTwoToneIcon from '@mui/icons-material/VolunteerActivismTwoTone';
 import { Grid, Button, Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 

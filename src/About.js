@@ -1,8 +1,6 @@
 import SvgIcon from '@mui/icons-material/VolunteerActivism';
 import VolunteerActivismRoundedIcon from '@mui/icons-material/VolunteerActivismRounded';
-import VolunteerActivismTwoToneIcon from '@mui/icons-material/VolunteerActivismTwoTone';
-import { Grid, Button } from '@mui/material'
-import Swal from 'sweetalert2';
+import { Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 
 const About = () => {
@@ -12,10 +10,10 @@ const About = () => {
     return (
         <>
             <Grid container sx={{
-                p: 15
+                p: 1
             }}>
                 <Grid container direction="column" sx={{
-                    p: 5,
+                    p: 1,
                 }}>
                     <h1>משלבים</h1>
                     <Grid container direction="row">
@@ -45,19 +43,6 @@ const About = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid item sx={{
-                        p: 2,
-                        margin: 'auto',
-                    }}>
-                        <Button
-                            variant="contained"
-                            size="large"
-                            onClick={() => {
-                                 navigate('/signIn')
-                            }}
-
-                        >לכניסה</Button>
-                    </Grid>
                 </Grid>
             </Grid>
         </>

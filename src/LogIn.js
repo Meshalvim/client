@@ -1,6 +1,6 @@
-import { Grid, TextField, FormLabel, Button, Alert } from "@mui/material";
+import { Grid, TextField, FormLabel, Button, Alert, IconButton } from "@mui/material";
+import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import Swal from "sweetalert2";
-import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from "formik";
 import * as Yup from "yup"
@@ -66,15 +66,21 @@ const LogIn = () => {
                         border: '2px solid lightGrey',
                         borderRadius: '1vw',
                         margin: 'auto',
-                        width: '50vw',
+                        width: '35vw',
                     }}>
+                    <Grid
+                        container
+                        direction='row'
+                        justifyContent="space-between">
+                        <FormLabel
+                            sx={{
+                                fontSize: '20px',
+                                color: '#1976d2',
+                            }}
+                        >כניסה</FormLabel>
 
-                    <FormLabel
-                        sx={{
-                            fontSize: '20px',
-                            color: '#1976d2',
-                        }}
-                    >כניסה</FormLabel>
+                        <IconButton onClick={() => { navigate('/') }}><ArrowBackRoundedIcon /></IconButton>
+                    </Grid>
 
                     <Grid item sx={{
                         p: 1,
