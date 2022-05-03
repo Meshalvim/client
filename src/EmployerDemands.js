@@ -84,7 +84,7 @@ const EmployerDemands = () => {
                     >דרישות מעסיק</FormLabel>
 
                     <Grid item sx={{
-                        p: 1,
+                        p: 2,
                         margin: 'auto',
                     }}>
                         <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }} >
@@ -123,13 +123,13 @@ const EmployerDemands = () => {
                         {values.abilities.map((ability, index) => {
                             return(
                             <ListItem key={index} sx={{
-                                width: '10vw'
+                                width: '9vw'
                             }}>
                                 <TextField
                                     type="number"
                                     name="genderScore"
                                     id="genderScore"
-                                    label="ניקוד דרישה"
+                                    label="ניקוד"
                                     variant="outlined"
                                 />
                                 <ListItemText
@@ -141,7 +141,7 @@ const EmployerDemands = () => {
                     </Grid>
 
                     <Grid item sx={{
-                        p: 1,
+                        p: 2,
                         margin: 'auto',
                     }}>
                         <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
@@ -182,7 +182,6 @@ const EmployerDemands = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 error={errors.genderScore && touched.genderScore} />
-                            {errors.genderScore && touched.genderScore && <Alert severity="error">{errors.genderScore}</Alert>}
                         </Grid>
                         <Grid item sx={{
                             p: 1,
@@ -231,7 +230,7 @@ const EmployerDemands = () => {
                             />
                         </Grid>
                         <Grid item sx={{
-                            p: 1,
+                            p: 2,
                             margin: 'auto',
                             width: '80%'
                         }}>
@@ -278,10 +277,9 @@ const EmployerDemands = () => {
                                 onBlur={handleBlur}
                                 error={errors.experienceScore && touched.experienceScore}
                             />
-                            {errors.experienceScore && touched.experienceScore && <Alert severity="error">{errors.experienceScore}</Alert>}
                         </Grid>
                         <Grid item sx={{
-                            p: 1,
+                            p: 2,
                             margin: 'auto',
                             width: '80%'
                         }}>
@@ -302,7 +300,7 @@ const EmployerDemands = () => {
                     </Grid>
 
                     <Grid item sx={{
-                        p: 1,
+                        p: 2,
                         margin: 'auto',
                     }}>
                         <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
