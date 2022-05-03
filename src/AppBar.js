@@ -156,9 +156,10 @@ const ResponsiveAppBar = () => {
                                             // לקרוא לפונקצית מחיקה
                                             localStorage.removeItem('user')
                                             setCurUser(null)
+                                            navigate('/')
                                         }}
 
-                                    >מחק</Button>
+                                    >מחק משתמש</Button>
                                 </Menu>
                             </Box>
                         </> :
