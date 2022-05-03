@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, ListItemText, Checkbox } from "@mui/material";
+import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, ListItemText, Checkbox, Chip, ListItemAvatar, Avatar, ListItem } from "@mui/material";
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -8,7 +8,7 @@ import { Input, TouchAppRounded } from "@mui/icons-material";
 import { number } from "yup/lib/locale";
 
 const validationSchema = Yup.object({
-    abilities: Yup.array().required('זהו שדה חובה').min(1,'יש לבחור לפחות יכולת אחת'),
+    abilities: Yup.array().required('זהו שדה חובה').min(1, 'יש לבחור לפחות יכולת אחת'),
     disabilities: Yup.string().required('זהו שדה חובה'),
     // gender: Yup.string().required('מין זהו שדה חובה'),
     age: Yup.string().required('זהו שדה חובה'),
@@ -30,7 +30,7 @@ const EmployerDemands = () => {
             experience: '',
             sumEmploeds: '',
             positionType: '',
-            abilitiesScore:[],
+            abilitiesScore: [],
             ageScore: '',
             experienceScore: '',
             genderScore: '',
@@ -60,7 +60,7 @@ const EmployerDemands = () => {
             },
         },
     };
-    
+
     return (
         <form onSubmit={handleSubmit} >
             <Grid container direction="column" sx={{
@@ -95,7 +95,14 @@ const EmployerDemands = () => {
                                 multiple
                                 name="abilities"
                                 value={values.abilities}
-                                renderValue={(selected) => selected.join(', ')}
+                                // renderValue={(selected) => selected.join(', ')}
+                                renderValue={(selected) => (
+                                    <div>
+                                        {(selected).map((value) => (
+                                            <Chip key={value} label={value} />
+                                        ))}
+                                    </div>
+                                )}
                                 MenuProps={MenuProps}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -105,27 +112,32 @@ const EmployerDemands = () => {
                                     <MenuItem key={i} value={obj}>
                                         <Checkbox checked={values.abilities.indexOf(obj) != -1} />
                                         <ListItemText primary={obj} />
-                                        {/* <Grid item sx={{
-                                            p: 1,
-                                            width: '20%'
-                                        }}>
-                                            <TextField
-                                                type="number"
-                                                fullWidth
-                                                name="ablScore"
-                                                id="ablScore"
-                                                label="דירוג"
-                                                variant="standard"
-                                                value={values.abilities.score}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                            />
-                                        </Grid> */}
                                     </MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
                         {errors.abilities && touched.abilities && <Alert severity="error">{errors.abilities}</Alert>}
+                    </Grid>
+
+                    <Grid>
+                        {values.abilities.map((ability, index) => {
+                            return(
+                            <ListItem key={index} sx={{
+                                width: '10vw'
+                            }}>
+                                <TextField
+                                    type="number"
+                                    name="genderScore"
+                                    id="genderScore"
+                                    label="ניקוד דרישה"
+                                    variant="outlined"
+                                />
+                                <ListItemText
+                                    sx={{ margin: '1vw' }}
+                                    primary={ability}
+                                />
+                            </ListItem>)
+                        })}
                     </Grid>
 
                     <Grid item sx={{
@@ -152,7 +164,7 @@ const EmployerDemands = () => {
                         {errors.disabilities && touched.disabilities && <Alert severity="error">{errors.disabilities}</Alert>}
                     </Grid>
                     <Grid>
-                        
+
                     </Grid>
 
                     <Grid container direction="row">
@@ -184,8 +196,8 @@ const EmployerDemands = () => {
                                     id="gender"
                                     value={values.gender}
                                     onChange={handleChange}
-                                    // onBlur={handleBlur}
-                                    // error={errors.gender}
+                                // onBlur={handleBlur}
+                                // error={errors.gender}
                                 >
                                     <FormControlLabel value="male" control={<Radio />} label="זכר" />
                                     <FormControlLabel value="female" control={<Radio />} label="נקבה" />
@@ -216,7 +228,7 @@ const EmployerDemands = () => {
                                 error={errors.ageScore && touched.ageScore}
                             />
                         </Grid>
-                        <Grid  item sx={{
+                        <Grid item sx={{
                             p: 1,
                             margin: 'auto',
                             width: '80%'
