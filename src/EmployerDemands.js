@@ -8,9 +8,8 @@ import { Input, TouchAppRounded } from "@mui/icons-material";
 import { number } from "yup/lib/locale";
 
 const validationSchema = Yup.object({
-    abilities: Yup.array().required('זהו שדה חובה'),
+    abilities: Yup.array().min(1,'זהו שדה חובה'),
     disabilities: Yup.string().required('זהו שדה חובה'),
-    // gender: Yup.string().required('מין זהו שדה חובה'),
     age: Yup.string().required('זהו שדה חובה'),
     experience: Yup.number().min(0, 'לא יתכן מספר שלילי').required('זהו שדה חובה'),
     sumEmploeds: Yup.number().min(1, 'לפחות אחד').required('זהו שדה חובה'),
@@ -37,7 +36,6 @@ const EmployerDemands = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-
             Swal.fire({
                 title: '',
                 text: 'הפרטים נקלטו בהצלחה!! המשך יום מוצלח!!! ',
@@ -49,7 +47,6 @@ const EmployerDemands = () => {
     });
     const ages = ["18 - 22", "23 - 28", "29 - 33", "34 - 38", "39 - 43", "44 - 48", "49 - 53", "54 - 60"];
     const abilitiesArr = ["פיזית", "מנטלית", "ריאלית", "תקשורתית", "מוטורית"];
-    const abilities = [{ ability: "מוטורית", score: null }, { ability: "תקשורתית", score: null }, { ability: "ריאלית", score: null }, { ability: "מנטלית", score: null }, { ability: "פיזית", score: null }]
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -87,7 +84,7 @@ const EmployerDemands = () => {
                         p: 2,
                         margin: 'auto',
                     }}>
-                        <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }} >
+                        <FormControl fullWidth variant="standard" sx={{ minWidth: 120 }} >
                             <InputLabel id="abilities">כישורים נדרשים</InputLabel>
                             <Select
                                 labelId="abilities"
@@ -95,7 +92,6 @@ const EmployerDemands = () => {
                                 multiple
                                 name="abilities"
                                 value={values.abilities}
-                                // renderValue={(selected) => selected.join(', ')}
                                 renderValue={(selected) => (
                                     <div>
                                         {(selected).map((value) => (
@@ -144,7 +140,7 @@ const EmployerDemands = () => {
                         p: 2,
                         margin: 'auto',
                     }}>
-                        <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                        <FormControl fullWidth variant="standard" sx={{ minWidth: 120 }}>
                             <InputLabel id="disabilities">סוגי מוגבלויות אפשריות</InputLabel>
                             <Select
 
@@ -195,15 +191,12 @@ const EmployerDemands = () => {
                                     id="gender"
                                     value={values.gender}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    error={errors.gender}
                                 >
                                     <FormControlLabel value="male" control={<Radio />} label="זכר" />
                                     <FormControlLabel value="female" control={<Radio />} label="נקבה" />
                                     <FormControlLabel value="both" control={<Radio />} label="לא משנה" />
                                 </RadioGroup>
                             </FormControl>
-                            {errors.gender && <Alert severity="error">{errors.gender}</Alert>}
                         </Grid>
                     </Grid>
 
@@ -234,7 +227,7 @@ const EmployerDemands = () => {
                             margin: 'auto',
                             width: '80%'
                         }}>
-                            <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                            <FormControl fullWidth variant="standard" sx={{ minWidth: 120 }}>
                                 <InputLabel id="age">טווח גילאים נדרש</InputLabel>
                                 <Select
 
@@ -303,7 +296,7 @@ const EmployerDemands = () => {
                         p: 2,
                         margin: 'auto',
                     }}>
-                        <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                        <FormControl fullWidth variant="standard" sx={{ minWidth: 120 }}>
                             <InputLabel id="positionType">היקף משרה</InputLabel>
                             <Select
 
