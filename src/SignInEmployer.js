@@ -34,10 +34,10 @@ const SignInEmployer = () => {
                 }).then(
                     (result) => {
                         if (result.isConfirmed) {
-                            if (status === 'employer')
-                                navigate('../employerDetails')
-                            else
-                                navigate('../disabledForm')
+                            navigate('../employerDemands')
+                            // if (status === 'employer')
+                            // else
+                            //     navigate('../disabledForm')
                         }
                     })
             }

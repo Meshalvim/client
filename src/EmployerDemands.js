@@ -8,12 +8,12 @@ import { Input, TouchAppRounded } from "@mui/icons-material";
 import { number } from "yup/lib/locale";
 
 const validationSchema = Yup.object({
-    // abilities: Yup.array().required('זהו שדה חובה'),
+    abilities: Yup.array().required('זהו שדה חובה').min(1,'יש לבחור לפחות יכולת אחת'),
     disabilities: Yup.string().required('זהו שדה חובה'),
-    gender: Yup.string().required('מין זהו שדה חובה'),
+    // gender: Yup.string().required('מין זהו שדה חובה'),
     age: Yup.string().required('זהו שדה חובה'),
     experience: Yup.number().min(0, 'לא יתכן מספר שלילי').required('זהו שדה חובה'),
-    sumEmploeds: Yup.number().min(1, 'לפחות אחד').required('זהו שדה חובה'),
+    sumEmploeds: Yup.number().min(2, 'לפחות שניים').required('זהו שדה חובה'),
     positionType: Yup.string().required('זהו שדה חובה'),
     ageScore: Yup.number().min(1, 'הניקוד מתחיל מאחד').required('זהו שדה חובה'),
     experienceScore: Yup.number().min(1, 'הניקוד מתחיל מאחד').required('זהו שדה חובה'),
@@ -23,13 +23,14 @@ const EmployerDemands = () => {
     // const navigate = useNavigate()
     const { handleBlur, handleChange, handleSubmit, errors, values, touched, isValid, dirty } = useFormik({
         initialValues: {
-            abilities: [{ability:'',score:null}],
+            abilities: [],
             disabilities: '',
-            gender: '',
+            gender: 'both',
             age: '',
             experience: '',
             sumEmploeds: '',
             positionType: '',
+            abilitiesScore:[],
             ageScore: '',
             experienceScore: '',
             genderScore: '',
@@ -48,7 +49,7 @@ const EmployerDemands = () => {
     });
     const ages = ["18 - 22", "23 - 28", "29 - 33", "34 - 38", "39 - 43", "44 - 48", "49 - 53", "54 - 60"];
     const abilitiesArr = ["פיזית", "מנטלית", "ריאלית", "תקשורתית", "מוטורית"];
-    const abilities = [{ability:"מוטורית",score:null}, {ability:"תקשורתית",score:null}, {ability:"ריאלית",score:null}, {ability:"מנטלית",score:null}, {ability:"פיזית",score:null}]
+    // const abilities = [{ability:"מוטורית",score:null}, {ability:"תקשורתית",score:null}, {ability:"ריאלית",score:null}, {ability:"מנטלית",score:null}, {ability:"פיזית",score:null}]
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -86,7 +87,7 @@ const EmployerDemands = () => {
                         p: 1,
                         margin: 'auto',
                     }}>
-                        <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }} >
+                        <FormControl fullWidth variant="standard" sx={{ minWidth: 120 }} >
                             <InputLabel id="abilities">כישורים נדרשים</InputLabel>
                             <Select
                                 labelId="abilities"
@@ -100,11 +101,11 @@ const EmployerDemands = () => {
                                 onBlur={handleBlur}
                                 error={errors.abilities && touched.abilities}
                             >
-                                {abilities.map((obj, i) => (
-                                    <MenuItem key={i} value={obj.ability}>
-                                        <Checkbox checked={values.abilities.indexOf(obj) > -1} />
-                                        <ListItemText primary={obj.ability} />
-                                        <Grid item sx={{
+                                {abilitiesArr.map((obj, i) => (
+                                    <MenuItem key={i} value={obj}>
+                                        <Checkbox checked={values.abilities.indexOf(obj) != -1} />
+                                        <ListItemText primary={obj} />
+                                        {/* <Grid item sx={{
                                             p: 1,
                                             width: '20%'
                                         }}>
@@ -119,7 +120,7 @@ const EmployerDemands = () => {
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                             />
-                                        </Grid>
+                                        </Grid> */}
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -131,10 +132,9 @@ const EmployerDemands = () => {
                         p: 1,
                         margin: 'auto',
                     }}>
-                        <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                        <FormControl fullWidth variant="standard" sx={{ minWidth: 120 }}>
                             <InputLabel id="disabilities">סוגי מוגבלויות אפשריות</InputLabel>
                             <Select
-
                                 labelId="disabilities"
                                 id="disabilities"
                                 value={values.disabilities}
@@ -151,10 +151,11 @@ const EmployerDemands = () => {
                         </FormControl>
                         {errors.disabilities && touched.disabilities && <Alert severity="error">{errors.disabilities}</Alert>}
                     </Grid>
+                    <Grid>
+                        
+                    </Grid>
 
-                    <Grid container direction="row" sx={{
-                        p: 5
-                    }}>
+                    <Grid container direction="row">
                         <Grid item sx={{
                             p: 1,
                             width: '20%'
@@ -165,14 +166,14 @@ const EmployerDemands = () => {
                                 name="genderScore"
                                 id="genderScore"
                                 label="ניקוד דרישה"
-                                variant="standard"
+                                variant="outlined"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 error={errors.genderScore && touched.genderScore} />
-                            {errors.genderScore && touched.genderScore && <Alert severity="error">{errors.genderScore}</Alert>}
+                            {/* {errors.genderScore && touched.genderScore && <Alert severity="error">{errors.genderScore}</Alert>} */}
                         </Grid>
                         <Grid item sx={{
-                            p: 4,
+                            p: 1,
                             margin: 'auto',
                             width: '80%'
                         }}>
@@ -183,46 +184,44 @@ const EmployerDemands = () => {
                                     id="gender"
                                     value={values.gender}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    error={errors.gender}
+                                    // onBlur={handleBlur}
+                                    // error={errors.gender}
                                 >
                                     <FormControlLabel value="male" control={<Radio />} label="זכר" />
                                     <FormControlLabel value="female" control={<Radio />} label="נקבה" />
                                     <FormControlLabel value="both" control={<Radio />} label="לא משנה" />
                                 </RadioGroup>
                             </FormControl>
-                            {errors.gender && <Alert severity="error">{errors.gender}</Alert>}
+                            {/* {errors.gender && <Alert severity="error">{errors.gender}</Alert>} */}
                         </Grid>
                     </Grid>
 
-                    <Grid container direction="row" sx={{
-                        p: 5
-                    }}>
+                    <Grid container direction="row">
                         <Grid item sx={{
                             p: 1,
                             margin: 'auto',
                             width: '20%'
                         }}>
                             <TextField
-                                className="score"
+                                // className="score"
                                 type="number"
                                 fullWidth
                                 name="ageScore"
                                 id="ageScore"
                                 label="ניקוד דרישה"
-                                variant="standard"
+                                variant="outlined"
                                 value={values.ageScore}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 error={errors.ageScore && touched.ageScore}
                             />
                         </Grid>
-                        <Grid item sx={{
+                        <Grid  item sx={{
                             p: 1,
                             margin: 'auto',
                             width: '80%'
-                        }}>
-                            <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                        }} >
+                            <FormControl fullWidth variant="standard" >
                                 <InputLabel id="age">טווח גילאים נדרש</InputLabel>
                                 <Select
 
@@ -244,28 +243,26 @@ const EmployerDemands = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid container direction="row" sx={{
-                        p: 5
-                    }}>
+                    <Grid container direction="row">
                         <Grid item sx={{
                             p: 1,
                             margin: 'auto',
                             width: '20%'
                         }}>
                             <TextField
-                                className="score"
+                                // className="score"
                                 type="number"
                                 fullWidth
                                 name="experienceScore"
                                 id="experienceScore"
                                 label="ניקוד דרישה"
-                                variant="standard"
+                                variant="outlined"
                                 value={values.experienceScore}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 error={errors.experienceScore && touched.experienceScore}
                             />
-                            {errors.experienceScore && touched.experienceScore && <Alert severity="error">{errors.experienceScore}</Alert>}
+                            {/* {errors.experienceScore && touched.experienceScore && <Alert severity="error">{errors.experienceScore}</Alert>} */}
                         </Grid>
                         <Grid item sx={{
                             p: 1,
@@ -289,10 +286,10 @@ const EmployerDemands = () => {
                     </Grid>
 
                     <Grid item sx={{
-                        p: 1,
+                        p: 2,
                         margin: 'auto',
                     }}>
-                        <FormControl fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                        <FormControl fullWidth variant="standard" sx={{ minWidth: 120 }}>
                             <InputLabel id="positionType">היקף משרה</InputLabel>
                             <Select
 
@@ -316,7 +313,7 @@ const EmployerDemands = () => {
                     </Grid>
 
                     <Grid item sx={{
-                        p: 1,
+                        p: 2,
                         margin: 'auto',
                     }}>
                         <TextField

@@ -8,8 +8,8 @@ import EmployerDemands from './EmployerDemands';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <EmployerDemands></EmployerDemands>
-    {/* <App /> */}
+    {/* <EmployerDemands></EmployerDemands> */}
+    <App />
   </React.StrictMode>
 );
 
