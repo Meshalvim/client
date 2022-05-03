@@ -8,11 +8,7 @@ import { Input, TouchAppRounded } from "@mui/icons-material";
 import { number } from "yup/lib/locale";
 
 const validationSchema = Yup.object({
-<<<<<<< HEAD
-    abilities: Yup.array().required('זהו שדה חובה').min(1, 'יש לבחור לפחות יכולת אחת'),
-=======
     // abilities: Yup.array().required('זהו שדה חובה'),
->>>>>>> d0e636e9e6a8477f66d94be7777aee833f386753
     disabilities: Yup.string().required('זהו שדה חובה'),
     gender: Yup.string().required('מין זהו שדה חובה'),
     age: Yup.string().required('זהו שדה חובה'),
@@ -27,17 +23,14 @@ const EmployerDemands = () => {
     // const navigate = useNavigate()
     const { handleBlur, handleChange, handleSubmit, errors, values, touched, isValid, dirty } = useFormik({
         initialValues: {
-            abilities: [{ ability: '', score: null }],
+            abilities: [],
             disabilities: '',
             gender: '',
             age: '',
             experience: '',
             sumEmploeds: '',
             positionType: '',
-<<<<<<< HEAD
             abilitiesScore: [],
-=======
->>>>>>> d0e636e9e6a8477f66d94be7777aee833f386753
             ageScore: '',
             experienceScore: '',
             genderScore: '',
@@ -71,11 +64,11 @@ const EmployerDemands = () => {
     return (
         <form onSubmit={handleSubmit} >
             <Grid container direction="column" sx={{
-                p: 5
+                p: 1
             }}>
                 <Grid
                     sx={{
-                        p: 4,
+                        p: 1,
                         border: '2px solid lightGrey',
                         borderRadius: '1vw',
                         margin: 'auto',
@@ -115,18 +108,10 @@ const EmployerDemands = () => {
                                 onBlur={handleBlur}
                                 error={errors.abilities && touched.abilities}
                             >
-<<<<<<< HEAD
                                 {abilitiesArr.map((obj, i) => (
                                     <MenuItem key={i} value={obj}>
                                         <Checkbox checked={values.abilities.indexOf(obj) != -1} />
                                         <ListItemText primary={obj} />
-=======
-
-                                {abilities.map((obj, i) => (
-                                    <MenuItem key={i} value={obj.ability}>
-                                        <Checkbox checked={values.abilities.indexOf(obj) > -1} />
-                                        <ListItemText primary={obj.ability} />
->>>>>>> d0e636e9e6a8477f66d94be7777aee833f386753
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -199,15 +184,9 @@ const EmployerDemands = () => {
                         </FormControl>
                         {errors.disabilities && touched.disabilities && <Alert severity="error">{errors.disabilities}</Alert>}
                     </Grid>
-<<<<<<< HEAD
-                    <Grid>
-
-                    </Grid>
-=======
->>>>>>> d0e636e9e6a8477f66d94be7777aee833f386753
 
                     <Grid container direction="row" sx={{
-                        p: 5
+                        p: 1
                     }}>
                         <Grid item sx={{
                             p: 1,
@@ -226,7 +205,7 @@ const EmployerDemands = () => {
                             {errors.genderScore && touched.genderScore && <Alert severity="error">{errors.genderScore}</Alert>}
                         </Grid>
                         <Grid item sx={{
-                            p: 4,
+                            p: 1,
                             margin: 'auto',
                             width: '80%'
                         }}>
@@ -237,13 +216,8 @@ const EmployerDemands = () => {
                                     id="gender"
                                     value={values.gender}
                                     onChange={handleChange}
-<<<<<<< HEAD
-                                // onBlur={handleBlur}
-                                // error={errors.gender}
-=======
                                     onBlur={handleBlur}
                                     error={errors.gender}
->>>>>>> d0e636e9e6a8477f66d94be7777aee833f386753
                                 >
                                     <FormControlLabel value="male" control={<Radio />} label="זכר" />
                                     <FormControlLabel value="female" control={<Radio />} label="נקבה" />
@@ -255,7 +229,7 @@ const EmployerDemands = () => {
                     </Grid>
 
                     <Grid container direction="row" sx={{
-                        p: 5
+                        p: 1
                     }}>
                         <Grid item sx={{
                             p: 1,
@@ -304,7 +278,7 @@ const EmployerDemands = () => {
                     </Grid>
 
                     <Grid container direction="row" sx={{
-                        p: 5
+                        p: 1
                     }}>
                         <Grid item sx={{
                             p: 1,
