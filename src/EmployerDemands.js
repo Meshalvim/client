@@ -23,7 +23,7 @@ const EmployerDemands = () => {
     // const navigate = useNavigate()
     const { handleBlur, handleChange, handleSubmit, errors, values, touched, isValid, dirty } = useFormik({
         initialValues: {
-            abilities: [{ability:'',score:null}],
+            abilities: [{ ability: '', score: null }],
             disabilities: '',
             gender: '',
             age: '',
@@ -48,7 +48,7 @@ const EmployerDemands = () => {
     });
     const ages = ["18 - 22", "23 - 28", "29 - 33", "34 - 38", "39 - 43", "44 - 48", "49 - 53", "54 - 60"];
     const abilitiesArr = ["פיזית", "מנטלית", "ריאלית", "תקשורתית", "מוטורית"];
-    const abilities = [{ability:"מוטורית",score:null}, {ability:"תקשורתית",score:null}, {ability:"ריאלית",score:null}, {ability:"מנטלית",score:null}, {ability:"פיזית",score:null}]
+    const abilities = [{ ability: "מוטורית", score: null }, { ability: "תקשורתית", score: null }, { ability: "ריאלית", score: null }, { ability: "מנטלית", score: null }, { ability: "פיזית", score: null }]
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -59,7 +59,7 @@ const EmployerDemands = () => {
             },
         },
     };
-    
+
     return (
         <form onSubmit={handleSubmit} >
             <Grid container direction="column" sx={{
@@ -100,31 +100,36 @@ const EmployerDemands = () => {
                                 onBlur={handleBlur}
                                 error={errors.abilities && touched.abilities}
                             >
+
                                 {abilities.map((obj, i) => (
                                     <MenuItem key={i} value={obj.ability}>
                                         <Checkbox checked={values.abilities.indexOf(obj) > -1} />
                                         <ListItemText primary={obj.ability} />
-                                        <Grid item sx={{
-                                            p: 1,
-                                            width: '20%'
-                                        }}>
-                                            <TextField
-                                                type="number"
-                                                fullWidth
-                                                name="ablScore"
-                                                id="ablScore"
-                                                label="דירוג"
-                                                variant="standard"
-                                                value={values.abilities.score}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                            />
-                                        </Grid>
                                     </MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
                         {errors.abilities && touched.abilities && <Alert severity="error">{errors.abilities}</Alert>}
+                    </Grid>
+
+                    <Grid item sx={{
+                        p: 1,
+                        margin: 'auto',
+                    }}>
+                        {values.abilities.map((obj, i) => (
+                            <TextField
+                                key={i}
+                                value={obj.score}
+                                type="number"
+                                fullWidth
+                                name="ablScore"
+                                id="ablScore"
+                                label={obj.ability}
+                                variant="standard"
+                                value={values.abilities.score}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            />))}
                     </Grid>
 
                     <Grid item sx={{
