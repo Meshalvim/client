@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, ListItemText, Checkbox, Chip, ListItemAvatar, Avatar, ListItem } from "@mui/material";
+import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, ListItemText, Checkbox, Chip, ListItemAvatar, Avatar, ListItem, Tooltip, IconButton } from "@mui/material";
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Input, TouchAppRounded } from "@mui/icons-material";
 import { number } from "yup/lib/locale";
+import ClearIcon from '@mui/icons-material/Clear';
 
 const validationSchema = Yup.object({
     // abilities: Yup.array().required('זהו שדה חובה'),
@@ -83,6 +84,12 @@ const EmployerDemands = () => {
                         }}
                     >דרישות מעסיק</FormLabel>
 
+                    <Tooltip title="Clear" className="tooltip">
+                        <IconButton>
+                            <ClearIcon></ClearIcon>
+                        </IconButton>
+                    </Tooltip>
+
                     <Grid item sx={{
                         p: 1,
                         margin: 'auto',
@@ -121,22 +128,22 @@ const EmployerDemands = () => {
 
                     <Grid>
                         {values.abilities.map((ability, index) => {
-                            return(
-                            <ListItem key={index} sx={{
-                                width: '10vw'
-                            }}>
-                                <TextField
-                                    type="number"
-                                    name="genderScore"
-                                    id="genderScore"
-                                    label="ניקוד דרישה"
-                                    variant="outlined"
-                                />
-                                <ListItemText
-                                    sx={{ margin: '1vw' }}
-                                    primary={ability}
-                                />
-                            </ListItem>)
+                            return (
+                                <ListItem key={index} sx={{
+                                    width: '10vw'
+                                }}>
+                                    <TextField
+                                        type="number"
+                                        name="genderScore"
+                                        id="genderScore"
+                                        label="ניקוד דרישה"
+                                        variant="outlined"
+                                    />
+                                    <ListItemText
+                                        sx={{ margin: '1vw' }}
+                                        primary={ability}
+                                    />
+                                </ListItem>)
                         })}
                     </Grid>
 
@@ -378,6 +385,7 @@ const EmployerDemands = () => {
                             && !errors.experienceScore && !errors.genderScore
                             && errors.gender
                             && <Alert severity="error">{errors.gender}</Alert>}
+
                         <Button
                             disabled={!dirty || !isValid}
                             type="submit"
