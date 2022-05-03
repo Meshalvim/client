@@ -20,7 +20,7 @@ const HomePage = () => {
                         <Button 
                             variant="contained" 
                             size="large"
-                            onClick={()=>navigate('/signIn')} 
+                            onClick={()=>navigate('/SignInEmployer')} 
                             sx={{
                             p: 2,
                             margin: 2,
@@ -30,7 +30,7 @@ const HomePage = () => {
                         <Button 
                             variant="contained" 
                             size="large" 
-                            onClick={()=>navigate('/signIn')} 
+                            onClick={()=>navigate('/signInWorker')} 
                             sx={{
                             p: 2,
                             margin: 2,

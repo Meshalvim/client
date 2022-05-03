@@ -10,9 +10,7 @@ import CustomizedBreadcrumbs from './try';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <DisabledForm></DisabledForm>
-    {/* <EmployerDemands></EmployerDemands> */}
-    {/* <App /> */}
+    <App />
   </React.StrictMode>
 );
 

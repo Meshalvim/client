@@ -16,7 +16,7 @@ const validationSchema = Yup.object({
     city: Yup.string().required('עיר זהו שדה חובה'),
 })
 
-const SignIn = () => {
+const SignInWorker = () => {
 
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
         initialValues: {
@@ -257,4 +257,4 @@ const SignIn = () => {
     );
 }
 
-export default SignIn;
+export default SignInWorker;
