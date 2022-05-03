@@ -16,7 +16,7 @@ const validationSchema = Yup.object({
     city: Yup.string().required('עיר זהו שדה חובה'),
 })
 
-const SignInWorker = () => {
+const SignIn = () => {
 
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
         initialValues: {
@@ -40,10 +40,7 @@ const SignInWorker = () => {
                 }).then(
                     (result) => {
                         if (result.isConfirmed) {
-                            if (status === 'employer')
                                 navigate('../employerDetails')
-                            else
-                                navigate('../disabledForm')
                         }
                     })
             }
@@ -51,7 +48,7 @@ const SignInWorker = () => {
         }
     })
 
-    const [status, setStatus] = useState('employer');
+    const [status, setStatus] = useState('lookingForJob');
     const [name, setName] = useState('')
 
     const navigate = useNavigate();
@@ -257,4 +254,4 @@ const SignInWorker = () => {
     );
 }
 
-export default SignInWorker;
+export default SignIn;
