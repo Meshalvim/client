@@ -1,4 +1,5 @@
-import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, ListItemText, Checkbox, Chip, ListItem } from "@mui/material";
+import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, ListItemText, Checkbox, Chip, ListItem, Tooltip, IconButton } from "@mui/material";
+import ClearIcon from '@mui/icons-material/Clear';
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -76,6 +77,12 @@ const EmployerDemands = () => {
                             color: '#1976d2',
                         }}
                     >דרישות מעסיק</FormLabel>
+
+                    <Tooltip title="Clear" className="tooltip">
+                        <IconButton>
+                            <ClearIcon></ClearIcon>
+                        </IconButton>
+                    </Tooltip>
 
                     <Grid item sx={{
                         p: 2,
@@ -348,6 +355,7 @@ const EmployerDemands = () => {
                             && !errors.experienceScore && !errors.genderScore
                             && errors.gender
                             && <Alert severity="error">{errors.gender}</Alert>}
+
                         <Button
                             disabled={!dirty || !isValid}
                             type="submit"
