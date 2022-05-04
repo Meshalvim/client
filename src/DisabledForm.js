@@ -1,4 +1,5 @@
-import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert } from "@mui/material";
+import { TextField, Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, IconButton } from "@mui/material";
+import ClearIcon from '@mui/icons-material/Clear';
 import { useFormik } from "formik";
 import swal from "sweetalert2";
 import * as Yup from 'yup';
@@ -19,7 +20,7 @@ const validationSchema = Yup.object(
     }
 )
 const DisabledForm = () => {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const { handleBlur, handleChange, handleSubmit, values, touched, required, errors, dirty, isValid } = useFormik({
         initialValues: {
             gender: '',
@@ -40,7 +41,7 @@ const DisabledForm = () => {
                 text: 'פרטיך נקלטו בהצלחה במערכת!!!',
                 confirmButtonText: 'חזרה לדף הבית',
                 confirmButtonColor: '#3085d6',
-            }).then((result)=>{if(result.isConfirmed) navigate('/')})
+            }).then((result) => { if (result.isConfirmed) navigate('/') })
         }
     })
 
@@ -58,12 +59,30 @@ const DisabledForm = () => {
                         width: '50vw'
 
                     }}>
-                    <FormLabel
-                        sx={{
-                            fontSize: '20px',
-                            color: '#1976d2',
-                        }}
-                    >פרטי מועמד</FormLabel>
+
+                    <Grid
+                        container
+                        direction='row'
+                        justifyContent="space-between">
+                        <FormLabel
+                            sx={{
+                                fontSize: '20px',
+                                color: '#1976d2',
+                            }}
+                        >פרטי מועמד</FormLabel>
+                        <IconButton
+                            onClick={(values) => {
+                                new swal({
+                                    title: 'אתה בטוח שברצונך לצאת?',
+                                    icon: 'warnning',
+                                    text: 'אם תצא כעת פרטיך לא ישמרו במערכת',
+                                    confirmButtonText: 'חזרה לדף הבית',
+                                    confirmButtonColor: '#3085d6',
+                                }).then((result) => { if (result.isConfirmed) navigate('/') })
+                            }}>
+                            <ClearIcon />
+                        </IconButton>
+                    </Grid>
 
                     <Grid item sx={{
                         p: 2,
@@ -227,7 +246,7 @@ const DisabledForm = () => {
                         <Button
                             type="submit"
                             variant="contained"
-                            disabled={!dirty || !isValid }
+                            disabled={!dirty || !isValid}
                         >שמור</Button>
                     </Grid>
                 </Grid>

@@ -1,6 +1,6 @@
 import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, ListItemText, Checkbox, Chip, ListItem, Tooltip, IconButton } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
-import Swal from "sweetalert2"
+import swal from "sweetalert2"
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -34,7 +34,7 @@ const EmployerDemands = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-            Swal.fire({
+            swal.fire({
                 title: '',
                 text: 'הפרטים נקלטו בהצלחה!! המשך יום מוצלח!!! ',
                 icon: 'success',
@@ -70,19 +70,32 @@ const EmployerDemands = () => {
                         width: '50vw'
 
                     }}>
+                    <Grid
+                        container
+                        direction='row'
+                        justifyContent="space-between">
+                        <FormLabel
+                            sx={{
+                                fontSize: '20px',
+                                color: '#1976d2',
+                            }}
+                        >דרישות מעסיק</FormLabel>
 
-                    <FormLabel
-                        sx={{
-                            fontSize: '20px',
-                            color: '#1976d2',
-                        }}
-                    >דרישות מעסיק</FormLabel>
-
-                    <Tooltip title="Clear" className="tooltip">
-                        <IconButton>
-                            <ClearIcon></ClearIcon>
-                        </IconButton>
-                    </Tooltip>
+                        {/* <Tooltip title="Clear" className="tooltip"> */}
+                            <IconButton
+                             onClick={() => {
+                                new swal({
+                                    title: 'אתה בטוח שברצונך לצאת?',
+                                    icon: 'warning',
+                                    text: 'אם תצא כעת פרטיך לא ישמרו במערכת',
+                                    confirmButtonText: 'חזרה לדף הבית',
+                                    confirmButtonColor: '#3085d6',
+                                }).then((result) => { if (result.isConfirmed) navigate('/') })
+                            }}>
+                                <ClearIcon></ClearIcon>
+                            </IconButton>
+                        {/* </Tooltip> */}
+                    </Grid>
 
                     <Grid item sx={{
                         p: 2,
@@ -119,28 +132,28 @@ const EmployerDemands = () => {
                         {errors.abilities && touched.abilities && <Alert severity="error">{errors.abilities}</Alert>}
                     </Grid>
 
-                    {values.abilities.length!=0&&
-                    <Grid>
-                        <FormLabel sx={{m:2}}>נקד את עדיפותך ביכולות שבחרת</FormLabel>
-                        {values.abilities.map((ability, index) => {
-                            return (
-                                <ListItem key={index} sx={{
-                                    width: '9vw'
-                                }}>
-                                    <TextField
-                                        type="number"
-                                        name="genderScore"
-                                        id="genderScore"
-                                        label="ניקוד"
-                                        variant="outlined"
-                                    />
-                                    <ListItemText
-                                        sx={{ margin: '1vw' }}
-                                        primary={ability}
-                                    />
-                                </ListItem>)
-                        })}
-                    </Grid>}
+                    {values.abilities.length != 0 &&
+                        <Grid>
+                            <FormLabel sx={{ m: 2 }}>נקד את עדיפותך ביכולות שבחרת</FormLabel>
+                            {values.abilities.map((ability, index) => {
+                                return (
+                                    <ListItem key={index} sx={{
+                                        width: '9vw'
+                                    }}>
+                                        <TextField
+                                            type="number"
+                                            name="genderScore"
+                                            id="genderScore"
+                                            label="ניקוד"
+                                            variant="outlined"
+                                        />
+                                        <ListItemText
+                                            sx={{ margin: '1vw' }}
+                                            primary={ability}
+                                        />
+                                    </ListItem>)
+                            })}
+                        </Grid>}
 
                     <Grid item sx={{
                         p: 2,
