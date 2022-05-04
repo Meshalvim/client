@@ -35,9 +35,6 @@ const SignInEmployer = () => {
                     (result) => {
                         if (result.isConfirmed) {
                             navigate('../employerDemands')
-                            // if (status === 'employer')
-                            // else
-                            //     navigate('../disabledForm')
                         }
                     })
             }

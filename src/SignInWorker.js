@@ -40,9 +40,6 @@ const SignInWorker = () => {
                 }).then(
                     (result) => {
                         if (result.isConfirmed) {
-                            if (status === 'employer')
-                                navigate('../employerDetails')
-                            else
                                 navigate('../disabledForm')
                         }
                     })

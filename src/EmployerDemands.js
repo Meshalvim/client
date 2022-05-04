@@ -9,7 +9,7 @@ import { number } from "yup/lib/locale";
 import ClearIcon from '@mui/icons-material/Clear';
 
 const validationSchema = Yup.object({
-    abilities: Yup.array().min(1,'זהו שדה חובה'),
+    abilities: Yup.array().min(1, 'זהו שדה חובה'),
     disabilities: Yup.string().required('זהו שדה חובה'),
     age: Yup.string().required('זהו שדה חובה'),
     experience: Yup.number().min(0, 'לא יתכן מספר שלילי').required('זהו שדה חובה'),
@@ -20,7 +20,7 @@ const validationSchema = Yup.object({
     genderScore: Yup.number().min(1, 'הניקוד מתחיל מאחד').required('זהו שדה חובה'),
 });
 const EmployerDemands = () => {
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const { handleBlur, handleChange, handleSubmit, errors, values, touched, isValid, dirty } = useFormik({
         initialValues: {
             abilities: [],
@@ -41,9 +41,9 @@ const EmployerDemands = () => {
                 title: '',
                 text: 'הפרטים נקלטו בהצלחה!! המשך יום מוצלח!!! ',
                 icon: 'success',
-                confirmButtonText: 'המשך',
+                confirmButtonText: 'חזרה לדף הבית',
                 confirmButtonColor: '#3085d6',
-            })
+            }).then(() => { navigate('/') })
         }
     });
     const ages = ["18 - 22", "23 - 28", "29 - 33", "34 - 38", "39 - 43", "44 - 48", "49 - 53", "54 - 60"];
@@ -111,10 +111,10 @@ const EmployerDemands = () => {
                                 onBlur={handleBlur}
                                 error={errors.abilities && touched.abilities}
                             >
-                                {abilitiesArr.map((obj, i) => (
-                                    <MenuItem key={i} value={obj}>
-                                        <Checkbox checked={values.abilities.indexOf(obj) != -1} />
-                                        <ListItemText primary={obj} />
+                                {abilitiesArr.map((ability, index) => (
+                                    <MenuItem key={index} value={ability}>
+                                        <Checkbox checked={values.abilities.indexOf(ability) != -1} />
+                                        <ListItemText primary={ability} />
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -124,22 +124,22 @@ const EmployerDemands = () => {
 
                     <Grid>
                         {values.abilities.map((ability, index) => {
-                            return(
-                            <ListItem key={index} sx={{
-                                width: '9vw'
-                            }}>
-                                <TextField
-                                    type="number"
-                                    name="genderScore"
-                                    id="genderScore"
-                                    label="ניקוד"
-                                    variant="outlined"
-                                />
-                                <ListItemText
-                                    sx={{ margin: '1vw' }}
-                                    primary={ability}
-                                />
-                            </ListItem>)
+                            return (
+                                <ListItem key={index} sx={{
+                                    width: '9vw'
+                                }}>
+                                    <TextField
+                                        type="number"
+                                        name="genderScore"
+                                        id="genderScore"
+                                        label="ניקוד"
+                                        variant="outlined"
+                                    />
+                                    <ListItemText
+                                        sx={{ margin: '1vw' }}
+                                        primary={ability}
+                                    />
+                                </ListItem>)
                         })}
                     </Grid>
 

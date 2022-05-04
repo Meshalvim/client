@@ -2,7 +2,8 @@ import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, 
 import { useFormik } from "formik";
 import { useState } from "react";
 import swal from "sweetalert2";
-import * as Yup from 'yup'
+import * as Yup from 'yup';
+import { useNavigate } from "react-router";
 
 const validationSchema = Yup.object(
     {
@@ -19,6 +20,7 @@ const validationSchema = Yup.object(
     }
 )
 const DisabledForm = () => {
+    const navigate=useNavigate();
     const { handleBlur, handleChange, handleSubmit, values, touched, required, errors, dirty, isValid } = useFormik({
         initialValues: {
             gender: '',
@@ -37,9 +39,9 @@ const DisabledForm = () => {
                 title: '',
                 icon: 'success',
                 text: 'פרטיך נקלטו בהצלחה במערכת!!!',
-                confirmButtonText: 'המשך',
+                confirmButtonText: 'חזרה לדף הבית',
                 confirmButtonColor: '#3085d6',
-            })
+            }).then(()=>{navigate('/')})
         }
     })
 

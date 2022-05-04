@@ -1,6 +1,6 @@
 import { Grid, TextField, FormLabel, Button, Alert } from "@mui/material";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from "formik";
 import * as Yup from "yup"
@@ -11,7 +11,13 @@ const validationSchema = Yup.object({
 })
 
 const LogIn = () => {
-
+    const [curStatus, setCurStatus] = useState(localStorage.getItem('status'))
+    useEffect(() => {
+        const s = localStorage.getItem('status');
+        if (s) {
+            setCurStatus(s);
+        }
+    },null);
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
         initialValues: {
             name: '',
@@ -19,7 +25,6 @@ const LogIn = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-            //    alert( JSON.stringify(values))
             const exists = checkIfExist()
             if (exists)
                 Swal.fire({
@@ -39,11 +44,15 @@ const LogIn = () => {
                     cancelButtonText: 'להזנת הפרטים מחדש',
                     confirmButtonClass: 'btn-danger',
                     cancelButtonClass: 'btn-danger',
-                    // confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#3085d6',
                 }).then(
                     (result) => {
-                        if (result.isConfirmed)
-                            navigate('../EmployerSignIn')
+                        if (result.isConfirmed) {
+                            if (curStatus === "employer")
+                                navigate('../SignInEmployer')
+                            else
+                                navigate('../signInWorker')
+                        }
                     })
             }
         },
