@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { TextField, Grid, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, IconButton } from '@mui/material';
+import { TextField, Grid, FormLabel,  Button, Alert, IconButton } from '@mui/material';
 import swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useFormik } from "formik";
 import * as Yup from "yup"
 
@@ -59,7 +58,7 @@ const SignInEmployer = () => {
                 <Grid item sx={{
                     p: 1,
                     margin: 'auto',
-                    width: '50vw'
+                    width: '45vw'
 
                 }}>
                     <Grid

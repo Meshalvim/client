@@ -1,6 +1,5 @@
 import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert } from "@mui/material";
 import { useFormik } from "formik";
-import { useState } from "react";
 import swal from "sweetalert2";
 import * as Yup from 'yup';
 import { useNavigate } from "react-router";
@@ -41,7 +40,7 @@ const DisabledForm = () => {
                 text: 'פרטיך נקלטו בהצלחה במערכת!!!',
                 confirmButtonText: 'חזרה לדף הבית',
                 confirmButtonColor: '#3085d6',
-            }).then(()=>{navigate('/')})
+            }).then((result)=>{if(result.isConfirmed) navigate('/')})
         }
     })
 
