@@ -128,7 +128,7 @@ const ResponsiveAppBar = () => {
 
                             <Typography sx={{ margin: 3 }} textAlign="center">{currUser.name}</Typography>
                             <Box sx={{ flexGrow: 0 }}>
-                                <Tooltip title="Open settings">
+                                <Tooltip title="פתח תפריט">
                                     <IconButton
                                         size="large"
                                         color="inherit"

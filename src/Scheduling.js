@@ -11,6 +11,7 @@ import { Button } from '@mui/material';
 import swal from "sweetalert2"
 
 
+import { Icon, IconButton } from '@mui/material';
 
 
 
@@ -75,9 +76,10 @@ export default function DenseTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, i) => (
-            <TableRow
-              key={i}
+          {rows.map((row,index) => (
+            <TableRow 
+              hover
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               hover >
               <TableCell align="right" sx={{ fontSize: '1.120rem' }}>{row.rowId}</TableCell>
