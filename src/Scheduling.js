@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Icon, IconButton } from '@mui/material';
 
 
 
@@ -15,11 +16,15 @@ export default function DenseTable() {
     { name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' },
     { name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' },
     { name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' },
     { name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' }]
   return (
     
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+    <TableContainer component={Paper} sx={{ width:'70vw', m:'auto', mt:5, mb:5}}>
+      <Table stickyHeader sx={{ maxHeight: 440}} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
             <TableCell>Dessert (100g serving)</TableCell>
@@ -30,9 +35,10 @@ export default function DenseTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
+          {rows.map((row,index) => (
+            <TableRow 
+              hover
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
@@ -41,7 +47,7 @@ export default function DenseTable() {
               <TableCell align="right">{row.company}</TableCell>
               <TableCell align="right">{row.position}</TableCell>
               <TableCell align="right">{row.name}</TableCell>
-              <DeleteIcon></DeleteIcon>
+              <TableCell align="right"><IconButton><DeleteIcon></DeleteIcon></IconButton></TableCell>
             </TableRow>
           ))}
         </TableBody>
