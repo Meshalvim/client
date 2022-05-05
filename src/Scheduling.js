@@ -7,41 +7,88 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Button } from '@mui/material';
+import swal from "sweetalert2"
+
+
 
 
 
 export default function DenseTable() {
-    const rows = [{ name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { name: 'רונן', company: 'אלביט', position: 'מזכיר' }, { name: 'רונן', company: 'אלביט', position: 'מזכיר' }]
+  const [rows, setRows] = React.useState([
+    { rowId: 1, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 2, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 3, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 4, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 5, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 6, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 7, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 8, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 9, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 10, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 11, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 12, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 13, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 14, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 15, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 16, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 17, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 18, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 19, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 20, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 21, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 22, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+    { rowId: 23, name: 'רונן', company: 'אלביט', position: 'מזכיר' },])
+
+  const remove = (id) => {
+    swal.fire({
+      title: '',
+      text: 'בטוח שהנך למחוק רשומה זו מהטבלה?',
+      icon: 'warning',
+      confirmButtonText: 'אישור',
+      confirmButtonColor: '#3085d6',
+    }).then(() => {
+      const copyRows = rows.filter((row) => row.rowId !== id);
+      setRows(copyRows);
+    })
+  }
+
   return (
-    
-    <TableContainer component={Paper}>
+
+    <TableContainer component={Paper}
+      sx={{
+        p: 5,
+        width: '70vw',
+        margin: "auto",
+        mt: 5,
+        boxShadow: '0px 2px 7px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 0px 3px 0px rgb(0 0 0 / 12%)'
+      }}
+    >
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}></TableCell>
+            <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}>חברה</TableCell>
+            <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}>משרה</TableCell>
+            <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}>שם מועמד</TableCell>
+            <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}>מחיקת רשומה</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row, i) => (
             <TableRow
-              key={row.name}
+              key={i}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
+              hover >
+              <TableCell align="right" sx={{ fontSize: '1.120rem' }}>{row.rowId}</TableCell>
+              <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.company}</TableCell>
+              <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.position}</TableCell>
+              <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.name}</TableCell>
+              <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
+                <Button onClick={() => { remove(row.rowId) }}>
+                  <DeleteIcon></DeleteIcon>
+                </Button>
               </TableCell>
-              <TableCell align="right">{row.company}</TableCell>
-              <TableCell align="right">{row.position}</TableCell>
-              <TableCell align="right">{row.name}</TableCell>
-              <DeleteIcon></DeleteIcon>
             </TableRow>
           ))}
         </TableBody>
