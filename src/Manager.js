@@ -1,7 +1,9 @@
 import { Backdrop, CircularProgress, Button, Grid } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const Manager = () => {
+    const navigate=useNavigate()
     const [showBackdrop, setShowBackdrop] = useState(false)
 
     const algorithm = () => {
@@ -9,7 +11,7 @@ const Manager = () => {
         console.log('start ' + showBackdrop)
         getRiverInformation().then(
             d => setShowBackdrop(d)
-        )
+        ).then(()=>{navigate('../scheduling')})
     }
 
 
