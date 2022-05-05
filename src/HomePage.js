@@ -1,6 +1,9 @@
-import SvgIcon from '@mui/icons-material/VolunteerActivism';
 import { Grid, Button, Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
+
+import HearingDisabledRoundedIcon from '@mui/icons-material/HearingDisabledRounded';
+import AccessibleRoundedIcon from '@mui/icons-material/AccessibleRounded';
+import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 
 const HomePage = () => {
 
@@ -8,6 +11,7 @@ const HomePage = () => {
 
     return (
         <>
+
             <Grid container direction='row'>
                 <Grid item>
                     <Box sx={{ width: '50vw', height: '20vw' }}></Box>

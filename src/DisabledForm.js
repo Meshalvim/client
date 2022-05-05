@@ -74,7 +74,7 @@ const DisabledForm = () => {
                             onClick={(values) => {
                                 new swal({
                                     title: 'אתה בטוח שברצונך לצאת?',
-                                    icon: 'warnning',
+                                    icon: 'warning',
                                     text: 'אם תצא כעת פרטיך לא ישמרו במערכת',
                                     confirmButtonText: 'חזרה לדף הבית',
                                     confirmButtonColor: '#3085d6',
@@ -180,7 +180,7 @@ const DisabledForm = () => {
                             onBlur={handleBlur}
                             error={errors.motor && touched.motor}
                         />
-                        {errors.motor && touched.motor && <Alert severity="error">{errors.min.motor}</Alert>}
+                        {errors.motor && touched.motor && <Alert severity="error">{errors.motor}</Alert>}
 
                         <TextField
                             type="number"
@@ -193,7 +193,7 @@ const DisabledForm = () => {
                             onBlur={handleBlur}
                             error={errors.comunication && touched.comunication}
                         />
-                        {errors.comunication && touched.comunication && <Alert severity="error">{errors.min.comunication}</Alert>}
+                        {errors.comunication && touched.comunication && <Alert severity="error">{errors.comunication}</Alert>}
 
                         <TextField
                             type="number"
@@ -206,7 +206,7 @@ const DisabledForm = () => {
                             onBlur={handleBlur}
                             error={errors.real && touched.real}
                         />
-                        {errors.real && touched.real && <Alert severity="error">{errors.min.real}</Alert>}
+                        {errors.real && touched.real && <Alert severity="error">{errors.real}</Alert>}
 
                         <TextField
                             type="number"
@@ -219,7 +219,7 @@ const DisabledForm = () => {
                             onBlur={handleBlur}
                             error={errors.mental && touched.mental}
                         />
-                        {errors.mental && touched.mental && <Alert severity="error">{errors.min.mental}</Alert>}
+                        {errors.mental && touched.mental && <Alert severity="error">{errors.mental}</Alert>}
 
                         <TextField
                             type="number"
@@ -232,7 +232,7 @@ const DisabledForm = () => {
                             onBlur={handleBlur}
                             error={errors.physical && touched.physical}
                         />
-                        {errors.physical && touched.physical && <Alert severity="error">{errors.min.physical}</Alert>}
+                        {errors.physical && touched.physical && <Alert severity="error">{errors.physical}</Alert>}
 
                     </Grid>
                     {!dirty.salary && touched.salary || !dirty.physical && touched.physical ||
