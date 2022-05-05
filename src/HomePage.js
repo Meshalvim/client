@@ -48,7 +48,10 @@ const HomePage = () => {
                         <Button
                             variant="contained"
                             size="large"
-                            onClick={() => navigate('/manage')}
+                            onClick={() => {
+                                localStorage.setItem('status', "manager");
+                                navigate('/managerLogin')
+                            }}
                             sx={{
                                 p: 2,
                                 margin: 2,

@@ -1,7 +1,7 @@
-import { Backdrop, CircularProgress, Button } from "@mui/material";
+import { Backdrop, CircularProgress, Button, Grid } from "@mui/material";
 import { useState } from "react";
 
-const Manage = () => {
+const Manager = () => {
     const [showBackdrop, setShowBackdrop] = useState(false)
 
     const algorithm = () => {
@@ -21,17 +21,22 @@ const Manage = () => {
         })
     }
 
-
     return (
         <>
-
-            <Button variant="contained" color="success"
-                onClick={() => { algorithm() }}
-            >
-                ... לשיבוץ עובדים על פי הנתונים שנשמרו
-            </Button>
+            <Grid
+                sx={{
+                    p: 4,
+                    margin: 'auto',
+                    width: '20vw',
+                }}>
+                <Button variant="contained" color="success"
+                    onClick={() => { algorithm() }}
+                >
+                    לשיבוץ עובדים על פי הנתונים שנשמרו ...
+                </Button>
+            </Grid>
             <Backdrop
-                
+
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={showBackdrop}
             >
@@ -42,4 +47,4 @@ const Manage = () => {
     );
 }
 
-export default Manage;
+export default Manager;

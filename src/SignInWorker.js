@@ -39,7 +39,7 @@ const SignInWorker = () => {
                 }).then(
                     (result) => {
                         if (result.isConfirmed) {
-                                navigate('../disabledForm')
+                                navigate('../candidateForm')
                         }
                     })
             }
