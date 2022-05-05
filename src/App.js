@@ -11,6 +11,7 @@ import CandidateForm from './CandidateForm';
 import EmployerDemands from './EmployerDemands';
 import ManagerLogin from './ManagerLogin';
 import AppBar from './AppBar';
+import Scheduling from './Scheduling';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/candidateForm" element={<CandidateForm />} />
           <Route path="/employerDemands" element={<EmployerDemands />} />
           <Route path="/managerLogin" element={<ManagerLogin/>} />
+          <Route path="/scheduling" element={<Scheduling/>} />
         </Routes>
       </BrowserRouter>
     </div>
