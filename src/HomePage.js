@@ -1,4 +1,4 @@
-import { Grid, Button, Box } from '@mui/material'
+import { Grid, Button, Box, SvgIcon } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 
 import HearingDisabledRoundedIcon from '@mui/icons-material/HearingDisabledRounded';
@@ -12,10 +12,11 @@ const HomePage = () => {
     return (
         <>
 
-            <Grid container direction='row'>
-                <Grid item>
-                    <Box sx={{ width: '50vw', height: '20vw' }}></Box>
-                    {/* here is a logo or an image */}
+            <Grid container direction='column' sx={{margin:'auto'}}>
+                <Grid container direction='row' justifyContent='center'>
+                    <SvgIcon sx={{ p: 2, m:6 }} style={{ borderRadius: '50%', backgroundColor: 'lightGrey', fontSize: '15vw', color: 'White'}} component={HearingDisabledRoundedIcon} inheritViewBox />
+                    <SvgIcon sx={{ p: 2, m:6 }} style={{ borderRadius: '50%', backgroundColor: 'lightGrey', fontSize: '15vw', color: 'White'}} component={AccessibleRoundedIcon} inheritViewBox />
+                    <SvgIcon sx={{ p: 2, m:6 }} style={{ borderRadius: '50%', backgroundColor: 'lightGrey', fontSize: '15vw', color: 'White' }} component={VisibilityOffRoundedIcon} inheritViewBox />
                 </Grid>
                 <Grid item sx={{ margin: 'auto' }}>
                     <Grid container direction='column'>
