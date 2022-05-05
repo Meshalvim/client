@@ -6,10 +6,10 @@ import SignInEmployer from './SignInEmployer';
 import LogIn from './LogIn';
 import HomePage from './HomePage';
 import About from './About';
-import EmployerDetails from './EmployerDetails';
-import Manage from './Manage';
-import DisabledForm from './DisabledForm';
+import Manager from './Manager';
+import CandidateForm from './CandidateForm';
 import EmployerDemands from './EmployerDemands';
+import ManagerLogin from './ManagerLogin';
 import AppBar from './AppBar';
 
 function App() {
@@ -23,10 +23,10 @@ function App() {
           <Route path="/signInWorker" element={<SignInWorker />} />
           <Route path="/SignInEmployer" element={<SignInEmployer />} />
           <Route path="/logIn" element={<LogIn />} />
-          <Route path="/employerDetails" element={<EmployerDetails />} />
-          <Route path="/manage" element={<Manage />} />
-          <Route path="/DisabledForm" element={<DisabledForm />} />
+          <Route path="/manager" element={<Manager />} />
+          <Route path="/candidateForm" element={<CandidateForm />} />
           <Route path="/employerDemands" element={<EmployerDemands />} />
+          <Route path="/managerLogin" element={<ManagerLogin/>} />
         </Routes>
       </BrowserRouter>
     </div>
