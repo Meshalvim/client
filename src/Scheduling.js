@@ -8,12 +8,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from '@mui/material';
-import swal from "sweetalert2"
-
-
+import Swal from "sweetalert2";
 import { Icon, IconButton } from '@mui/material';
-
-
 
 export default function DenseTable() {
   const [rows, setRows] = React.useState([
@@ -41,17 +37,25 @@ export default function DenseTable() {
     { rowId: 22, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
     { rowId: 23, name: 'רונן', company: 'אלביט', position: 'מזכיר' },])
 
-  const remove = (id) => {
-    swal.fire({
+  const onClickRemove = (id) => {
+    Swal.fire({
       title: '',
-      text: 'בטוח שהנך למחוק רשומה זו מהטבלה?',
       icon: 'warning',
+      text: 'בטוח שהנך למחוק רשומה זו מהטבלה?',
       confirmButtonText: 'אישור',
+      showCancelButton: true,
+      cancelButtonText: 'ביטול',
+      confirmButtonClass: 'btn-danger',
+      cancelButtonClass: 'btn-danger',
       confirmButtonColor: '#3085d6',
     }).then(() => {
-      const copyRows = rows.filter((row) => row.rowId !== id);
-      setRows(copyRows);
+      remove(id)
     })
+  }
+  const remove=(id) => {
+    const copyRows = rows.filter((row) => row.rowId !== id);
+    setRows(copyRows);
+    alert("deleted")
   }
 
   return (
@@ -68,7 +72,6 @@ export default function DenseTable() {
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}></TableCell>
             <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}>חברה</TableCell>
             <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}>משרה</TableCell>
             <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}>שם מועמד</TableCell>
@@ -76,18 +79,17 @@ export default function DenseTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row,index) => (
-            <TableRow 
+          {rows.map((row, index) => (
+            <TableRow
               hover
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               hover >
-              <TableCell align="right" sx={{ fontSize: '1.120rem' }}>{row.rowId}</TableCell>
               <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.company}</TableCell>
               <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.position}</TableCell>
               <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.name}</TableCell>
               <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
-                <Button onClick={() => { remove(row.rowId) }}>
+                <Button onClick={() => { onClickRemove(row.rowId) }}>
                   <DeleteIcon></DeleteIcon>
                 </Button>
               </TableCell>
