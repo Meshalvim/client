@@ -9,7 +9,6 @@ import About from './About';
 import Manager from './Manager';
 import CandidateForm from './CandidateForm';
 import EmployerDemands from './EmployerDemands';
-import ManagerLogin from './ManagerLogin';
 import AppBar from './AppBar';
 import Scheduling from './Scheduling';
 
@@ -24,10 +23,9 @@ function App() {
           <Route path="/signInWorker" element={<SignInWorker />} />
           <Route path="/SignInEmployer" element={<SignInEmployer />} />
           <Route path="/logIn" element={<LogIn />} />
-          <Route path="/manager" element={<Manager />} />
           <Route path="/candidateForm" element={<CandidateForm />} />
           <Route path="/employerDemands" element={<EmployerDemands />} />
-          <Route path="/managerLogin" element={<ManagerLogin/>} />
+          <Route path="/manager" element={<Manager />} />
           <Route path="/scheduling" element={<Scheduling/>} />
         </Routes>
       </BrowserRouter>

@@ -11,14 +11,7 @@ const validationSchema = Yup.object({
     password: Yup.string().required('סיסמא זהו שדה חובה'),
 })
 
-const LogIn = () => {
-    const [curStatus, setCurStatus] = useState(localStorage.getItem('status'))
-    useEffect(() => {
-        const s = localStorage.getItem('status');
-        if (s) {
-            setCurStatus(s);
-        }
-    }, null);
+const Add = () => {
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
         initialValues: {
             name: '',
@@ -119,9 +112,7 @@ const LogIn = () => {
                                     fontSize: '20px',
                                     color: '#1976d2',
                                 }}
-                            >כניסה</FormLabel>
-
-                            <IconButton onClick={() => { navigate('/') }}><ArrowBackRoundedIcon /></IconButton>
+                            >הוספת רשומה</FormLabel>
                         </Grid>
 
                         <Grid item sx={{
@@ -178,4 +169,4 @@ const LogIn = () => {
     );
 }
 
-export default LogIn;
+export default Add;
