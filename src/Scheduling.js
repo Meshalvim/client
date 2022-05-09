@@ -64,84 +64,84 @@ export default function DenseTable() {
   }
 
   return (
-<>
-    <TableContainer component={Paper}
-      sx={{
-        p: 5,
-        width: '70vw',
-        margin: "auto",
-        mt: 5,
-        boxShadow: '0px 2px 7px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 0px 3px 0px rgb(0 0 0 / 12%)'
-      }}>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="center" sx={{ fontSize: '21px', color: 'deepPink' }}>חברה</TableCell>
-            <TableCell align="center" sx={{ fontSize: '21px', color: 'deepPink' }}>משרה</TableCell>
-            <TableCell align="center" sx={{ fontSize: '21px', color: 'deepPink' }}>שם מועמד</TableCell>
-            <TableCell align="center" sx={{ fontSize: '21px', color: 'deepPink' }}>מחיקת רשומה</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row, index) => {
-            return(<TableRow
-              hover
-              key={index}
+    <>
+      <TableContainer component={Paper}
+        sx={{
+          p: 5,
+          width: '70vw',
+          margin: "auto",
+          mt: 5,
+          boxShadow: '0px 2px 7px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 0px 3px 0px rgb(0 0 0 / 12%)'
+        }}
+      >
+        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}>חברה</TableCell>
+              <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}>משרה</TableCell>
+              <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}>שם מועמד</TableCell>
+              <TableCell align="center" sx={{ fontSize: '21px', color: ' #1976d2' }}>מחיקת רשומה</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row, index) => (
+              <TableRow
+                hover
+                key={index}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                hover >
+                <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.company}</TableCell>
+                <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.position}</TableCell>
+                <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.name}</TableCell>
+                <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
+                  <Button onClick={() => { onClickRemove(row.rowId) }}>
+                    <DeleteIcon></DeleteIcon>
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+            <TableRow hover
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               hover >
               <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
-                <IconButton sx={{ color: 'deepPink' }} onClick={() => { onClickRemove(row.rowId) }}>
-                  <DeleteIcon></DeleteIcon>
-                </IconButton>
+                <select
+                  value={company}
+                  onChange={(event) => {
+                    setCompany(event.target.value);
+                  }}
+                // placeholder='חברה'
+                // width='20vw'
+                >
+                  <option value="grapefruit">company</option>
+                  <option value="lime">company</option>
+                  <option value="coconut">company</option>
+                  <option value="mango">company</option>
+                </select>
               </TableCell>
-              <TableCell>{row.company}</TableCell>
-              <TableCell>{row.position}</TableCell>
-              <TableCell>{row.name}</TableCell>
-            </TableRow>)
-          })}
-
-          <TableRow>
-
-            <TableCell>
-
-              <select
-                value={company}
-                onChange={(event) => {
-                  setCompany(event.target.value);
-                }}
-              // placeholder='חברה'
-              // width='20vw'
-              >
-                <option value="grapefruit">company</option>
-                <option value="lime">company</option>
-                <option value="coconut">company</option>
-                <option value="mango">company</option>
-              </select>
-            </TableCell>
-            <TableCell align="center" sx={{ fontSize: '1.120rem' }}>blablabla</TableCell>
-            <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
-              <select
-                value={candidate}
-                onChange={(event) => {
-                  setCandidate(event.target.value);
-                }}
-              // placeholder='מועמד'
-              >
-                <option value="grapefruit">candidate</option>
-                <option value="lime">candidate</option>
-                <option value="coconut">candidate</option>
-                <option value="mango">candidate</option>
-              </select>
-            </TableCell>
-            <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
-              <Button onClick={() => { onClickAdd() }}>
-                <AddCircleOutlineIcon></AddCircleOutlineIcon>
-              </Button>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
+              <TableCell align="center" sx={{ fontSize: '1.120rem' }}></TableCell>
+              <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
+                <select
+                  value={candidate}
+                  onChange={(event) => {
+                    setCandidate(event.target.value);
+                  }}
+                  // placeholder='מועמד'
+                >
+                  <option value="grapefruit">candidate</option>
+                  <option value="lime">candidate</option>
+                  <option value="coconut">candidate</option>
+                  <option value="mango">candidate</option>
+                </select>
+              </TableCell>
+              <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
+                <Button onClick={() => { onClickAdd() }}>
+                  <AddCircleOutlineIcon></AddCircleOutlineIcon>
+                </Button>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
     </>
   );
 }
