@@ -30,6 +30,7 @@ const HomePage = () => {
                             sx={{
                                 p: 2,
                                 margin: 2,
+                                backgroundColor:'deepPink'
                             }}>
                             מעסיק
                         </Button>
@@ -43,6 +44,7 @@ const HomePage = () => {
                             sx={{
                                 p: 2,
                                 margin: 2,
+                                backgroundColor:'deepPink'
                             }}>
                             מחפש עבודה
                         </Button>
@@ -56,6 +58,7 @@ const HomePage = () => {
                             sx={{
                                 p: 2,
                                 margin: 2,
+                                backgroundColor:'deepPink'
                             }}>
                             מנהל המערכת
                         </Button>

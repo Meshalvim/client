@@ -30,7 +30,7 @@ const About = () => {
                             <p>אם בעבר העסקת אנשים עם מוגבלות נעשתה פעמים רבות ממקום של חסד ולא ממקום של אמונה ביכולתם של אנשים עם מוגבלות לבצע את המשימות כשווים, הרי שהתפיסה המקצועית  – בשנים האחרונות הולכת ומשתנה. העסקת אנשים עם מוגבלות מתמקדת ביכולות ולא במוגבלות- שינוי מהותי ששם במרכז את יכולותיו של האדם לבצע את תפקידו ולא את הדעות הקדומות (ופעמים רבות - השגויות) לגבי יכולתו לבצע תפקיד ספציפי בהינתן ההתאמות הנדרשות לו.</p>
                         </Grid>
                         <Grid item style={{ width: '40vw' }}>
-                            <SvgIcon style={{ fontSize: '15vw', margin: 'auto', color: '#1976d2', marginLeft: '10vw', marginBottom: '2vw' }} component={VolunteerActivismRoundedIcon} inheritViewBox />
+                            <SvgIcon style={{opacity:'0.5', fontSize: '15vw', margin: 'auto', color: 'deepPink', marginLeft: '10vw', marginBottom: '2vw' }} component={VolunteerActivismRoundedIcon} inheritViewBox />
                         </Grid>
                     </Grid>
 

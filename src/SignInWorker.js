@@ -30,6 +30,7 @@ const SignInWorker = () => {
         onSubmit: (values) => {
             localStorage.setItem('user', JSON.stringify(values))
             {
+                //values צריך לשלוח את   
                 new swal({
                     title: '!!!' + values.name + ' שלום ',
                     icon: 'success',
@@ -39,7 +40,7 @@ const SignInWorker = () => {
                 }).then(
                     (result) => {
                         if (result.isConfirmed) {
-                                navigate('../candidateForm')
+                            navigate('../candidateForm')
                         }
                     })
             }
@@ -83,11 +84,15 @@ const SignInWorker = () => {
                             <FormLabel
                                 sx={{
                                     fontSize: '20px',
-                                    color: '#1976d2',
+                                    color: 'deepPink',
                                 }}
                             >הרשמה</FormLabel>
 
-                            <IconButton onClick={() => { navigate('/') }}><ArrowBackRoundedIcon /></IconButton>
+                            <IconButton 
+                                sx={{color:'deepPink'}}
+                                onClick={() => { navigate('/') }}>
+                                <ArrowBackRoundedIcon />
+                            </IconButton>
 
                         </Grid>
 
@@ -200,23 +205,6 @@ const SignInWorker = () => {
                             {errors.city && touched.city && <Alert severity="error">{errors.city}</Alert>}
                         </Grid>
 
-                        {/* <Grid item sx={{
-                            p: 2,
-                            margin: 'auto',
-                        }}>
-                            <FormControl>
-                                <FormLabel>סמן סטטוס</FormLabel>
-                                <RadioGroup
-                                    name="controlled-radio-buttons-group"
-                                    value={status}
-                                    onChange={handleRadioChange}
-                                >
-                                    <FormControlLabel value="employer" control={<Radio />} label="מעסיק" />
-                                    <FormControlLabel value="lookingForJob" control={<Radio />} label="מחפש עבודה" />
-                                </RadioGroup>
-                            </FormControl>
-                        </Grid> */}
-
                         <Grid container direction="row"  >
 
                             <Grid item sx={{
@@ -227,6 +215,7 @@ const SignInWorker = () => {
                                     type='submit'
                                     disabled={!dirty || !isValid}
                                     variant="contained"
+                                    sx={{backgroundColor:'deepPink'}}
                                 >להרשמה</Button>
                             </Grid>
 
@@ -237,10 +226,11 @@ const SignInWorker = () => {
                                 <Button
                                     variant="outlined"
                                     onClick={() => { navigate('../logIn') }}
+                                    sx={{color:'deepPink', borderColor:'deepPink'}}
                                 >משתמש רשום?</Button>
                             </Grid>
                         </Grid>
-                        
+
 
                     </Grid>
                 </Grid>

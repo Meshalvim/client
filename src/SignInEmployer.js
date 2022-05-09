@@ -22,6 +22,7 @@ const SignInEmployer = () => {
         },
         validationSchema,
         onSubmit: (values) => {
+            //values צריך לשלוח את   
             localStorage.setItem('user', JSON.stringify(values))
             {
                 new swal({
@@ -77,11 +78,11 @@ const SignInEmployer = () => {
                             <FormLabel
                                 sx={{
                                     fontSize: '20px',
-                                    color: '#1976d2',
+                                    color: 'deepPink',
                                 }}
                             >הרשמה</FormLabel>
 
-                            <IconButton
+                            <IconButton sx={{color:'deepPink'}}
                                 variant="outlined"
                                 onClick={() => { navigate('/') }}
                             >
@@ -154,6 +155,7 @@ const SignInEmployer = () => {
                                     type='submit'
                                     disabled={!dirty || !isValid}
                                     variant="contained"
+                                    sx={{backgroundColor:'deepPink'}}
                                 >להרשמה</Button>
                             </Grid>
 
@@ -164,6 +166,7 @@ const SignInEmployer = () => {
                                 <Button
                                     variant="outlined"
                                     onClick={() => { navigate('../logIn') }}
+                                    sx={{color:'deepPink', borderColor:'deepPink'}}
                                 >משתמש רשום?</Button>
                             </Grid>
                         </Grid>

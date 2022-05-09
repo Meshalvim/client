@@ -39,7 +39,7 @@ const ResponsiveAppBar = () => {
     };
 
     return (
-        <AppBar position="sticky">
+        <AppBar position="sticky" sx={{backgroundColor:'deepPink'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <IconButton
@@ -108,10 +108,11 @@ const ResponsiveAppBar = () => {
                                     handleCloseNavMenu()
                                     navigate('/about')
                             }}
-                            sx={{ my: 2, color: 'white', display: 'block', fontSize:'20px' }}
+                            sx={{m:2, my: 2, color: 'white', display: 'block', fontSize:'20px' }}
                         >
                             אודות
                         </Button>
+                        {/* ----------צריך להוסיף כאן את הדפים לפי המשתמש שנמצא במערכת ------------------------*/}
                         {/* {pages.map((page) => ( */}
                         {/* <Button
                                 key={page}

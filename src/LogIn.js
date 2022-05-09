@@ -85,11 +85,13 @@ const LogIn = () => {
                         <FormLabel
                             sx={{
                                 fontSize: '20px',
-                                color: '#1976d2',
+                                color: 'deepPink',
                             }}
                         >כניסה</FormLabel>
 
-                        <IconButton onClick={() => { navigate('/') }}><ArrowBackRoundedIcon /></IconButton>
+                        <IconButton sx={{color:'deepPink'}} onClick={() => { navigate('/') }}>
+                            <ArrowBackRoundedIcon />
+                        </IconButton>
                     </Grid>
 
                     <Grid item sx={{
@@ -137,6 +139,7 @@ const LogIn = () => {
                             disabled={!dirty || !isValid}
                             type="submit"
                             variant="contained"
+                            sx={{backgroundColor:'deepPink'}}
                         >לכניסה</Button>
                     </Grid>
 
