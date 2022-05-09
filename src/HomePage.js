@@ -8,6 +8,14 @@ import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 const HomePage = () => {
 
     const navigate = useNavigate();
+    const buttonStyle= {
+        p: 2,
+        margin: 2,
+        backgroundColor:'deepPink',
+        '&:hover':{
+        backgroundColor:'#bf0067'
+        }
+    }
 
     return (
         <>
@@ -27,11 +35,7 @@ const HomePage = () => {
                                 localStorage.setItem('status', "employer");
                                 navigate('/SignInEmployer')
                             }}
-                            sx={{
-                                p: 2,
-                                margin: 2,
-                                backgroundColor:'deepPink'
-                            }}>
+                            sx={buttonStyle}>
                             מעסיק
                         </Button>
                         <Button
@@ -41,11 +45,7 @@ const HomePage = () => {
                                 localStorage.setItem('status', "worker");
                                 navigate('/signInWorker')
                             }}
-                            sx={{
-                                p: 2,
-                                margin: 2,
-                                backgroundColor:'deepPink'
-                            }}>
+                            sx={buttonStyle}>
                             מחפש עבודה
                         </Button>
                         <Button
@@ -55,11 +55,7 @@ const HomePage = () => {
                                 localStorage.setItem('status', "manager");
                                 navigate('/manager')
                             }}
-                            sx={{
-                                p: 2,
-                                margin: 2,
-                                backgroundColor:'deepPink'
-                            }}>
+                            sx={buttonStyle}>
                             מנהל המערכת
                         </Button>
                     </Grid>

@@ -60,7 +60,6 @@ const SignInEmployer = () => {
                     p: 1,
                     margin: 'auto',
                     width: '45vw'
-
                 }}>
                     <Grid
                         sx={{
