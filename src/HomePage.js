@@ -53,7 +53,7 @@ const HomePage = () => {
                             size="large"
                             onClick={() => {
                                 localStorage.setItem('status', "manager");
-                                navigate('/managerLogin')
+                                navigate('/manager')
                             }}
                             sx={{
                                 p: 2,

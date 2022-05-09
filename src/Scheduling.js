@@ -7,11 +7,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button } from '@mui/material';
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import Swal from "sweetalert2";
 import { Icon, IconButton } from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 export default function DenseTable() {
+  const [company, setCompany] = React.useState('חברה')
+  const [candidate, setCandidate] = React.useState('מועמד')
   const [rows, setRows] = React.useState([
     { rowId: 1, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
     { rowId: 2, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
@@ -37,6 +40,8 @@ export default function DenseTable() {
     { rowId: 22, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
     { rowId: 23, name: 'רונן', company: 'אלביט', position: 'מזכיר' },])
 
+  const onClickAdd = () => { }
+
   const onClickRemove = (id) => {
     Swal.fire({
       title: '',
@@ -52,14 +57,14 @@ export default function DenseTable() {
       remove(id)
     })
   }
-  const remove=(id) => {
+  const remove = (id) => {
     const copyRows = rows.filter((row) => row.rowId !== id);
     setRows(copyRows);
     alert("deleted")
   }
 
   return (
-
+<>
     <TableContainer component={Paper}
       sx={{
         p: 5,
@@ -67,8 +72,7 @@ export default function DenseTable() {
         margin: "auto",
         mt: 5,
         boxShadow: '0px 2px 7px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 0px 3px 0px rgb(0 0 0 / 12%)'
-      }}
-    >
+      }}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
@@ -79,25 +83,66 @@ export default function DenseTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
-            <TableRow
+          {rows.map((row, index) => {
+            return(<TableRow
               hover
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               hover >
-              <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.company}</TableCell>
-              <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.position}</TableCell>
-              <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.name}</TableCell>
               <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
-                <IconButton sx={{color:'deepPink'}} onClick={() => { onClickRemove(row.rowId) }}>
+                <IconButton sx={{ color: 'deepPink' }} onClick={() => { onClickRemove(row.rowId) }}>
                   <DeleteIcon></DeleteIcon>
                 </IconButton>
               </TableCell>
-            </TableRow>
-          ))}
+              <TableCell>{row.company}</TableCell>
+              <TableCell>{row.position}</TableCell>
+              <TableCell>{row.name}</TableCell>
+            </TableRow>)
+          })}
+
+          <TableRow>
+
+            <TableCell>
+
+              <select
+                value={company}
+                onChange={(event) => {
+                  setCompany(event.target.value);
+                }}
+              // placeholder='חברה'
+              // width='20vw'
+              >
+                <option value="grapefruit">company</option>
+                <option value="lime">company</option>
+                <option value="coconut">company</option>
+                <option value="mango">company</option>
+              </select>
+            </TableCell>
+            <TableCell align="center" sx={{ fontSize: '1.120rem' }}>blablabla</TableCell>
+            <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
+              <select
+                value={candidate}
+                onChange={(event) => {
+                  setCandidate(event.target.value);
+                }}
+              // placeholder='מועמד'
+              >
+                <option value="grapefruit">candidate</option>
+                <option value="lime">candidate</option>
+                <option value="coconut">candidate</option>
+                <option value="mango">candidate</option>
+              </select>
+            </TableCell>
+            <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
+              <Button onClick={() => { onClickAdd() }}>
+                <AddCircleOutlineIcon></AddCircleOutlineIcon>
+              </Button>
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>
+    </>
   );
 }
 

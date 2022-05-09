@@ -11,14 +11,7 @@ const validationSchema = Yup.object({
     password: Yup.string().required('סיסמא זהו שדה חובה'),
 })
 
-const LogIn = () => {
-    const [curStatus, setCurStatus] = useState(localStorage.getItem('status'))
-    useEffect(() => {
-        const s = localStorage.getItem('status');
-        if (s) {
-            setCurStatus(s);
-        }
-    }, null);
+const Add = () => {
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
         initialValues: {
             name: '',
@@ -103,73 +96,77 @@ const LogIn = () => {
                     p: 5,
                 }}>
                     <Grid
-                        container
-                        direction='row'
-                        justifyContent="space-between">
-                        <FormLabel
-                            sx={{
-                                fontSize: '20px',
-                                color: 'deepPink',
-                            }}
-                        >כניסה</FormLabel>
+                        sx={{
+                            p: 4,
+                            border: '2px solid lightGrey',
+                            borderRadius: '1vw',
+                            margin: 'auto',
+                            width: '35vw',
+                        }}>
+                        <Grid
+                            container
+                            direction='row'
+                            justifyContent="space-between">
+                            <FormLabel
+                                sx={{
+                                    fontSize: '20px',
+                                    color: '#1976d2',
+                                }}
+                            >הוספת רשומה</FormLabel>
+                        </Grid>
 
-                        <IconButton sx={{color:'deepPink'}} onClick={() => { navigate('/') }}>
-                            <ArrowBackRoundedIcon />
-                        </IconButton>
+                        <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                        }}>
+                            <TextField
+                                fullWidth
+                                error={errors.name && touched.name}
+                                name="name"
+                                id="name"
+                                label="שם"
+                                variant="standard"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.name}
+                            />
+                            {errors.name && touched.name && <Alert severity="error">{errors.name}</Alert>}
+                        </Grid>
+
+                        <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                        }}>
+                            <TextField
+                                fullWidth
+                                error={errors.password && touched.password}
+                                name='password'
+                                id='password'
+                                type='password'
+                                label="סיסמא"
+                                variant="standard"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.email}
+                            />
+                            {errors.password && touched.password && <Alert severity="error">{errors.password}</Alert>}
+                        </Grid>
+
+                        <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                        }}>
+                            <Button
+                                disabled={!dirty || !isValid}
+                                type="submit"
+                                variant="contained"
+                            >לכניסה</Button>
+                        </Grid>
+
                     </Grid>
-
-                    <Grid item sx={{
-                        p: 1,
-                        margin: 'auto',
-                    }}>
-                        <TextField
-                            fullWidth
-                            error={errors.name && touched.name}
-                            name="name"
-                            id="name"
-                            label="שם"
-                            variant="standard"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.name}
-                        />
-                        {errors.name && touched.name && <Alert severity="error">{errors.name}</Alert>}
-                    </Grid>
-
-                    <Grid item sx={{
-                        p: 1,
-                        margin: 'auto',
-                    }}>
-                        <TextField
-                            fullWidth
-                            error={errors.password && touched.password}
-                            name='password'
-                            id='password'
-                            type='password'
-                            label="סיסמא"
-                            variant="standard"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.email}
-                        />
-                        {errors.password && touched.password && <Alert severity="error">{errors.password}</Alert>}
-                    </Grid>
-
-                    <Grid item sx={{
-                        p: 1,
-                        margin: 'auto',
-                    }}>
-                        <Button
-                            disabled={!dirty || !isValid}
-                            type="submit"
-                            variant="contained"
-                            sx={{backgroundColor:'deepPink'}}
-                        >לכניסה</Button>
-                    </Grid>
-
                 </Grid>
         </form >
     );
 }
 
-export default LogIn;
+export default Add;
