@@ -86,11 +86,11 @@ const EmployerDemands = () => {
                 localStorage.getItem('user') != null && localStorage.getItem('status') == 'employer' ?
                     <form onSubmit={handleSubmit} >
                         <Grid container direction="column" sx={{
-                            p: 1
+                            p: 2
                         }}>
                             <Grid
                                 sx={{
-                                    p: 1,
+                                    p: 4,
                                     border: '2px solid lightGrey',
                                     borderRadius: '1vw',
                                     margin: 'auto',
@@ -169,7 +169,7 @@ const EmployerDemands = () => {
                                             sx={{ p: 2, fontSize: '20px', color: 'deepPink', }}>
                                             דרג את עדיפותך ביכולות שבחרת
                                         </FormLabel>
-                                        <Grid sx={{ p: 2 }} container direction='column'>
+                                        <Grid sx={{ p: 1 }} container direction='column'>
                                             <Grid container direction='row'>
                                                 {shownAbilities.map((ability, index) => {
                                                     return (
@@ -195,7 +195,7 @@ const EmployerDemands = () => {
                                     </Grid>
                                 }
                                 <Grid item sx={{
-                                    p: 2,
+                                    // p: 2,
                                     margin: 'auto',
                                 }}>
 

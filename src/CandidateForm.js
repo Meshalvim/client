@@ -61,7 +61,7 @@ const CandidateForm = () => {
                 localStorage.getItem('user') != null && localStorage.getItem('status') == 'worker' ?
                     <form onSubmit={handleSubmit}>
                         <Grid container direction="column" sx={{
-                            p: 5
+                            p: 2
                         }}>
                             <Grid
                                 sx={{

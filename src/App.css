@@ -1,1 +1,50 @@
+/*input*/
+.css-1a1fmpi-MuiInputBase-root-MuiInput-root:after, 
+.css-wb57ya-MuiFormControl-root-MuiTextField-root:after, 
+.css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root:after,
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input
+{    
+    border-color: deeppink !important
+}
 
+.css-1a1fmpi-MuiInputBase-root-MuiInput-root.Mui-error:after {
+    border-bottom-color: #d32f2f !important;
+}
+
+.css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+    color: deeppink !important
+}
+/*buttonOutlined*/
+.css-1rvhyz2-MuiButtonBase-root-MuiButton-root{
+    border-color: deeppink !important
+}
+
+.css-1rvhyz2-MuiButtonBase-root-MuiButton-root:hover, .css-1pq3op5-MuiButtonBase-root-MuiButton-root:hover{
+    background-color: #ff149312 !important
+}
+/*buttonBase*/
+.css-z4kzhn-MuiButtonBase-root-MuiButton-root,.css-sghohy-MuiButtonBase-root-MuiButton-root{
+    background-color: deeppink !important
+}
+
+.css-z4kzhn-MuiButtonBase-root-MuiButton-root:hover,.css-sghohy-MuiButtonBase-root-MuiButton-root:hover{
+    background-color: #d10070 !important
+}
+.css-z4kzhn-MuiButtonBase-root-MuiButton-root.Mui-disabled,.css-sghohy-MuiButtonBase-root-MuiButton-root.Mui-disabled {
+    background-color: rgba(0, 0, 0, 0.12) !important;
+}
+/*formLabel*/
+.css-k06cc8-MuiFormLabel-root, .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked, .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
+    color: deeppink !important
+}
+/*select*/
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected:hover, .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected {
+    background-color: #ff149312 !important
+}
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root:hover, .css-vqmohf-MuiButtonBase-root-MuiRadio-root:hover {
+    background-color: #ff149312 !important
+}
+/*radioButton*/
+.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked, .css-u4tvz2-MuiFormLabel-root.Mui-focused {
+    color: deeppink !important;
+}

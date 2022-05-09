@@ -19,6 +19,12 @@ const LogIn = () => {
             setCurStatus(s);
         }
     }, null);
+    const buttonStyle= {
+        backgroundColor:'deepPink',
+        '&:hover':{
+        backgroundColor:'#bf0067'
+        }
+    }
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
         initialValues: {
             name: '',
@@ -173,7 +179,7 @@ const LogIn = () => {
                         disabled={!dirty || !isValid}
                         type="submit"
                         variant="contained"
-                        sx={{ backgroundColor: 'deepPink' }}
+                        sx={buttonStyle}
                     >לכניסה</Button>
                 </Grid>
 
