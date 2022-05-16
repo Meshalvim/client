@@ -173,7 +173,7 @@ const EmployerDemands = () => {
                                             <Grid container direction='row'>
                                                 {shownAbilities.map((ability, index) => {
                                                     return (
-                                                        <Button sx={{color:'deepPink'}} id={index} key={index} onClick={(e) => addAbility(e)}>
+                                                        <Button sx={{color:'#1c8ab2'}} id={index} key={index} onClick={(e) => addAbility(e)}>
                                                             {ability}
                                                         </Button>
                                                     )
@@ -204,7 +204,7 @@ const EmployerDemands = () => {
                                         p: 1
                                     }}>
                                         <Grid item sx={{
-                                            p: 1,
+                                            p: 0,
                                             width: '20%'
                                         }}>
                                             <TextField
@@ -243,7 +243,7 @@ const EmployerDemands = () => {
                                         p: 1
                                     }}>
                                         <Grid item sx={{
-                                            p: 1,
+                                            p: 0,
                                             margin: 'auto',
                                             width: '20%'
                                         }}>
@@ -292,7 +292,7 @@ const EmployerDemands = () => {
                                         p: 1
                                     }}>
                                         <Grid item sx={{
-                                            p: 1,
+                                            p: 0,
                                             margin: 'auto',
                                             width: '20%'
                                         }}>

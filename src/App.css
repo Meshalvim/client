@@ -4,47 +4,70 @@
 .css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root:after,
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input
 {    
-    border-color: deeppink !important
+    border-color: #1c8ab2 !important
 }
 
 .css-1a1fmpi-MuiInputBase-root-MuiInput-root.Mui-error:after {
     border-bottom-color: #d32f2f !important;
 }
 
-.css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
-    color: deeppink !important
+.css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused, .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+    color: #1c8ab2 !important
 }
 /*buttonOutlined*/
 .css-1rvhyz2-MuiButtonBase-root-MuiButton-root{
-    border-color: deeppink !important
+    border-color: #1c8ab2 !important
 }
+
+ .MuiInputBase-colorPrimary, .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused{
+    border-color: #1c8ab2 !important;
+    outline-color: #1c8ab2 !important
+}
+
+
+.MuiInputBase-colorPrimary.Mui-focused, .MuiInputBase-formControl.Mui-focused, .MuiInputBase-fullWidth.Mui-focused, .MuiInputBase-root.Mui-focused, .MuiOutlinedInput-root.Mui-focused{
+    border-color: #1c8ab2 !important;
+    outline-color: #1c8ab2 !important
+}
+
 
 .css-1rvhyz2-MuiButtonBase-root-MuiButton-root:hover, .css-1pq3op5-MuiButtonBase-root-MuiButton-root:hover{
     background-color: #ff149312 !important
 }
 /*buttonBase*/
 .css-z4kzhn-MuiButtonBase-root-MuiButton-root,.css-sghohy-MuiButtonBase-root-MuiButton-root{
-    background-color: deeppink !important
+    background-color: #1c8ab2 !important
 }
 
-.css-z4kzhn-MuiButtonBase-root-MuiButton-root:hover,.css-sghohy-MuiButtonBase-root-MuiButton-root:hover{
-    background-color: #d10070 !important
+.css-z4kzhn-MuiButtonBase-root-MuiButton-root:hover,
+.css-sghohy-MuiButtonBase-root-MuiButton-root:hover,
+.css-8jqb21-MuiButtonBase-root-MuiButton-root:hover,
+.css-s2jw0r-MuiButtonBase-root-MuiButton-root:hover,{
+    background-color: #187292 !important
 }
-.css-z4kzhn-MuiButtonBase-root-MuiButton-root.Mui-disabled,.css-sghohy-MuiButtonBase-root-MuiButton-root.Mui-disabled {
+.css-z4kzhn-MuiButtonBase-root-MuiButton-root.Mui-disabled,.css-17huflz-MuiButtonBase-root-MuiButton-root.Mui-disabled,
+.css-sghohy-MuiButtonBase-root-MuiButton-root.Mui-disabled {
     background-color: rgba(0, 0, 0, 0.12) !important;
 }
 /*formLabel*/
-.css-k06cc8-MuiFormLabel-root, .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked, .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
-    color: deeppink !important
+.css-k06cc8-MuiFormLabel-root, .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root.Mui-focused,.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked, .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
+    color: #1c8ab2 !important
 }
 /*select*/
-.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected:hover, .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected {
-    background-color: #ff149312 !important
-}
-.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root:hover, .css-vqmohf-MuiButtonBase-root-MuiRadio-root:hover {
-    background-color: #ff149312 !important
+/* .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected:hover, .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected {
+    background-color: #1872925d !important
+} */
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected:hover,
+ .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected,
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root:hover, 
+.css-vqmohf-MuiButtonBase-root-MuiRadio-root:hover {
+    background-color: #1872925d !important
 }
 /*radioButton*/
-.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked, .css-u4tvz2-MuiFormLabel-root.Mui-focused {
-    color: deeppink !important;
+.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked, .css-u4tvz2-MuiFormLabel-root.Mui-focused, .css-1xdg3r6-MuiFormLabel-root, .css-8pqxon-MuiFormLabel-root, .css-1pq3op5-MuiButtonBase-root-MuiButton-root {
+    color: #1c8ab2 !important;
 }
+
+.containedBtn,.containedBtn:hover, .css-17huflz-MuiButtonBase-root-MuiButton-root{
+    background-color:#1a7799 !important;
+  }

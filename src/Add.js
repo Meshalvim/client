@@ -28,7 +28,6 @@ const Add = () => {
                         confirmButtonText: 'מעבר לרישום',
                         showCancelButton: true,
                         cancelButtonText: 'להזנת הפרטים מחדש',
-                        confirmButtonClass: 'btn-danger',
                         cancelButtonClass: 'btn-danger',
                         confirmButtonColor: '#3085d6',
                     }).then(

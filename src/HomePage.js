@@ -11,9 +11,9 @@ const HomePage = () => {
     const buttonStyle= {
         p: 2,
         margin: 2,
-        backgroundColor:'deepPink',
+        backgroundColor:'#1c8ab2',
         '&:hover':{
-        backgroundColor:'#bf0067'
+        backgroundColor:'#187292'
         }
     }
 
@@ -32,7 +32,7 @@ const HomePage = () => {
                             variant="contained"
                             size="large"
                             onClick={() => {
-                                localStorage.setItem('status', "employer");
+                                localStorage.setItem('status', 'employer');
                                 navigate('/SignInEmployer')
                             }}
                             sx={buttonStyle}>
@@ -42,7 +42,7 @@ const HomePage = () => {
                             variant="contained"
                             size="large"
                             onClick={() => {
-                                localStorage.setItem('status', "worker");
+                                localStorage.setItem('status', 'worker');
                                 navigate('/signInWorker')
                             }}
                             sx={buttonStyle}>

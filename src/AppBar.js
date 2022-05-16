@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, Tooltip, MenuItem } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, Tooltip, MenuItem, Grid } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
-
+// import lg from '../public/logo'
 
 // const pages = [];
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -38,10 +38,30 @@ const ResponsiveAppBar = () => {
         setAnchorElUser(null);
     };
 
+    const logOut = () => {
+        localStorage.removeItem('user')
+        setCurUser(null)
+        navigate('/')
+    }
+
+    const deleteUser = () => {
+        //DELETE
+        // לקרוא לפונקצית מחיקה מהשרת
+        // .then
+        logOut()
+    }
+
+    const editDetails = () => {
+        //GET
+        //לנווט לטופס הרשמה עם פרופס של המשתמש עפ"י הסטטוס שבלוקל סטורג
+    }
+
     return (
-        <AppBar position="sticky" sx={{backgroundColor:'deepPink'}}>
-            <Container maxWidth="xl">
+        <AppBar position="sticky" sx={{ backgroundColor: '#1c8ab2' }}>
+            <Container direction="column" maxWidth="xl">
+
                 <Toolbar disableGutters>
+                    <img src={require('./images/logo.png')} style={{ width: '5vw', margin: 10, borderRadius: '50%' }}></img>
                     <IconButton
                         onClick={() => navigate('/')}
                         color="inherit"
@@ -57,6 +77,7 @@ const ResponsiveAppBar = () => {
                         MESHALVIM
                     </Typography>
 
+                    {/* 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
@@ -91,8 +112,9 @@ const ResponsiveAppBar = () => {
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))} */}
-                        </Menu>
-                    </Box>
+                    {/* </Menu>
+                    </Box>  */}
+
                     {/* <Typography
                         variant="h6"
                         noWrap
@@ -101,14 +123,13 @@ const ResponsiveAppBar = () => {
                     >
                         LOGO
                     </Typography> */}
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{ flexGrow: 1, display: { md: 'flex' } }}>
                         <Button
-                            onClick={()=>
-                                {
-                                    handleCloseNavMenu()
-                                    navigate('/about')
+                            onClick={() => {
+                                handleCloseNavMenu()
+                                navigate('/about')
                             }}
-                            sx={{m:2, my: 2, color: 'white', display: 'block', fontSize:'20px' }}
+                            sx={{ m: 2, my: 2, color: 'white', display: 'block', fontSize: '20px' }}
                         >
                             אודות
                         </Button>
@@ -158,15 +179,13 @@ const ResponsiveAppBar = () => {
                                     <MenuItem
                                         onClick={() => {
                                             handleCloseUserMenu()
-                                            //לנווט לטופס הרשמה עם פרופס של המשתמש
+                                            editDetails()
                                         }}>
                                         <Typography textAlign="center">עריכת פרטים</Typography>
                                     </MenuItem>
                                     <MenuItem onClick={() => {
                                         handleCloseUserMenu()
-                                        localStorage.removeItem('user')
-                                        setCurUser(null)
-                                        navigate('/')
+                                        logOut()
                                     }}>
                                         <Typography textAlign="center">יציאה</Typography>
                                     </MenuItem>
@@ -178,10 +197,7 @@ const ResponsiveAppBar = () => {
                                             color='error'
                                             onClick={() => {
                                                 handleCloseUserMenu()
-                                                // לקרוא לפונקצית מחיקה
-                                                localStorage.removeItem('user')
-                                                setCurUser(null)
-                                                navigate('/')
+                                                deleteUser()
                                             }}
 
                                         >מחק משתמש</Button>

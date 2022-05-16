@@ -25,9 +25,7 @@ code {
   direction: ltr;
 }
 
-.containedBtn,.containedBtn:hover{
-  background-color:'deepPink';
-}
+
 
 /*
 *:hover,:active,:focus{

@@ -5,6 +5,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from "formik";
 import * as Yup from "yup"
+import { async } from "q";
+import axios from "axios";
 
 const validationSchema = Yup.object({
     name: Yup.string().required('שם זהו שדה חובה'),
@@ -13,16 +15,20 @@ const validationSchema = Yup.object({
 
 const LogIn = () => {
     const [curStatus, setCurStatus] = useState(localStorage.getItem('status'))
+
+    const url = `http://localhost:64672/api/login`
+    let user
+
     useEffect(() => {
         const s = localStorage.getItem('status');
         if (s) {
             setCurStatus(s);
         }
     }, null);
-    const buttonStyle= {
-        backgroundColor:'deepPink',
-        '&:hover':{
-        backgroundColor:'#bf0067'
+    const buttonStyle = {
+        backgroundColor: 'deepPink',
+        '&:hover': {
+            backgroundColor: '#bf0067'
         }
     }
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
@@ -32,39 +38,64 @@ const LogIn = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-            fetch(`https://localhost:44339/`).then(result => {
-                if (result.json == null) {
-                    Swal.fire({
-                        title: 'שגיאה!',
-                        icon: 'error',
-                        text: 'משתמש לא קיים!',
-                        confirmButtonText: 'מעבר לרישום',
-                        showCancelButton: true,
-                        cancelButtonText: 'להזנת הפרטים מחדש',
-                        confirmButtonClass: 'btn-danger',
-                        cancelButtonClass: 'btn-danger',
-                        confirmButtonColor: '#3085d6',
-                    }).then(
-                        (result) => {
-                            if (result.isConfirmed) {
-                                if (curStatus === "employer")
-                                    navigate('../SignInEmployer')
-                                else
-                                    navigate('../signInWorker')
-                            }
-                        })
-                }
-                else
-                    Swal.fire({
-                        title: '!!!' + ' שלום ' + values.name,
-                        icon: 'info',
-                        text: '!!!אתה מועבר לטופס לבקשת עבודה, בהצלחה',
-                        confirmButtonText: 'המשך',
-                        confirmButtonColor: '#3085d6',
-                    })
+
+            // let jobs = getJobs();
+            debugger
+            axios.get(url).then(response => {
+                console.log(response);
             })
+            // .catch(err=>{
+            // console.log(err)});
+
+            // console.log(jobs)
+            // fetch(url, {
+            //     mode: 'no-cors',
+            // }).then(res => {
+            //     {
+            //         console.log(res.text())
+            //         // user=data.filter(d=> d.name== values.name&& d.password== values.password)
+            //     }
+            // })
+            //     .then(data => console.log(data))
         }
     })
+
+    const getJobs = () => {
+
+    }
+
+
+    //     if (result.json == null) {
+    //         Swal.fire({
+    //             title: 'שגיאה!',
+    //             icon: 'error',
+    //             text: 'משתמש לא קיים!',
+    //             confirmButtonText: 'מעבר לרישום',
+    //             showCancelButton: true,
+    //             cancelButtonText: 'להזנת הפרטים מחדש',
+    //             cancelButtonClass: 'btn-danger',
+    //             confirmButtonColor: '#3085d6',
+    //         }).then(
+    //             (result) => {
+    //                 if (result.isConfirmed) {
+    //                     if (curStatus === "employer")
+    //                         navigate('../SignInEmployer')
+    //                     else
+    //                         navigate('../signInWorker')
+    //                 }
+    //             })
+    //     }
+    //     else
+    //         Swal.fire({
+    //             title: '!!!' + ' שלום ' + values.name,
+    //             icon: 'info',
+    //             text: '!!!אתה מועבר לטופס לבקשת עבודה, בהצלחה',
+    //             confirmButtonText: 'המשך',
+    //             confirmButtonColor: '#3085d6',
+    //         })
+    //          })
+    //     }
+    // })
     //         const exists = checkIfExist()
     //         if (exists)
     //             Swal.fire({
@@ -82,7 +113,6 @@ const LogIn = () => {
     //                 confirmButtonText: 'מעבר לרישום',
     //                 showCancelButton: true,
     //                 cancelButtonText: 'להזנת הפרטים מחדש',
-    //                 confirmButtonClass: 'btn-danger',
     //                 cancelButtonClass: 'btn-danger',
     //                 confirmButtonColor: '#3085d6',
     //             }).then(
@@ -96,7 +126,9 @@ const LogIn = () => {
     //                 })
     //         }
     //     },
-    // })
+    // 
+    // }
+    //     )
 
     const navigate = useNavigate();
     const checkIfExist = () => {
@@ -121,17 +153,22 @@ const LogIn = () => {
                     <FormLabel
                         sx={{
                             fontSize: '20px',
-                            color: 'deepPink',
+                            color: '#1c8ab2',
                             '&:focus': {
-                                borderColor: "deepPink !important",
+                                borderColor: "#1c8ab2 !important",
                                 // border: "1px solid green"
                             }
                         }}
                     >כניסה</FormLabel>
 
-                    <IconButton sx={{ color: 'deepPink' }} onClick={() => { navigate('/') }}>
+                    <IconButton sx={{ color: '#1c8ab2' }} onClick={() => { navigate('/') }}>
                         <ArrowBackRoundedIcon />
                     </IconButton>
+                </Grid>
+                <Grid item
+                    sx={{ margin: 'auto'}}
+                >
+                    <img src={require('./images/15.png')}  style={{borderRadius:'50%', width:'100px'}}></img>
                 </Grid>
 
                 <Grid item sx={{

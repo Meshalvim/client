@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { TextField, Grid, FormLabel,  Button, Alert, IconButton } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { TextField, Grid, FormLabel, Button, Alert, IconButton, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useFormik } from "formik";
 import * as Yup from "yup"
+import axios from 'axios';
 
 const validationSchema = Yup.object({
     name: Yup.string().required('שם זהו שדה חובה'),
@@ -42,11 +43,21 @@ const SignInEmployer = () => {
         }
     })
 
+    const url = `http://localhost:64672/api/cities`
+
     const [status, setStatus] = useState('lookingForJob');
     const [name, setName] = useState('')
 
     const navigate = useNavigate();
 
+    const [cities, setCities] = useState([])
+
+    useEffect(() => {
+        let c;
+        axios.get(url).then(res => {
+            setCities(res.data)
+        })
+    })
     const handleRadioChange = (event) => {
         setStatus(event.target.value);
     }
@@ -77,11 +88,11 @@ const SignInEmployer = () => {
                             <FormLabel
                                 sx={{
                                     fontSize: '20px',
-                                    color: 'deepPink',
+                                    color: '#1c8ab2',
                                 }}
                             >הרשמה</FormLabel>
 
-                            <IconButton sx={{color:'deepPink'}}
+                            <IconButton sx={{ color: '#1c8ab2' }}
                                 variant="outlined"
                                 onClick={() => { navigate('/') }}
                             >
@@ -119,6 +130,7 @@ const SignInEmployer = () => {
                                 type="password"
                                 label="סיסמא"
                                 variant="standard"
+                                autoComplete='false'
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.password}
@@ -126,7 +138,7 @@ const SignInEmployer = () => {
                             {errors.password && touched.password && <Alert severity="error">{errors.password}</Alert>}
                         </Grid>
 
-                        <Grid item sx={{
+                        {/* <Grid item sx={{
                             p: 1,
                             margin: 'auto',
                         }}>
@@ -142,6 +154,31 @@ const SignInEmployer = () => {
                                 value={values.city}
                             />
                             {errors.city && touched.city && <Alert severity="error">{errors.city}</Alert>}
+                        </Grid> */}
+
+                        <Grid item sx={{
+                            p: 1,
+                            margin: 'auto',
+                        }}>
+                            <FormControl fullWidth variant="standard">
+                                <InputLabel id="city">עיר</InputLabel>
+                                <Select
+                                    labelId="city"
+                                    id="city"
+                                    name="city"
+                                    value={values.city}
+                                    label="city"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    error={errors.city && touched.city}
+                                >
+                                    {
+                                        cities.map((item, i) => {
+                                            return <MenuItem key={i} value={item.name_city} className="menuItemAge">{item.name_city}</MenuItem>
+                                        })}
+                                </Select>
+                            </FormControl>
+                            {errors.city && touched.city && <Alert severity="error">{errors.city}</Alert>}
                         </Grid>
 
                         <Grid container direction="row"  >
@@ -154,7 +191,7 @@ const SignInEmployer = () => {
                                     type='submit'
                                     disabled={!dirty || !isValid}
                                     variant="contained"
-                                    sx={{backgroundColor:'deepPink'}}
+                                    sx={{ backgroundColor: '#1c8ab2' }}
                                 >להרשמה</Button>
                             </Grid>
 
@@ -165,7 +202,7 @@ const SignInEmployer = () => {
                                 <Button
                                     variant="outlined"
                                     onClick={() => { navigate('../logIn') }}
-                                    sx={{color:'deepPink', borderColor:'deepPink'}}
+                                    sx={{ color: '#1c8ab2', borderColor: '#1c8ab2' }}
                                 >משתמש רשום?</Button>
                             </Grid>
                         </Grid>
