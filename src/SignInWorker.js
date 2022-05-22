@@ -7,6 +7,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup"
 import axios from 'axios';
 
+import {useLocation} from 'react-router-dom';
+
 const validationSchema = Yup.object({
     name: Yup.string().required('שם זהו שדה חובה'),
     password: Yup.string().required('סיסמא זהו שדה חובה'),
@@ -16,17 +18,19 @@ const validationSchema = Yup.object({
     city: Yup.string().required('עיר זהו שדה חובה'),
 })
 
-const SignInWorker = () => {
+const SignInWorker = (props) => {
+    const location= useLocation()
 
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
-        initialValues: {
-            name: '',
+        initialValues: 
+            location.state!=null?location.state.user:
+            { name: '',
             password: '',
             identity: '',
             tel: '',
             email: '',
-            city: '',
-        },
+            city: '',}
+        ,
         validationSchema,
         onSubmit: (values) => {
             localStorage.setItem('user', JSON.stringify(values))
@@ -72,133 +76,133 @@ const SignInWorker = () => {
     return (
 
         <form onSubmit={handleSubmit}>
-            <Grid container direction="column" sx={{ p: 5 }}>
-                <Grid item sx={{
-                    p: 1,
-                    margin: 'auto',
-                    width: '45vw'
-
-                }}>
-                    <Grid
-                        sx={{
-                            p: 4,
-                            border: '2px solid lightGrey',
-                            borderRadius: '1vw',
-                            margin: 'auto',
-                        }}>
-
+            <Grid container direction='row'>
+                <Grid container direction="column" item sx={{ p: 5 }}>
+                    <Grid item sx={{
+                        p: 1,
+                        width: '35vw',
+                        margin:'auto'
+                    }}>
                         <Grid
-                            container
-                            direction='row'
-                            justifyContent="space-between">
+                            sx={{
+                                p: 4,
+                                border: '2px solid lightGrey',
+                                borderRadius: '1vw',
+                                margin: 'auto',
+                            }}>
 
-                            <FormLabel
-                                sx={{
-                                    fontSize: '20px',
-                                    color: 'deepPink',
-                                }}
-                            >הרשמה</FormLabel>
+                            <Grid
+                                container
+                                direction='row'
+                                justifyContent="space-between">
 
-                            <IconButton
-                                sx={{ color: '#1c8ab2' }}
-                                onClick={() => { navigate('/') }}>
-                                <ArrowBackRoundedIcon />
-                            </IconButton>
+                                <FormLabel
+                                    sx={{
+                                        fontSize: '20px',
+                                        color: 'deepPink',
+                                    }}
+                                >הרשמה</FormLabel>
 
-                        </Grid>
+                                <IconButton
+                                    sx={{ color: '#02c298' }}
+                                    onClick={() => { navigate('/') }}>
+                                    <ArrowBackRoundedIcon />
+                                </IconButton>
 
-                        <Grid item sx={{
-                            p: 1,
-                            margin: 'auto',
-                        }}>
-                            <TextField
-                                fullWidth
-                                error={errors.name && touched.name}
-                                name="name"
-                                id="name"
-                                label="שם"
-                                variant="standard"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.name}
-                            />
-                            {errors.name && touched.name && <Alert severity="error">{errors.name}</Alert>}
-                        </Grid>
+                            </Grid>
 
-                        <Grid item sx={{
-                            p: 1,
-                            margin: 'auto',
-                        }}>
-                            <TextField
-                                fullWidth
-                                error={errors.password && touched.password}
-                                id="password"
-                                type="password"
-                                label="סיסמא"
-                                variant="standard"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.password}
-                            />
-                            {errors.password && touched.password && <Alert severity="error">{errors.password}</Alert>}
-                        </Grid>
+                            <Grid item sx={{
+                                p: 1,
+                                margin: 'auto',
+                            }}>
+                                <TextField
+                                    fullWidth
+                                    error={errors.name && touched.name}
+                                    name="name"
+                                    id="name"
+                                    label="שם"
+                                    variant="standard"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.name}
+                                />
+                                {errors.name && touched.name && <Alert severity="error">{errors.name}</Alert>}
+                            </Grid>
 
-                        <Grid item sx={{
-                            p: 1,
-                            margin: 'auto',
-                        }}>
-                            <TextField
-                                fullWidth
-                                error={errors.identity && touched.identity}
-                                name="identity"
-                                id="identity"
-                                label="ת.ז."
-                                variant="standard"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.identity}
-                            />
-                            {errors.identity && touched.identity && <Alert severity="error">{errors.identity}</Alert>}
-                        </Grid>
+                            <Grid item sx={{
+                                p: 1,
+                                margin: 'auto',
+                            }}>
+                                <TextField
+                                    fullWidth
+                                    error={errors.password && touched.password}
+                                    id="password"
+                                    type="password"
+                                    label="סיסמא"
+                                    variant="standard"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.password}
+                                />
+                                {errors.password && touched.password && <Alert severity="error">{errors.password}</Alert>}
+                            </Grid>
 
-                        <Grid item sx={{
-                            p: 1,
-                            margin: 'auto',
-                        }}>
-                            <TextField
-                                fullWidth
-                                error={errors.tel && touched.tel}
-                                name="tel"
-                                id="tel"
-                                label="טלפון"
-                                variant="standard"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.tel}
-                            />
-                            {errors.tel && touched.tel && <Alert severity="error">{errors.tel}</Alert>}
-                        </Grid>
+                            <Grid item sx={{
+                                p: 1,
+                                margin: 'auto',
+                            }}>
+                                <TextField
+                                    fullWidth
+                                    error={errors.identity && touched.identity}
+                                    name="identity"
+                                    id="identity"
+                                    label="ת.ז."
+                                    variant="standard"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.identity}
+                                />
+                                {errors.identity && touched.identity && <Alert severity="error">{errors.identity}</Alert>}
+                            </Grid>
 
-                        <Grid item sx={{
-                            p: 1,
-                            margin: 'auto',
-                        }}>
-                            <TextField
-                                fullWidth
-                                error={errors.email && touched.email}
-                                id="email"
-                                type="email"
-                                label="אימייל"
-                                variant="standard"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.email}
-                            />
-                            {/* <Alert severity="error">בתבנית אימייל!!!</Alert> */}
-                            {errors.email && errors.email && touched.email && <Alert severity="error">{errors.email}</Alert>}
-                        </Grid>
+                            <Grid item sx={{
+                                p: 1,
+                                margin: 'auto',
+                            }}>
+                                <TextField
+                                    fullWidth
+                                    error={errors.tel && touched.tel}
+                                    name="tel"
+                                    id="tel"
+                                    label="טלפון"
+                                    variant="standard"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.tel}
+                                />
+                                {errors.tel && touched.tel && <Alert severity="error">{errors.tel}</Alert>}
+                            </Grid>
 
-                        {/* <Grid item sx={{
+                            <Grid item sx={{
+                                p: 1,
+                                margin: 'auto',
+                            }}>
+                                <TextField
+                                    fullWidth
+                                    error={errors.email && touched.email}
+                                    id="email"
+                                    type="email"
+                                    label="אימייל"
+                                    variant="standard"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.email}
+                                />
+                                {/* <Alert severity="error">בתבנית אימייל!!!</Alert> */}
+                                {errors.email && errors.email && touched.email && <Alert severity="error">{errors.email}</Alert>}
+                            </Grid>
+
+                            {/* <Grid item sx={{
                             p: 1,
                             margin: 'auto',
                         }}>
@@ -216,60 +220,67 @@ const SignInWorker = () => {
                             {errors.city && touched.city && <Alert severity="error">{errors.city}</Alert>}
                         </Grid> */}
 
-                        <Grid item sx={{
-                            p: 1,
-                            margin: 'auto',
-                        }}>
-                            <FormControl fullWidth variant="standard">
-                                <InputLabel id="city">עיר</InputLabel>
-                                <Select
-                                    labelId="city"
-                                    id="city"
-                                    name="city"
-                                    value={values.city}
-                                    label="city"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    error={errors.city && touched.city}
-                                >
-                                    {
-                                        cities.map((item, i) => {
-                                            return <MenuItem key={i} value={item.name_city} className="menuItemAge">{item.name_city}</MenuItem>
-                                        })}
-                                </Select>
-                            </FormControl>
-                            {errors.city && touched.city && <Alert severity="error">{errors.city}</Alert>}
-                        </Grid>
-
-
-                        <Grid container direction="row"  >
-
                             <Grid item sx={{
                                 p: 1,
                                 margin: 'auto',
                             }}>
-                                <Button
-                                    type='submit'
-                                    disabled={!dirty || !isValid}
-                                    variant="contained"
-                                    sx={{ backgroundColor: '#1c8ab2' }}
-                                >להרשמה</Button>
+                                <FormControl fullWidth variant="standard">
+                                    <InputLabel id="city">עיר</InputLabel>
+                                    <Select
+                                        labelId="city"
+                                        id="city"
+                                        name="city"
+                                        value={values.city}
+                                        label="city"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        error={errors.city && touched.city}
+                                    >
+                                        {
+                                            cities.map((item, i) => {
+                                                return <MenuItem key={i} value={item.name_city} className="menuItemAge">{item.name_city}</MenuItem>
+                                            })}
+                                    </Select>
+                                </FormControl>
+                                {errors.city && touched.city && <Alert severity="error">{errors.city}</Alert>}
                             </Grid>
 
-                            <Grid item sx={{
-                                p: 1,
-                                margin: 'auto',
-                            }}>
-                                <Button
-                                    variant="outlined"
-                                    onClick={() => { navigate('../logIn') }}
-                                    sx={{ color: '#1c8ab2', borderColor: '#1c8ab2' }}
-                                >משתמש רשום?</Button>
+
+                            <Grid container direction="row"  >
+
+                                <Grid item sx={{
+                                    p: 1,
+                                    margin: 'auto',
+                                }}>
+                                    <Button
+                                        type='submit'
+                                        disabled={(location.state&&(!dirty || !isValid))||(!location.state && dirty && !isValid) }
+                                        variant="contained"
+                                        sx={{ backgroundColor: '#02c298' }}
+                                    >להרשמה</Button>
+                                </Grid>
+
+                                <Grid item sx={{
+                                    p: 1,
+                                    margin: 'auto',
+                                }}>
+                                    <Button
+                                        variant="outlined"
+                                        onClick={() => { navigate('../logIn') }}
+                                        sx={{ color: '#02c298', borderColor: '#02c298' }}
+                                    >משתמש רשום?</Button>
+                                </Grid>
                             </Grid>
+
                         </Grid>
-
 
                     </Grid>
+                </Grid>
+                <Grid item style={{position: "fixed", bottom:0, left:0}}>
+                    <img src={require('./images/3.png')}></img>
+                </Grid>
+                <Grid item style={{position: "fixed", bottom:0, right:0}}>
+                    <img src={require('./images/3.png')}></img>
                 </Grid>
             </Grid>
         </form >

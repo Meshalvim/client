@@ -70,7 +70,7 @@ const SignInEmployer = () => {
                 <Grid item sx={{
                     p: 1,
                     margin: 'auto',
-                    width: '45vw'
+                    width: '35vw'
                 }}>
                     <Grid
                         sx={{
@@ -88,11 +88,11 @@ const SignInEmployer = () => {
                             <FormLabel
                                 sx={{
                                     fontSize: '20px',
-                                    color: '#1c8ab2',
+                                    color: '#02c298',
                                 }}
                             >הרשמה</FormLabel>
 
-                            <IconButton sx={{ color: '#1c8ab2' }}
+                            <IconButton sx={{ color: '#02c298' }}
                                 variant="outlined"
                                 onClick={() => { navigate('/') }}
                             >
@@ -191,7 +191,7 @@ const SignInEmployer = () => {
                                     type='submit'
                                     disabled={!dirty || !isValid}
                                     variant="contained"
-                                    sx={{ backgroundColor: '#1c8ab2' }}
+                                    sx={{ backgroundColor: '#02c298' }}
                                 >להרשמה</Button>
                             </Grid>
 
@@ -202,7 +202,7 @@ const SignInEmployer = () => {
                                 <Button
                                     variant="outlined"
                                     onClick={() => { navigate('../logIn') }}
-                                    sx={{ color: '#1c8ab2', borderColor: '#1c8ab2' }}
+                                    sx={{ color: '#02c298', borderColor: '#02c298' }}
                                 >משתמש רשום?</Button>
                             </Grid>
                         </Grid>

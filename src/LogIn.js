@@ -153,15 +153,15 @@ const LogIn = () => {
                     <FormLabel
                         sx={{
                             fontSize: '20px',
-                            color: '#1c8ab2',
+                            color: '#02c298',
                             '&:focus': {
-                                borderColor: "#1c8ab2 !important",
+                                borderColor: "#02c298 !important",
                                 // border: "1px solid green"
                             }
                         }}
                     >כניסה</FormLabel>
 
-                    <IconButton sx={{ color: '#1c8ab2' }} onClick={() => { navigate('/') }}>
+                    <IconButton sx={{ color: '#02c298' }} onClick={() => { navigate('/') }}>
                         <ArrowBackRoundedIcon />
                     </IconButton>
                 </Grid>

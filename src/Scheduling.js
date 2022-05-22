@@ -77,10 +77,10 @@ export default function DenseTable() {
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
-              <TableCell align="center" sx={{ fontSize: '21px', color: 'deepPink' }}>חברה</TableCell>
-              <TableCell align="center" sx={{ fontSize: '21px', color: 'deepPink' }}>משרה</TableCell>
-              <TableCell align="center" sx={{ fontSize: '21px', color: 'deepPink' }}>שם מועמד</TableCell>
-              <TableCell align="center" sx={{ fontSize: '21px', color: 'deepPink' }}>מחיקת רשומה</TableCell>
+              <TableCell align="center" sx={{ fontSize: '21px', color: '#02c298' }}>חברה</TableCell>
+              <TableCell align="center" sx={{ fontSize: '21px', color: '#02c298' }}>משרה</TableCell>
+              <TableCell align="center" sx={{ fontSize: '21px', color: '#02c298' }}>שם מועמד</TableCell>
+              <TableCell align="center" sx={{ fontSize: '21px', color: '#02c298' }}>מחיקת רשומה</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -94,7 +94,7 @@ export default function DenseTable() {
                 <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.position}</TableCell>
                 <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.name}</TableCell>
                 <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
-                  <IconButton onClick={() => { onClickRemove(row.rowId) }} sx={{color:'deepPink'}}>
+                  <IconButton onClick={() => { onClickRemove(row.rowId) }} sx={{color:'red'}}>
                     <DeleteIcon></DeleteIcon>
                   </IconButton>
                 </TableCell>
@@ -134,7 +134,7 @@ export default function DenseTable() {
                 </select>
               </TableCell>
               <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
-                <IconButton onClick={() => { onClickAdd() }} sx={{color:'deepPink'}}>
+                <IconButton onClick={() => { onClickAdd() }} sx={{color:'#02c298'}}>
                   <AddCircleOutlineIcon></AddCircleOutlineIcon>
                 </IconButton>
               </TableCell>

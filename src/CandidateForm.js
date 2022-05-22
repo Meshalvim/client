@@ -58,7 +58,7 @@ const CandidateForm = () => {
     return (
         <div>
             {
-                localStorage.getItem('user') != null && localStorage.getItem('status') == 'worker' ?
+                localStorage.getItem('user') != null && localStorage.getItem('status') == 'candidate' ?
                     <form onSubmit={handleSubmit}>
                         <Grid container direction="column" sx={{
                             p: 2
@@ -184,7 +184,7 @@ const CandidateForm = () => {
                                                 id={index} 
                                                 key={index} 
                                                 onClick={(e) => addAbility(e)}
-                                                sx={{color:'deepPink'}}>{ability}</Button>
+                                                sx={{color:'#02c298'}}>{ability}</Button>
                                             )
                                         })}
                                     {abilities.length > 0 &&

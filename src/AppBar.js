@@ -4,6 +4,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+import {useLocation} from 'react-router-dom';
 // import lg from '../public/logo'
 
 // const pages = [];
@@ -15,7 +18,7 @@ const ResponsiveAppBar = () => {
     const [currUser, setCurUser] = React.useState(JSON.parse(localStorage.getItem('user')))
 
     const navigate = useNavigate()
-
+    const url = `http://localhost:64672/api/`
     React.useEffect(() => {
         const u = JSON.parse(localStorage.getItem('user'));
         if (u) {
@@ -47,35 +50,36 @@ const ResponsiveAppBar = () => {
     const deleteUser = () => {
         //DELETE
         // לקרוא לפונקצית מחיקה מהשרת
-        // .then
-        logOut()
+        axios.delete(url + localStorage.getItem('status') + '/' + localStorage.getItem('user').id)
+            .then(logOut())
     }
 
     const editDetails = () => {
         //GET
+        axios.get(url + localStorage.getItem('status') + '/' + localStorage.getItem('user').id)
+            .then(() => {
+                if (localStorage.getItem('status') === 'candidate')
+                    navigate('/signInWorker', {state: {user: JSON.parse(localStorage.getItem('user'))}})
+                else
+                    navigate('/SignInEmployer')
+            })
         //לנווט לטופס הרשמה עם פרופס של המשתמש עפ"י הסטטוס שבלוקל סטורג
     }
 
     return (
-        <AppBar position="sticky" sx={{ backgroundColor: '#1c8ab2' }}>
+        <AppBar position="sticky" sx={{ backgroundColor: 'white' }}>
             <Container direction="column" maxWidth="xl">
 
                 <Toolbar disableGutters>
-                    <img src={require('./images/logo.png')} style={{ width: '5vw', margin: 10, borderRadius: '50%' }}></img>
+                    <img src={require('./images/logo.png')} style={{ width: '9vw', margin: 10 }}></img>
                     <IconButton
                         onClick={() => navigate('/')}
-                        color="inherit"
+                        // color='success'
+                        // sx={{color:'white'}}
                         aria-label="add to shopping cart">
                         <HomeRoundedIcon />
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-                    >
-                        MESHALVIM
-                    </Typography>
+
 
                     {/* 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -129,7 +133,7 @@ const ResponsiveAppBar = () => {
                                 handleCloseNavMenu()
                                 navigate('/about')
                             }}
-                            sx={{ m: 2, my: 2, color: 'white', display: 'block', fontSize: '20px' }}
+                            sx={{ m: 2, my: 2, color: 'black', display: 'block', fontSize: '20px' }}
                         >
                             אודות
                         </Button>
@@ -153,7 +157,6 @@ const ResponsiveAppBar = () => {
                                 <Tooltip title="פתח תפריט">
                                     <IconButton
                                         size="large"
-                                        color="inherit"
                                         onClick={handleOpenUserMenu}
                                         sx={{ p: 0 }}>
                                         <AccountCircle fontSize="inherit" />

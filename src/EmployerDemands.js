@@ -173,7 +173,7 @@ const EmployerDemands = () => {
                                             <Grid container direction='row'>
                                                 {shownAbilities.map((ability, index) => {
                                                     return (
-                                                        <Button sx={{color:'#1c8ab2'}} id={index} key={index} onClick={(e) => addAbility(e)}>
+                                                        <Button sx={{color:'#02c298'}} id={index} key={index} onClick={(e) => addAbility(e)}>
                                                             {ability}
                                                         </Button>
                                                     )
