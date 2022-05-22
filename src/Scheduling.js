@@ -24,13 +24,14 @@ export default function DenseTable() {
   // { rowId: 2, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
   // { rowId: 3, name: 'רונן', company: 'אלביט', position: 'מזכיר' },]
 
-  React.useEffect(() => {
-    debugger
-    let c;
-    axios.get(uri).then(res => {
-      setRows(res.data)
-    })
-  }, [])
+  // React.useEffect(() => {
+  //   debugger
+  //   let c;
+  //   axios.get(uri).then(res => {
+  //     setRows(res.data)
+  //   })
+  // }, [])
+
   const onClickRemove = (id) => {
     Swal.fire({
       title: '',
