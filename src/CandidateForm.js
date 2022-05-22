@@ -4,7 +4,8 @@ import { useFormik } from "formik";
 import swal from "sweetalert2";
 import * as Yup from 'yup';
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const validationSchema = Yup.object(
     {
@@ -40,18 +41,28 @@ const CandidateForm = () => {
         }
     })
 
-    const [shownAbilities, setShownAbilities] = useState(['תקשורתית', 'מוטורית', 'ריאלית', 'פיזית', 'מנטלית'])
+    useEffect(() => {
+        let c;
+        axios.get(uri).then(res => {
+            if (!shownAbilities)
+                setShownAbilities(res.data.data)
+        })
+    },);
 
-    const addAbility = (e) => {
-        setAbilities([...abilities, e.target.outerText])
-        debugger
+    const [shownAbilities, setShownAbilities] = useState()
+    const uri = 'http://localhost:64672/api/requirements'
+
+    const addAbility = (ability, e) => {
+        setAbilities([...abilities, ability])
         let a = shownAbilities.slice(0, e.target.id)
         let b = shownAbilities.slice(parseInt(e.target.id) + 1, shownAbilities.length)
         setShownAbilities(
             [...b, ...a])
     }
     const cancelGrade = () => {
+        debugger
         setShownAbilities([...abilities, ...shownAbilities])
+        console.log(shownAbilities)
         setAbilities([])
     }
 
@@ -178,13 +189,14 @@ const CandidateForm = () => {
                                 >דרג את יכולותיך</FormLabel>
                                 <Grid container direction='row'>
                                     {
+                                        shownAbilities &&
                                         shownAbilities.map((ability, index) => {
                                             return (
-                                                <Button 
-                                                id={index} 
-                                                key={index} 
-                                                onClick={(e) => addAbility(e)}
-                                                sx={{color:'#02c298'}}>{ability}</Button>
+                                                <Button
+                                                    id={index}
+                                                    key={index}
+                                                    onClick={(e) => addAbility(ability, e)}
+                                                    sx={{ color: '#02c298' }}>{ability.name_req}</Button>
                                             )
                                         })}
                                     {abilities.length > 0 &&
@@ -195,7 +207,7 @@ const CandidateForm = () => {
                                 <Grid container direction='column'>
                                     <ol>
                                         {abilities.map((ability, index) => {
-                                            return (<li key={index}><Grid>{ability}</Grid></li>)
+                                            return (<li key={index}><Grid>{ability.name_req}</Grid></li>)
                                         })}
                                     </ol>
                                 </Grid>
@@ -207,8 +219,8 @@ const CandidateForm = () => {
                                     <Button
                                         type="submit"
                                         variant="contained"
-                                        disabled={!dirty || !isValid || shownAbilities.length!=0}
-                                        sx={{backgroundColor:'deepPink'}}
+                                        disabled={!dirty || !isValid || shownAbilities.length != 0}
+                                        sx={{ backgroundColor: 'deepPink' }}
                                     >שמור</Button>
                                 </Grid>
                             </Grid>

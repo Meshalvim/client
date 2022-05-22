@@ -4,8 +4,9 @@ import swal from "sweetalert2"
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HomePage from './HomePage'
+import axios from "axios";
 
 const validationSchema = Yup.object({
     abilities: Yup.array().min(1, 'זהו שדה חובה'),
@@ -14,10 +15,8 @@ const validationSchema = Yup.object({
     sumEmploeds: Yup.number().min(1, 'לפחות אחד').required('זהו שדה חובה'),
     positionType: Yup.string().required('זהו שדה חובה'),
     ageScore: Yup.number().min(10, 'הניקוד מתחיל מעשר').required('זהו שדה חובה'),
-    //צריך להוסיף בניקוד בדיקה האם המספר מתחלק ב 10
-    // .matches(/[*]+0$/, 'על המספר להתחלק באפס')
-    experienceScore: Yup.number().min(10, 'הניקוד מתחיל מעשר').required('זהו שדה חובה'),
-    genderScore: Yup.number().min(10, 'הניקוד מתחיל מעשר').required('זהו שדה חובה'),
+    experienceScore: Yup.number(),
+    genderScore: Yup.number(),
 });
 const EmployerDemands = () => {
     const navigate = useNavigate()
@@ -67,7 +66,16 @@ const EmployerDemands = () => {
     }
 
     const ages = ["18 - 22", "23 - 28", "29 - 33", "34 - 38", "39 - 43", "44 - 48", "49 - 53", "54 - 60"];
-    const abilitiesArr = ["פיזית", "מנטלית", "ריאלית", "תקשורתית", "מוטורית"];
+
+    const uri= 'http://localhost:64672/api/requirements'
+    const [abilitiesArr, setAbilitiesArr]=useState([])
+    useEffect(() => {
+        let c;
+        axios.get(uri).then(res => {
+            setAbilitiesArr(res.data.data)
+        })
+    })
+    
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -145,16 +153,18 @@ const EmployerDemands = () => {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             error={errors.abilities && touched.abilities}>
-                                            {abilitiesArr.map((ability, index) => (
+                                            {   
+                                                // console.log(abilitiesArr)&&
+                                                abilitiesArr && abilitiesArr.map((ability, index) => (
                                                 <MenuItem onClick={() => { cancelGrade() }}
-                                                    key={index} value={ability} >
+                                                    key={index} value={ability.name_req} >
                                                     <Checkbox onChange={(e) => {
                                                         if (e.target.checked)
-                                                            setShownAbilities([...values.abilities, ability])
+                                                            setShownAbilities([...values.abilities, ability.name_req])
                                                         else
-                                                            setShownAbilities(values.abilities.filter((a) => a != ability))
-                                                    }} checked={values.abilities.indexOf(ability) != -1} />
-                                                    <ListItemText primary={ability} />
+                                                            setShownAbilities(values.abilities.filter((a) => a != ability.name_req))
+                                                    }} checked={values.abilities.indexOf(ability.name_req) != -1} />
+                                                    <ListItemText primary={ability.name_req} />
                                                 </MenuItem>
                                             ))}
                                         </Select>

@@ -36,10 +36,10 @@ const SignInWorker = (props) => {
         validationSchema,
         onSubmit: (values) => {
             localStorage.setItem('user', JSON.stringify(values))
-                .then(new swal({
-                    title: 'שלום' + values.name + '!!!',
+                new swal({
+                    title:`שלום ${values.name} !!!`,
                     icon: 'success',
-                    text: '!!!פרטיך נקלטו בהצלחה במערכת',
+                    text: 'פרטיך נקלטו בהצלחה במערכת!!!',
                     confirmButtonText: 'המשך',
                     confirmButtonColor: '#3085d6',
                 }).then(
@@ -47,7 +47,7 @@ const SignInWorker = (props) => {
                         if (result.isConfirmed) {
                             navigate('../candidateForm')
                         }
-                    }))
+                    })
         }
     })
 
@@ -73,20 +73,21 @@ const SignInWorker = (props) => {
     const editDetailsPut = () => {
         //PUT(values, id)
         //
-            localStorage.setItem('user', JSON.stringify(values))
-            new swal({
-                title: 'שלום' + values.name + '!!!',
-                icon: 'success',
-                text:'פרטיך עודכנו בהצלחה במערכת!!!',
-                confirmButtonText: 'המשך',
-                confirmButtonColor: '#3085d6',
-            }).then(
-                (result) => {
-                    if (result.isConfirmed) {
-                        navigate('../candidateForm')
-                    }
-                })
-               
+        debugger
+        localStorage.setItem('user', JSON.stringify(values))
+        new swal({
+            title: 'שלום ' + values.name + '!!!',
+            icon: 'success',
+            text: 'פרטיך עודכנו בהצלחה במערכת!!!',
+            confirmButtonText: 'המשך לעריכת טופס הדרישות',
+            confirmButtonColor: '#3085d6',
+        }).then(
+            (result) => {
+                if (result.isConfirmed) {
+                    navigate('../candidateForm')
+                }
+            })
+
     }
 
     return (
@@ -151,6 +152,7 @@ const SignInWorker = (props) => {
                             }}>
                                 <TextField
                                     fullWidth
+                                    autoComplete='false'
                                     error={errors.password && touched.password}
                                     id="password"
                                     type="password"

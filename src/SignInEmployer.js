@@ -27,7 +27,7 @@ const SignInEmployer = () => {
             localStorage.setItem('user', JSON.stringify(values))
             {
                 new swal({
-                    title: '!!!' + values.name_ + ' שלום ',
+                    title:`שלום ${values.name} !!!`,
                     icon: 'success',
                     text: '!!!פרטיך נקלטו בהצלחה במערכת',
                     confirmButtonText: 'המשך',
@@ -43,7 +43,7 @@ const SignInEmployer = () => {
         }
     })
 
-    const url = `http://localhost:64672/api/cities`
+    const uri = `http://localhost:64672/api/cities`
 
     const [status, setStatus] = useState('lookingForJob');
     const [name, setName] = useState('')
@@ -54,7 +54,7 @@ const SignInEmployer = () => {
 
     useEffect(() => {
         let c;
-        axios.get(url).then(res => {
+        axios.get(uri).then(res => {
             setCities(res.data)
         })
     })

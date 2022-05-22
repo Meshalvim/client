@@ -7,10 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import {useLocation} from 'react-router-dom';
-// import lg from '../public/logo'
 
 // const pages = [];
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -50,14 +48,16 @@ const ResponsiveAppBar = () => {
     const deleteUser = () => {
         //DELETE
         // לקרוא לפונקצית מחיקה מהשרת
-        axios.delete(url + localStorage.getItem('status') + '/' + localStorage.getItem('user').id)
+        axios.delete(`${url}${localStorage.getItem('status')}/${localStorage.getItem('user').id}`)
             .then(logOut())
     }
 
     const editDetails = () => {
         //GET
+        debugger
         const user= JSON.parse(localStorage.getItem('user'))
-        axios.get(url + localStorage.getItem('status') + '/' + user.id)
+        const uri= url + localStorage.getItem('status')
+        axios.get(uri)
             .then(() => {
                 if (localStorage.getItem('status') === 'candidate')
                     navigate('/signInWorker', {state: {user: user}})
