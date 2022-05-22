@@ -42,7 +42,7 @@ const Manager = () => {
             Swal.fire({
                 title: 'שלום!',
                 icon: 'info',
-                text: '!!!האימות הצליח',
+                text: 'האימות הצליח!!!',
                 confirmButtonText: 'המשך',
                 confirmButtonColor: '#3085d6',
             }).then((result) => { if (result.isConfirmed) { setEnable(false) } })
@@ -151,7 +151,7 @@ const Manager = () => {
                 open={showBackdrop}
             >
                 <CircularProgress color="inherit" />
-                <h1 width='100vw'>  ...אנא המתן</h1>
+                <h1 width='100vw'>אנא המתן...</h1>
             </Backdrop>
         </>
     );

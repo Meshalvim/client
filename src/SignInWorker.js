@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup"
 import axios from 'axios';
 
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const validationSchema = Yup.object({
     name: Yup.string().required('שם זהו שדה חובה'),
@@ -19,25 +19,25 @@ const validationSchema = Yup.object({
 })
 
 const SignInWorker = (props) => {
-    const location= useLocation()
+    const location = useLocation()
 
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
-        initialValues: 
-            location.state!=null?location.state.user:
-            { name: '',
-            password: '',
-            identity: '',
-            tel: '',
-            email: '',
-            city: '',}
+        initialValues:
+            location.state != null ? location.state.user :
+                {
+                    name: '',
+                    password: '',
+                    identity: '',
+                    tel: '',
+                    email: '',
+                    city: '',
+                }
         ,
         validationSchema,
         onSubmit: (values) => {
             localStorage.setItem('user', JSON.stringify(values))
-            {
-                //values צריך לשלוח את   
-                new swal({
-                    title: '!!!' + values.name + ' שלום ',
+                .then(new swal({
+                    title: 'שלום' + values.name + '!!!',
                     icon: 'success',
                     text: '!!!פרטיך נקלטו בהצלחה במערכת',
                     confirmButtonText: 'המשך',
@@ -47,9 +47,7 @@ const SignInWorker = (props) => {
                         if (result.isConfirmed) {
                             navigate('../candidateForm')
                         }
-                    })
-            }
-
+                    }))
         }
     })
 
@@ -72,6 +70,24 @@ const SignInWorker = (props) => {
         setStatus(event.target.value);
     }
 
+    const editDetailsPut = () => {
+        //PUT(values, id)
+        //
+            localStorage.setItem('user', JSON.stringify(values))
+            new swal({
+                title: 'שלום' + values.name + '!!!',
+                icon: 'success',
+                text:'פרטיך עודכנו בהצלחה במערכת!!!',
+                confirmButtonText: 'המשך',
+                confirmButtonColor: '#3085d6',
+            }).then(
+                (result) => {
+                    if (result.isConfirmed) {
+                        navigate('../candidateForm')
+                    }
+                })
+               
+    }
 
     return (
 
@@ -81,7 +97,7 @@ const SignInWorker = (props) => {
                     <Grid item sx={{
                         p: 1,
                         width: '35vw',
-                        margin:'auto'
+                        margin: 'auto'
                     }}>
                         <Grid
                             sx={{
@@ -152,6 +168,7 @@ const SignInWorker = (props) => {
                                 margin: 'auto',
                             }}>
                                 <TextField
+                                    // disabled={location.state}
                                     fullWidth
                                     error={errors.identity && touched.identity}
                                     name="identity"
@@ -252,12 +269,21 @@ const SignInWorker = (props) => {
                                     p: 1,
                                     margin: 'auto',
                                 }}>
-                                    <Button
-                                        type='submit'
-                                        disabled={(location.state&&(!dirty || !isValid))||(!location.state && dirty && !isValid) }
-                                        variant="contained"
-                                        sx={{ backgroundColor: '#02c298' }}
-                                    >להרשמה</Button>
+                                    {location.state ?
+
+                                        <Button
+                                            onClick={editDetailsPut}
+                                            disabled={!isValid}
+                                            variant="contained"
+                                            sx={{ backgroundColor: '#02c298' }}
+                                        >לעדכון פרטים</Button> :
+                                        <Button
+                                            type='submit'
+                                            disabled={!dirty || !isValid}
+                                            variant="contained"
+                                            sx={{ backgroundColor: '#02c298' }}
+                                        >להרשמה</Button>
+                                    }
                                 </Grid>
 
                                 <Grid item sx={{
@@ -276,10 +302,10 @@ const SignInWorker = (props) => {
 
                     </Grid>
                 </Grid>
-                <Grid item style={{position: "fixed", bottom:0, left:0}}>
+                <Grid item style={{ position: "fixed", bottom: 0, left: 0 }}>
                     <img src={require('./images/3.png')}></img>
                 </Grid>
-                <Grid item style={{position: "fixed", bottom:0, right:0}}>
+                <Grid item style={{ position: "fixed", bottom: 0, right: 0 }}>
                     <img src={require('./images/3.png')}></img>
                 </Grid>
             </Grid>

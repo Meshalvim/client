@@ -11,37 +11,26 @@ import { Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/ma
 import Swal from "sweetalert2";
 import { Icon, IconButton } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import axios from 'axios';
 
 export default function DenseTable() {
+  const uri = `http://localhost:64672/api/schedule`
   const [company, setCompany] = React.useState('חברה')
   const [candidate, setCandidate] = React.useState('מועמד')
-  const [rows, setRows] = React.useState([
-    { rowId: 1, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 2, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 3, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 4, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 5, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 6, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 7, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 8, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 9, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 10, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 11, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 12, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 13, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 14, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 15, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 16, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 17, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 18, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 19, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 20, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 21, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 22, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
-    { rowId: 23, name: 'רונן', company: 'אלביט', position: 'מזכיר' },])
 
-  const onClickAdd = () => { }
+  const [rows, setRows] = React.useState([])
 
+  // [{ rowId: 1, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+  // { rowId: 2, name: 'רונן', company: 'אלביט', position: 'מזכיר' },
+  // { rowId: 3, name: 'רונן', company: 'אלביט', position: 'מזכיר' },]
+
+  React.useEffect(() => {
+    debugger
+    let c;
+    axios.get(uri).then(res => {
+      setRows(res.data)
+    })
+  }, [])
   const onClickRemove = (id) => {
     Swal.fire({
       title: '',
@@ -84,61 +73,25 @@ export default function DenseTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, index) => (
-              <TableRow
-                hover
-                key={index}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                hover >
-                <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.company}</TableCell>
-                <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.position}</TableCell>
-                <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.name}</TableCell>
-                <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
-                  <IconButton onClick={() => { onClickRemove(row.rowId) }} sx={{color:'red'}}>
-                    <DeleteIcon></DeleteIcon>
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
-            <TableRow hover
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              hover >
-              <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
-                <select
-                  value={company}
-                  onChange={(event) => {
-                    setCompany(event.target.value);
-                  }}
-                // placeholder='חברה'
-                // width='20vw'
-                >
-                  <option value="grapefruit">company</option>
-                  <option value="lime">company</option>
-                  <option value="coconut">company</option>
-                  <option value="mango">company</option>
-                </select>
-              </TableCell>
-              <TableCell align="center" sx={{ fontSize: '1.120rem' }}></TableCell>
-              <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
-                <select
-                  value={candidate}
-                  onChange={(event) => {
-                    setCandidate(event.target.value);
-                  }}
-                  // placeholder='מועמד'
-                >
-                  <option value="grapefruit">candidate</option>
-                  <option value="lime">candidate</option>
-                  <option value="coconut">candidate</option>
-                  <option value="mango">candidate</option>
-                </select>
-              </TableCell>
-              <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
-                <IconButton onClick={() => { onClickAdd() }} sx={{color:'#02c298'}}>
-                  <AddCircleOutlineIcon></AddCircleOutlineIcon>
-                </IconButton>
-              </TableCell>
-            </TableRow>
+            {
+
+              rows &&
+              rows.map((row, index) => (
+                <TableRow
+                  hover
+                  key={index}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  hover >
+                  <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.company}</TableCell>
+                  <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.position}</TableCell>
+                  <TableCell align="center" sx={{ fontSize: '1.120rem' }}>{row.name}</TableCell>
+                  <TableCell align="center" sx={{ fontSize: '1.120rem' }}>
+                    <IconButton onClick={() => { onClickRemove(row.rowId) }} sx={{ color: 'red' }}>
+                      <DeleteIcon></DeleteIcon>
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

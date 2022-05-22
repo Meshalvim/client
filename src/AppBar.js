@@ -56,12 +56,13 @@ const ResponsiveAppBar = () => {
 
     const editDetails = () => {
         //GET
-        axios.get(url + localStorage.getItem('status') + '/' + localStorage.getItem('user').id)
+        const user= JSON.parse(localStorage.getItem('user'))
+        axios.get(url + localStorage.getItem('status') + '/' + user.id)
             .then(() => {
                 if (localStorage.getItem('status') === 'candidate')
-                    navigate('/signInWorker', {state: {user: JSON.parse(localStorage.getItem('user'))}})
+                    navigate('/signInWorker', {state: {user: user}})
                 else
-                    navigate('/SignInEmployer')
+                    navigate('/SignInEmployer', {state: {user: user}})
             })
         //לנווט לטופס הרשמה עם פרופס של המשתמש עפ"י הסטטוס שבלוקל סטורג
     }
