@@ -17,7 +17,7 @@ const SignInEmployer = () => {
 
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
         initialValues: {
-            name: '',
+            name_: '',
             password: '',
             city: '',
         },
@@ -27,7 +27,7 @@ const SignInEmployer = () => {
             localStorage.setItem('user', JSON.stringify(values))
             {
                 new swal({
-                    title: '!!!' + values.name + ' שלום ',
+                    title: '!!!' + values.name_ + ' שלום ',
                     icon: 'success',
                     text: '!!!פרטיך נקלטו בהצלחה במערכת',
                     confirmButtonText: 'המשך',
@@ -107,16 +107,16 @@ const SignInEmployer = () => {
                         }}>
                             <TextField
                                 fullWidth
-                                error={errors.name && touched.name}
-                                name="name"
-                                id="name"
+                                error={errors.name_ && touched.name_}
+                                name="name_"
+                                id="name_"
                                 label="שם החברה"
                                 variant="standard"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.name}
+                                value={values.name_}
                             />
-                            {errors.name && touched.name && <Alert severity="error">{errors.name}</Alert>}
+                            {errors.name_ && touched.name_ && <Alert severity="error">{errors.name_}</Alert>}
                         </Grid>
 
                         <Grid item sx={{
