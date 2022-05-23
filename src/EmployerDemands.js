@@ -13,10 +13,9 @@ const validationSchema = Yup.object({
     age: Yup.string().required('זהו שדה חובה'),
     experience: Yup.number().min(0, 'לא יתכן מספר שלילי').required('זהו שדה חובה'),
     sumEmploeds: Yup.number().min(1, 'לפחות אחד').required('זהו שדה חובה'),
-    positionType: Yup.string().required('זהו שדה חובה'),
-    ageScore: Yup.number().min(10, 'הניקוד מתחיל מעשר').required('זהו שדה חובה'),
-    experienceScore: Yup.number(),
-    genderScore: Yup.number(),
+    ageScore: Yup.number().min(0, 'הניקוד גדול מאפס').required('זהו שדה חובה'),
+    experienceScore: Yup.number().min(0 ,'הניקוד גדול מאפס').required('זהו שדה חובה'),
+    genderScore: Yup.number().min(0 ,'הניקוד גדול מאפס').required('זהו שדה חובה'),
 });
 const EmployerDemands = () => {
     const navigate = useNavigate()
@@ -27,7 +26,6 @@ const EmployerDemands = () => {
             age: '',
             experience: '',
             sumEmploeds: '',
-            positionType: '',
             ageScore: '',
             experienceScore: '',
             genderScore: '',
@@ -75,7 +73,7 @@ const EmployerDemands = () => {
             setAbilitiesArr(res.data.data)
         })
     })
-    
+
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -339,32 +337,6 @@ const EmployerDemands = () => {
                                             />
                                             {errors.experience && touched.experience && <Alert severity="error">{errors.experience}</Alert>}
                                         </Grid>
-                                    </Grid>
-
-                                    <Grid item sx={{
-                                        p: 2,
-                                        margin: 'auto',
-                                    }}>
-                                        <FormControl fullWidth variant="standard" sx={{ minWidth: 120 }}>
-                                            <InputLabel id="positionType">היקף משרה</InputLabel>
-                                            <Select
-                                                labelId="positionType"
-                                                id="positionType"
-                                                value={values.positionType}
-                                                label="positionType"
-                                                name="positionType"
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                error={errors.positionType && touched.positionType}
-                                            >
-                                                <MenuItem value={'full'}>משרה מלאה</MenuItem>
-                                                <MenuItem value={'morning'}>בוקר</MenuItem>
-                                                <MenuItem value={'afternoon'}>אחה"צ</MenuItem>
-                                                <MenuItem value={'evening'}>ערב</MenuItem>
-                                                <MenuItem value={'shifts'}>משמרות</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                        {errors.positionType && touched.positionType && <Alert severity="error">{errors.positionType}</Alert>}
                                     </Grid>
 
                                     <Grid item sx={{
