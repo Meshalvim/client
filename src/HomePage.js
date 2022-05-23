@@ -27,7 +27,7 @@ const HomePage = () => {
                     <SvgIcon sx={{ p: 2, m: 6 }} style={{ borderRadius: '50%', backgroundColor: 'lightGrey', fontSize: '15vw', color: 'White' }} component={VisibilityOffRoundedIcon} inheritViewBox />
                 </Grid>
                 <Grid item container direction='row' justifyContent='space-around'>
-                    <Grid item container style={{width:'50vw', }}>
+                    <Grid item container style={{width:'65vw', }}>
                         <img src={require('./images/logo.png')} width='100%' style={{opacity:0.5}}/>
                     </Grid>
                     <Grid item container direction='column' width='15vw'>
