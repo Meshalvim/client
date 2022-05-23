@@ -10,12 +10,12 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
 const validationSchema = Yup.object({
-    name: Yup.string().required('שם זהו שדה חובה'),
-    password: Yup.string().required('סיסמא זהו שדה חובה'),
-    identity: Yup.string().length(9, 'ת.ז. מכילה 9 ספרות').required('ת.ז. זהו שדה חובה').matches(/^[0-9]+$/, 'צריך להכיל רק ספרות'),
-    tel: Yup.string().required('טלפון זהו שדה חובה').matches(/^[0-9]+$/, 'צריך להכיל רק ספרות').min(9, 'מינימום 9 ספרות').max(10, 'מקסימום 10 ספרות'),
+    name_: Yup.string().required('שם זהו שדה חובה'),
+    password_: Yup.string().required('סיסמא זהו שדה חובה'),
+    Id_number: Yup.string().length(9, 'ת.ז. מכילה 9 ספרות').required('ת.ז. זהו שדה חובה').matches(/^[0-9]+$/, 'צריך להכיל רק ספרות'),
+    phone: Yup.string().required('טלפון זהו שדה חובה').matches(/^[0-9]+$/, 'צריך להכיל רק ספרות').min(9, 'מינימום 9 ספרות').max(10, 'מקסימום 10 ספרות'),
     email: Yup.string().email('נא התאם לתבנית אימייל').required('אימייל זהו שדה חובה'),
-    city: Yup.string().required('עיר זהו שדה חובה'),
+    id_city: Yup.string().required('עיר זהו שדה חובה'),
 })
 
 const SignInWorker = (props) => {
@@ -25,19 +25,19 @@ const SignInWorker = (props) => {
         initialValues:
             location.state != null ? location.state.user :
                 {
-                    name: '',
-                    password: '',
-                    identity: '',
-                    tel: '',
+                    name_: '',
+                    password_: '',
+                    Id_number: '',
+                    phone: '',
                     email: '',
-                    city: '',
+                    id_city: '',
                 }
         ,
         validationSchema,
         onSubmit: (values) => {
             localStorage.setItem('user', JSON.stringify(values))
                 new swal({
-                    title:`שלום ${values.name} !!!`,
+                    title:`שלום ${values.name_} !!!`,
                     icon: 'success',
                     text: 'פרטיך נקלטו בהצלחה במערכת!!!',
                     confirmButtonText: 'המשך',
@@ -76,7 +76,7 @@ const SignInWorker = (props) => {
         debugger
         localStorage.setItem('user', JSON.stringify(values))
         new swal({
-            title: 'שלום ' + values.name + '!!!',
+            title: 'שלום ' + values.name_ + '!!!',
             icon: 'success',
             text: 'פרטיך עודכנו בהצלחה במערכת!!!',
             confirmButtonText: 'המשך לעריכת טופס הדרישות',
@@ -134,16 +134,16 @@ const SignInWorker = (props) => {
                             }}>
                                 <TextField
                                     fullWidth
-                                    error={errors.name && touched.name}
-                                    name="name"
-                                    id="name"
+                                    error={errors.name_ && touched.name_}
+                                    name="name_"
+                                    id="name_"
                                     label="שם"
                                     variant="standard"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.name}
+                                    value={values.name_}
                                 />
-                                {errors.name && touched.name && <Alert severity="error">{errors.name}</Alert>}
+                                {errors.name_ && touched.name_ && <Alert severity="error">{errors.name_}</Alert>}
                             </Grid>
 
                             <Grid item sx={{
@@ -153,16 +153,16 @@ const SignInWorker = (props) => {
                                 <TextField
                                     fullWidth
                                     autoComplete='false'
-                                    error={errors.password && touched.password}
-                                    id="password"
+                                    error={errors.password_ && touched.password_}
+                                    id="password_"
                                     type="password"
                                     label="סיסמא"
                                     variant="standard"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.password}
+                                    value={values.password_}
                                 />
-                                {errors.password && touched.password && <Alert severity="error">{errors.password}</Alert>}
+                                {errors.password_ && touched.password_ && <Alert severity="error">{errors.password_}</Alert>}
                             </Grid>
 
                             <Grid item sx={{
@@ -172,16 +172,16 @@ const SignInWorker = (props) => {
                                 <TextField
                                     // disabled={location.state}
                                     fullWidth
-                                    error={errors.identity && touched.identity}
-                                    name="identity"
-                                    id="identity"
+                                    error={errors.Id_number && touched.Id_number}
+                                    name="Id_number"
+                                    id="Id_number"
                                     label="ת.ז."
                                     variant="standard"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.identity}
+                                    value={values.Id_number}
                                 />
-                                {errors.identity && touched.identity && <Alert severity="error">{errors.identity}</Alert>}
+                                {errors.Id_number && touched.Id_number && <Alert severity="error">{errors.Id_number}</Alert>}
                             </Grid>
 
                             <Grid item sx={{
@@ -190,16 +190,16 @@ const SignInWorker = (props) => {
                             }}>
                                 <TextField
                                     fullWidth
-                                    error={errors.tel && touched.tel}
-                                    name="tel"
-                                    id="tel"
+                                    error={errors.phone && touched.phone}
+                                    name="phone"
+                                    id="phone"
                                     label="טלפון"
                                     variant="standard"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.tel}
+                                    value={values.phone}
                                 />
-                                {errors.tel && touched.tel && <Alert severity="error">{errors.tel}</Alert>}
+                                {errors.phone && touched.phone && <Alert severity="error">{errors.phone}</Alert>}
                             </Grid>
 
                             <Grid item sx={{
@@ -244,23 +244,24 @@ const SignInWorker = (props) => {
                                 margin: 'auto',
                             }}>
                                 <FormControl fullWidth variant="standard">
-                                    <InputLabel id="city">עיר</InputLabel>
+                                    <InputLabel id="id_city">עיר</InputLabel>
                                     <Select
-                                        labelId="city"
-                                        id="city"
-                                        name="city"
-                                        value={values.city}
-                                        label="city"
+                                        labelId="id_city"
+                                        id="id_city"
+                                        name="id_city"
+                                        value={values.id_city}
+                                        label="id_city"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        error={errors.city && touched.city}
+                                        error={errors.id_city && touched.id_city}
                                     >
                                         {
                                             cities.map((item, i) => {
-                                                return <MenuItem key={i} value={item.name_city} className="menuItemAge">{item.name_city}</MenuItem>
+                                                return <MenuItem key={i} value={item.id_city} className="menuItemAge">{item.name_city}</MenuItem>
                                             })}
                                     </Select>
                                 </FormControl>
+                                {console.log(values.id_city)}
                                 {errors.city && touched.city && <Alert severity="error">{errors.city}</Alert>}
                             </Grid>
 

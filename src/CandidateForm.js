@@ -9,10 +9,10 @@ import axios from "axios";
 
 const validationSchema = Yup.object(
     {
-        gender: Yup.string().required('זהו שדה חובה'),
+        id_gender: Yup.string().required('זהו שדה חובה'),
         age: Yup.number().min(18, 'אין העסקת קטינים').required('זהו שדה חובה'),
-        experience: Yup.number().min(0, 'לא יתכן ערך שלילי').required('זהו שדה חובה'),
-        salary: Yup.number().min(30, 'שלושים שקלים זהו שכר המינימום שלנו').required('זהו שדה חובה'),
+        seniority: Yup.number().min(0, 'לא יתכן ערך שלילי').required('זהו שדה חובה'),
+        price: Yup.number().min(30, 'שלושים שקלים זהו שכר המינימום שלנו').required('זהו שדה חובה'),
     }
 )
 const CandidateForm = () => {
@@ -23,14 +23,21 @@ const CandidateForm = () => {
 
     const { handleBlur, handleChange, handleSubmit, values, touched, required, errors, dirty, isValid } = useFormik({
         initialValues: {
-            gender: '',
+            id_gender: '',
             age: '',
-            experience: '',
-            salary: '',
+            seniority: '',
+            price: '',
         },
         validationSchema,
         onSubmit: (values) => {
-            //abilities וכן את values צריך לשלוח את
+            //abilities וכן את values signIn צריך לשלוח את
+            const send={
+                ...values,
+                ...JSON.parse(localStorage.getItem('user'))
+            }
+            axios.post(url, send).then(response => {
+                console.log(response);
+            })
             new swal({
                 title: '',
                 icon: 'success',
@@ -51,6 +58,7 @@ const CandidateForm = () => {
 
     const [shownAbilities, setShownAbilities] = useState()
     const uri = 'http://localhost:64672/api/requirements'
+    const url = 'http://localhost:64672/api/candidate'
 
     const addAbility = (ability, e) => {
         setAbilities([...abilities, ability])
@@ -114,14 +122,14 @@ const CandidateForm = () => {
                                     <FormControl>
                                         <FormLabel>מין</FormLabel>
                                         <RadioGroup
-                                            id="gender"
-                                            name="gender"
-                                            value={values.gender}
+                                            id="id_gender"
+                                            name="id_gender"
+                                            value={values.id_gender}
                                             onChange={handleChange}
-                                            error={errors.gender}
+                                            error={errors.id_gender}
                                         >
-                                            <FormControlLabel value="male" control={<Radio />} label="זכר" />
-                                            <FormControlLabel value="female" control={<Radio />} label="נקבה" />
+                                            <FormControlLabel value="1" control={<Radio />} label="זכר" />
+                                            <FormControlLabel value="2" control={<Radio />} label="נקבה" />
                                         </RadioGroup>
                                     </FormControl>
                                 </Grid>
@@ -151,16 +159,16 @@ const CandidateForm = () => {
                                     <TextField
                                         type="number"
                                         fullWidth
-                                        name="experience"
-                                        id="experience"
+                                        name="seniority"
+                                        id="seniority"
                                         label="מספר שנות ניסיון"
                                         variant="standard"
-                                        value={values.experience}
+                                        value={values.seniority}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        error={errors.experience && touched.experience}
+                                        error={errors.seniority && touched.seniority}
                                     />
-                                    {errors.experience && touched.experience && <Alert severity="error">{errors.experience}</Alert>}
+                                    {errors.seniority && touched.seniority && <Alert severity="error">{errors.seniority}</Alert>}
                                 </Grid>
 
                                 <Grid item sx={{
@@ -170,15 +178,15 @@ const CandidateForm = () => {
                                     <TextField
                                         type="number"
                                         fullWidth
-                                        name="salary"
-                                        id="salary"
+                                        name="price"
+                                        id="price"
                                         label="משכורת"
                                         variant="standard"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        error={errors.salary && touched.salary}
+                                        error={errors.price && touched.price}
                                     />
-                                    {errors.salary && touched.salary && <Alert severity="error">{errors.salary}</Alert>}
+                                    {errors.price && touched.price && <Alert severity="error">{errors.price}</Alert>}
                                 </Grid>
 
                                 <FormLabel
