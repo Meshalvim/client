@@ -30,7 +30,6 @@
     outline-color: #02c298 !important
 }
 
-
 .css-1rvhyz2-MuiButtonBase-root-MuiButton-root:hover, .css-1pq3op5-MuiButtonBase-root-MuiButton-root:hover{
     background-color: #018669 !important
 }
@@ -42,7 +41,7 @@
 .css-z4kzhn-MuiButtonBase-root-MuiButton-root:hover,
 .css-sghohy-MuiButtonBase-root-MuiButton-root:hover,
 .css-8jqb21-MuiButtonBase-root-MuiButton-root:hover,
-.css-s2jw0r-MuiButtonBase-root-MuiButton-root:hover,{
+.css-s2jw0r-MuiButtonBase-root-MuiButton-root:hover{
     background-color: #009f7c !important
 }
 .css-z4kzhn-MuiButtonBase-root-MuiButton-root.Mui-disabled,.css-17huflz-MuiButtonBase-root-MuiButton-root.Mui-disabled,
@@ -80,3 +79,13 @@
   .css-1xw1d9r-MuiButtonBase-root-MuiButton-root:hover{
       background-color: #02c29810 !important;
   }
+  .enterBtn{
+    background-color: #02c298 !important
+}
+.enterBtn :focus{
+    border-color: #02c298 !important;
+    outline-color: #02c298 !important
+}
+.enterBtn:hover{
+    background-color: '#009f7c' !important
+}

@@ -8,28 +8,28 @@ import * as Yup from "yup"
 import axios from 'axios';
 
 const validationSchema = Yup.object({
-    name: Yup.string().required('שם זהו שדה חובה'),
+    name_company: Yup.string().required('שם זהו שדה חובה'),
     password: Yup.string().required('סיסמא זהו שדה חובה'),
-    city: Yup.string().required('עיר זהו שדה חובה'),
+    id_city: Yup.string().required('עיר זהו שדה חובה'),
 })
 
 const SignInEmployer = () => {
 
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
         initialValues: {
-            name_: '',
+            name_company: '',
             password: '',
-            city: '',
-        },
+            id_city: '',
+        },  
         validationSchema,
         onSubmit: (values) => {
             //values צריך לשלוח את   
             localStorage.setItem('user', JSON.stringify(values))
             {
                 new swal({
-                    title:`שלום ${values.name} !!!`,
+                    title:`שלום ${values.name_company} `,
                     icon: 'success',
-                    text: '!!!פרטיך נקלטו בהצלחה במערכת',
+                    text: 'פרטיך נקלטו בהצלחה במערכת',
                     confirmButtonText: 'המשך',
                     confirmButtonColor: '#3085d6',
                 }).then(
@@ -39,18 +39,14 @@ const SignInEmployer = () => {
                         }
                     })
             }
-
         }
     })
 
-    const uri = `http://localhost:64672/api/cities`
-
     const [status, setStatus] = useState('lookingForJob');
     const [name, setName] = useState('')
-
     const navigate = useNavigate();
-
     const [cities, setCities] = useState([])
+    const uri = `http://localhost:64672/api/cities`
 
     useEffect(() => {
         let c;
@@ -58,6 +54,7 @@ const SignInEmployer = () => {
             setCities(res.data)
         })
     })
+
     const handleRadioChange = (event) => {
         setStatus(event.target.value);
     }
@@ -107,16 +104,16 @@ const SignInEmployer = () => {
                         }}>
                             <TextField
                                 fullWidth
-                                error={errors.name_ && touched.name_}
-                                name="name_"
-                                id="name_"
+                                error={errors.name_company_ && touched.name_company_}
+                                name="name_company"
+                                id="name_company"
                                 label="שם החברה"
                                 variant="standard"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.name_}
+                                value={values.name_company}
                             />
-                            {errors.name_ && touched.name_ && <Alert severity="error">{errors.name_}</Alert>}
+                            {errors.name_company && touched.name_company && <Alert severity="error">{errors.name_company}</Alert>}
                         </Grid>
 
                         <Grid item sx={{
@@ -161,24 +158,24 @@ const SignInEmployer = () => {
                             margin: 'auto',
                         }}>
                             <FormControl fullWidth variant="standard">
-                                <InputLabel id="city">עיר</InputLabel>
+                                <InputLabel id="id_city">עיר</InputLabel>
                                 <Select
-                                    labelId="city"
-                                    id="city"
-                                    name="city"
-                                    value={values.city}
+                                    labelId="id_city"
+                                    id="id_city"
+                                    name="id_city"
+                                    value={values.id_city}
                                     label="city"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    error={errors.city && touched.city}
+                                    error={errors.id_city && touched.id_city}
                                 >
                                     {
                                         cities.map((item, i) => {
-                                            return <MenuItem key={i} value={item.name_city} className="menuItemAge">{item.name_city}</MenuItem>
+                                            return <MenuItem key={i} value={item.id_city} className="menuItemAge">{item.name_city}</MenuItem>
                                         })}
                                 </Select>
                             </FormControl>
-                            {errors.city && touched.city && <Alert severity="error">{errors.city}</Alert>}
+                            {errors.id_city && touched.id_city && <Alert severity="error">{errors.id_city}</Alert>}
                         </Grid>
 
                         <Grid container direction="row"  >

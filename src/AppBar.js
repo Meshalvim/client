@@ -5,7 +5,7 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 // const pages = [];
 
@@ -54,14 +54,14 @@ const ResponsiveAppBar = () => {
     const editDetails = () => {
         //GET
         debugger
-        const user= JSON.parse(localStorage.getItem('user'))
-        const uri= url + localStorage.getItem('status')
+        const user = JSON.parse(localStorage.getItem('user'))
+        const uri = url + localStorage.getItem('status')
         axios.get(uri)
             .then(() => {
                 if (localStorage.getItem('status') === 'candidate')
-                    navigate('/signInWorker', {state: {user: user}})
+                    navigate('/signInWorker', { state: { user: user } })
                 else
-                    navigate('/SignInEmployer', {state: {user: user}})
+                    navigate('/SignInEmployer', { state: { user: user } })
             })
         //לנווט לטופס הרשמה עם פרופס של המשתמש עפ"י הסטטוס שבלוקל סטורג
     }
@@ -209,6 +209,7 @@ const ResponsiveAppBar = () => {
                             </Box>
                         </> :
                         <Button
+                            className="enterBtn"
                             variant="contained"
                             color='success'
                             onClick={() => { navigate('/logIn') }}>

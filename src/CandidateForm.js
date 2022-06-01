@@ -18,8 +18,12 @@ const validationSchema = Yup.object(
 const CandidateForm = () => {
 
     const navigate = useNavigate();
-
     const [abilities, setAbilities] = useState([])
+    const [shownAbilities, setShownAbilities] = useState()
+    const [genders, setGenders] = useState([])
+    const uri = 'http://localhost:64672/api/requirements'
+    const url = 'http://localhost:64672/api/candidate'
+    const urlGender = `http://localhost:64672/api/gender`
 
     const { handleBlur, handleChange, handleSubmit, values, touched, required, errors, dirty, isValid } = useFormik({
         initialValues: {
@@ -30,10 +34,10 @@ const CandidateForm = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-            //abilities וכן את values signIn צריך לשלוח את
-            const send={
+            const send = {
                 ...values,
-                ...JSON.parse(localStorage.getItem('user'))
+                ...JSON.parse(localStorage.getItem('user')),
+                // ...abilities
             }
             axios.post(url, send).then(response => {
                 console.log(response);
@@ -54,11 +58,14 @@ const CandidateForm = () => {
             if (!shownAbilities)
                 setShownAbilities(res.data.data)
         })
-    },);
+    });
 
-    const [shownAbilities, setShownAbilities] = useState()
-    const uri = 'http://localhost:64672/api/requirements'
-    const url = 'http://localhost:64672/api/candidate'
+    useEffect(() => {
+        let c;
+        axios.get(urlGender).then(res => {
+            setGenders(res.data.data)
+        })
+    }, [2])
 
     const addAbility = (ability, e) => {
         setAbilities([...abilities, ability])
@@ -68,7 +75,7 @@ const CandidateForm = () => {
             [...b, ...a])
     }
     const cancelGrade = () => {
-        debugger
+        // debugger
         setShownAbilities([...abilities, ...shownAbilities])
         console.log(shownAbilities)
         setAbilities([])
@@ -128,8 +135,9 @@ const CandidateForm = () => {
                                             onChange={handleChange}
                                             error={errors.id_gender}
                                         >
-                                            <FormControlLabel value="1" control={<Radio />} label="זכר" />
-                                            <FormControlLabel value="2" control={<Radio />} label="נקבה" />
+                                            {genders.map((item, i) => {
+                                                return <FormControlLabel key={i} value={item.id_gender} control={<Radio />} label={item.name_gender} />
+                                            })}
                                         </RadioGroup>
                                     </FormControl>
                                 </Grid>
@@ -236,7 +244,7 @@ const CandidateForm = () => {
                     </form> :
                     <Grid>
                         אינך משתמש מורשה לכניסה הרשם בדף הבית !!
-                </Grid>
+                    </Grid>
             }
         </div>
     );
