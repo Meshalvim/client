@@ -30,7 +30,7 @@ export default function DenseTable() {
     Swal.fire({
       title: '',
       icon: 'warning',
-      text: 'בטוח שהנך למחוק רשומה זו מהטבלה?',
+      text: 'בטוח שהנך רוצה למחוק רשומה זו מהטבלה?',
       confirmButtonText: 'אישור',
       showCancelButton: true,
       cancelButtonText: 'ביטול',
