@@ -15,7 +15,7 @@ const Manager = () => {
     const navigate = useNavigate()
     const [enable, setEnable] = useState(true)
     const [showBackdrop, setShowBackdrop] = useState(false)
-
+    const password = "manager1234"
     const algorithm = () => {
         setShowBackdrop(true)
         getRiverInformation().then(
@@ -37,33 +37,33 @@ const Manager = () => {
         validationSchema,
         onSubmit: (values) => {
             //check if it's correct password of the manager of the system
-            //if (values.password)
-            Swal.fire({
-                title: 'שלום!',
-                icon: 'info',
-                text: 'האימות הצליח!!!',
-                confirmButtonText: 'המשך',
-                confirmButtonColor: '#3085d6',
-            }).then((result) => { if (result.isConfirmed) { setEnable(false) } })
-
-            // else {
-            //     Swal.fire({
-            //         title: '',
-            //         icon: 'error',
-            //         text: 'סיסמא שגויה',
-            //         confirmButtonText: 'חזרה לדף הבית',
-            //         showCancelButton: true,
-            //         cancelButtonText: 'להזנת הסיסמא מחדש',
-            //         confirmButtonClass: 'btn-danger',
-            //         cancelButtonClass: 'btn-danger',
-            //         confirmButtonColor: '#3085d6',
-            //     }).then(
-            //         (result) => {
-            //             if (result.isConfirmed) {
-            //                     navigate('/')
-            //             }
-            //         })
-            // }
+            if (values.password == password) {
+                Swal.fire({
+                    title: 'שלום!',
+                    icon: 'info',
+                    text: 'האימות הצליח!!!',
+                    confirmButtonText: 'המשך',
+                    confirmButtonColor: '#3085d6',
+                }).then((result) => { if (result.isConfirmed) { setEnable(false) } })
+            }
+            else {
+                Swal.fire({
+                    title: '',
+                    icon: 'error',
+                    text: 'סיסמא שגויה',
+                    confirmButtonText: 'חזרה לדף הבית',
+                    showCancelButton: true,
+                    cancelButtonText: 'להזנת הסיסמא מחדש',
+                    confirmButtonClass: 'btn-danger',
+                    cancelButtonClass: 'btn-danger',
+                    confirmButtonColor: '#3085d6',
+                }).then(
+                    (result) => {
+                        if (result.isConfirmed) {
+                            navigate('/')
+                        }
+                    })
+            }
         },
     })
 
@@ -133,7 +133,7 @@ const Manager = () => {
                     p: 4,
                     margin: 'auto',
                     width: '20vw',
-                    mt:'10vh'
+                    mt: '10vh'
                 }}>
                 <Button
                     variant="contained"

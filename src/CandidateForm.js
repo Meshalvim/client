@@ -34,21 +34,57 @@ const CandidateForm = () => {
         },
         validationSchema,
         onSubmit: (values) => {
+            let sendAbilities=[];
+            for (let i = 0; i < abilities.length; i++) {
+                sendAbilities[i] = {
+                    id_candidate: '',
+                    id_req: abilities[i].id_req,
+                    num_priority: i
+                }
+            }
             const send = {
-                ...values,
-                ...JSON.parse(localStorage.getItem('user')),
-                // ...abilities
+                /* public int id_candidate { get; set; } האם בשרת יש השמה של משתנה זה? ז*/
+                Candidate: {
+                    Id_number: (JSON.parse(localStorage.getItem('user'))).Id_number,
+                    name_: (JSON.parse(localStorage.getItem('user'))).name_,
+                    phone: (JSON.parse(localStorage.getItem('user'))).phone,
+                    email: (JSON.parse(localStorage.getItem('user'))).email,
+                    id_city: (JSON.parse(localStorage.getItem('user'))).id_city,
+                    password_: (JSON.parse(localStorage.getItem('user'))).password_,
+                    ...values,
+                },
+                /* public int id_candidate { get; set; } האם בשרת יש השמה של משתנה זה? ז*/
+                FavoriteReqs: sendAbilities
             }
             axios.post(url, send).then(response => {
                 console.log(response);
+                if(response==true)
+                {       new swal({
+                    title: '',
+                    icon: 'success',
+                    text: 'פרטיך נקלטו בהצלחה במערכת!!!',
+                    confirmButtonText: 'חזרה לדף הבית',
+                    confirmButtonColor: '#3085d6',
+                }).then((result) => { if (result.isConfirmed) navigate('/') })}
+                else{
+                    swal.fire({
+                        title: '',
+                        icon: 'error',
+                        text: 'בעיה בשרת',
+                        confirmButtonText: 'חזרה לדף הבית',
+                        showCancelButton: true,
+                        cancelButtonText: 'לניסיון חוזר',
+                        confirmButtonClass: 'btn-danger',
+                        cancelButtonClass: 'btn-danger',
+                        confirmButtonColor: '#3085d6',
+                    }).then( (result) => {
+                        if (result.isConfirmed) {
+                                navigate('/')
+                        }
+                    })
+                }
+            
             })
-            new swal({
-                title: '',
-                icon: 'success',
-                text: 'פרטיך נקלטו בהצלחה במערכת!!!',
-                confirmButtonText: 'חזרה לדף הבית',
-                confirmButtonColor: '#3085d6',
-            }).then((result) => { if (result.isConfirmed) navigate('/') })
         }
     })
 
@@ -56,6 +92,7 @@ const CandidateForm = () => {
         let c;
         axios.get(uri).then(res => {
             if (!shownAbilities)
+                //id_req name_req
                 setShownAbilities(res.data.data)
         })
     });

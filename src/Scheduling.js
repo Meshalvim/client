@@ -30,21 +30,24 @@ export default function DenseTable() {
     Swal.fire({
       title: '',
       icon: 'warning',
-      text: 'בטוח שהנך למחוק רשומה זו מהטבלה?',
+      text: 'בטוח שהנך רוצה למחוק רשומה זו מהטבלה?',
       confirmButtonText: 'אישור',
       showCancelButton: true,
       cancelButtonText: 'ביטול',
       confirmButtonClass: 'btn-danger',
       cancelButtonClass: 'btn-danger',
       confirmButtonColor: '#3085d6',
-    }).then(() => {
-      remove(id)
+    }).then((result) => {
+      if (result.isConfirmed) {
+        remove(id)
+      }
     })
   }
   const remove = (id) => {
     const copyRows = rows.filter((row) => row.rowId !== id);
     setRows(copyRows);
     alert("deleted")
+    //צריך למחוק גם מהשרת לא???אין שם פונקציה כזו, בקונטרולר!!!! ך
   }
 
   return (
