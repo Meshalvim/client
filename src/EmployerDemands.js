@@ -38,11 +38,11 @@ const EmployerDemands = () => {
             //( values ואז לא יצטרכו לשלוח עוד משהו חוץ מ 
 
             const send = {
-                ...{
+                Company: {
                     password: JSON.parse(localStorage.getItem('user')).password,
                     name_company: JSON.parse(localStorage.getItem('user')).name_company
                 },
-                ...{
+                Job: {
                     age_range: values.age_range,
                     seniority_range: values.seniority_range,
                     //id_company in the C#
@@ -50,13 +50,15 @@ const EmployerDemands = () => {
                     id_gender: values.id_gender,
                     amount: values.amount,
                 },
-                ...{
+                scoreOfJob:
+                {
                     score_time: values.score_time,
                     score_gender: values.score_gender,
                     // score_age:values.,
                     score_seniority: values.score_seniority,
                 },
-                
+                //requires: {}
+
             }
             axios.post(url, send).then(response => {
                 console.log(response);
