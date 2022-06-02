@@ -16,7 +16,7 @@ const validationSchema = Yup.object({
 const LogIn = () => {
     const [curStatus, setCurStatus] = useState(localStorage.getItem('status'))
 
-    const url = `http://localhost:64672/api/login`
+    const url = `http://localhost:64672/api/logIn`
     let user
 
     useEffect(() => {
@@ -38,25 +38,14 @@ const LogIn = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-
-            // let jobs = getJobs();
+            let details = {
+                Name: values.name,
+                Password: values.password
+            }
             debugger
-            axios.get(url).then(response => {
-                console.log(response);
+            axios.post(url, details).then((response) => {
+                
             })
-            // .catch(err=>{
-            // console.log(err)});
-
-            // console.log(jobs)
-            // fetch(url, {
-            //     mode: 'no-cors',
-            // }).then(res => {
-            //     {
-            //         console.log(res.text())
-            //         // user=data.filter(d=> d.name== values.name&& d.password== values.password)
-            //     }
-            // })
-            //     .then(data => console.log(data))
         }
     })
 
@@ -166,9 +155,9 @@ const LogIn = () => {
                     </IconButton>
                 </Grid>
                 <Grid item
-                    sx={{ margin: 'auto'}}
+                    sx={{ margin: 'auto' }}
                 >
-                    <img src={require('./images/15.png')}  style={{borderRadius:'50%', width:'100px'}}></img>
+                    <img src={require('./images/15.png')} style={{ borderRadius: '50%', width: '100px' }}></img>
                 </Grid>
 
                 <Grid item sx={{
