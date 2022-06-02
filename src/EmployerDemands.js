@@ -59,31 +59,49 @@ const EmployerDemands = () => {
                 },
                 requires: [
                     {
-                        id_requirment:1,
-                        score:1        
-            
+                        id_requirment: 1,
+                        score: 1
+
                     },
                     {
-                        id_requirment:2,
-                        score:2       
+                        id_requirment: 2,
+                        score: 2
                     }
                 ]
-                
+
             }
             axios.post(url, send).then(response => {
                 console.log(response);
-            }).then(
-                swal.fire({
-                    title: '',
-                    text: 'הפרטים נקלטו בהצלחה!! המשך יום מוצלח!!! ',
-                    icon: 'success',
-                    confirmButtonText: 'חזרה לדף הבית',
-                    confirmButtonColor: '#3085d6',
-                }).then(() => {
-                    localStorage.setItem('realUser',JSON.stringify(send))
-                    navigate('/') 
-                })
-            )
+                if (response.status == true) {
+                    swal.fire({
+                        title: '',
+                        text: 'הפרטים נקלטו בהצלחה!! המשך יום מוצלח!!! ',
+                        icon: 'success',
+                        confirmButtonText: 'חזרה לדף הבית',
+                        confirmButtonColor: '#3085d6',
+                    }).then(() => {
+                        localStorage.setItem('realUser', JSON.stringify(send))
+                        navigate('/')
+                    })
+                }
+                else {
+                    swal.fire({
+                        title: '',
+                        icon: 'error',
+                        text: response.message,
+                        confirmButtonText: 'חזרה לדף הבית',
+                        showCancelButton: true,
+                        cancelButtonText: 'לניסיון חוזר',
+                        confirmButtonClass: 'btn-danger',
+                        cancelButtonClass: 'btn-danger',
+                        confirmButtonColor: '#3085d6',
+                    }).then( (result) => {
+                        if (result.isConfirmed) {
+                                navigate('/')
+                        }
+                    })
+                }
+            })
         }
     });
 
@@ -122,9 +140,9 @@ const EmployerDemands = () => {
         })
     }, [2])
 
-    const addAbility = (e) => {       
+    const addAbility = (e) => {
         debugger
-        setGradedAbilities([...gradedAbilities,JSON.parse(e.target.value)])
+        setGradedAbilities([...gradedAbilities, JSON.parse(e.target.value)])
         let a = shownAbilities.slice(0, e.target.id)
         let b = shownAbilities.slice(parseInt(e.target.id) + 1, shownAbilities.length)
         setShownAbilities([...b, ...a])
@@ -211,16 +229,16 @@ const EmployerDemands = () => {
                                                         key={index} value={JSON.stringify(ability)} >
                                                         <Checkbox onChange={(e) => {
                                                             debugger
-                                                            if (e.target.checked)
-                                                            {
-                                                                console.log("add "+JSON.stringify(shownAbilities))
+                                                            if (e.target.checked) {
+                                                                console.log("add " + JSON.stringify(shownAbilities))
                                                                 debugger
                                                                 setShownAbilities([...values.abilities, ability])
                                                             }
-                                                            else{
+                                                            else {
                                                                 debugger
-                                                                console.log("less "+shownAbilities)
-                                                                setShownAbilities(values.abilities.filter((a) => a.id_req != ability.id_req))}
+                                                                console.log("less " + shownAbilities)
+                                                                setShownAbilities(values.abilities.filter((a) => a.id_req != ability.id_req))
+                                                            }
                                                         }} checked={values.abilities.indexOf(ability.name_req) != -1} />
                                                         <ListItemText primary={ability.name_req} />
                                                     </MenuItem>

@@ -38,14 +38,15 @@ const Manager = () => {
         validationSchema,
         onSubmit: (values) => {
             //check if it's correct password of the manager of the system
-            if (values.password==password)
-               { Swal.fire({
+            if (values.password == password) {
+                Swal.fire({
                     title: 'שלום!',
                     icon: 'info',
                     text: 'האימות הצליח!!!',
                     confirmButtonText: 'המשך',
                     confirmButtonColor: '#3085d6',
-                }).then((result) => { if (result.isConfirmed) { setEnable(false) } })}
+                }).then((result) => { if (result.isConfirmed) { setEnable(false) } })
+            }
             else {
                 Swal.fire({
                     title: '',
@@ -60,7 +61,7 @@ const Manager = () => {
                 }).then(
                     (result) => {
                         if (result.isConfirmed) {
-                                navigate('/')
+                            navigate('/')
                         }
                     })
             }

@@ -37,14 +37,17 @@ export default function DenseTable() {
       confirmButtonClass: 'btn-danger',
       cancelButtonClass: 'btn-danger',
       confirmButtonColor: '#3085d6',
-    }).then(() => {
-      remove(id)
+    }).then((result) => {
+      if (result.isConfirmed) {
+        remove(id)
+      }
     })
   }
   const remove = (id) => {
     const copyRows = rows.filter((row) => row.rowId !== id);
     setRows(copyRows);
     alert("deleted")
+    //צריך למחוק גם מהשרת לא???אין שם פונקציה כזו, בקונטרולר!!!! ך
   }
 
   return (
