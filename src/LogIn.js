@@ -44,16 +44,29 @@ const LogIn = () => {
             }
             debugger
             axios.post(url, details).then((response) => {
-                
+                if (response.data.data === null)
+                    Swal.fire({
+                        title: 'שגיאה!',
+                        icon: 'warning',
+                        text: 'משתמש לא קיים!',
+                        confirmButtonText: 'מעבר לרישום',
+                        showCancelButton: true,
+                        cancelButtonText: 'להזנת הפרטים מחדש',
+                        cancelButtonClass: 'btn-danger',
+                        confirmButtonColor: '#3085d6',
+                    }).then((result) => {
+                        if (result.isConfirmed)
+                            navigate('/')
+                        else
+                            values = {
+                                name: '',
+                                password: '',
+                            }
+                    }
+                    )
             })
         }
     })
-
-    const getJobs = () => {
-
-    }
-
-
     //     if (result.json == null) {
     //         Swal.fire({
     //             title: 'שגיאה!',

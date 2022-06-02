@@ -39,7 +39,7 @@ const EmployerDemands = () => {
 
             const send = {
                 Company: {
-                    password: JSON.parse(localStorage.getItem('user')).password,
+                    password_company: JSON.parse(localStorage.getItem('user')).password,
                     name_company: JSON.parse(localStorage.getItem('user')).name_company
                 },
                 Job: {
