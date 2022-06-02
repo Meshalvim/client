@@ -18,7 +18,6 @@ const Manager = () => {
 
     const algorithm = () => {
         setShowBackdrop(true)
-        console.log('start ' + showBackdrop)
         getRiverInformation().then(
             d => setShowBackdrop(d)
         ).then(() => { navigate('../scheduling') })
