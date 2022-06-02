@@ -47,7 +47,9 @@ const ResponsiveAppBar = () => {
     const deleteUser = () => {
         //DELETE
         // לקרוא לפונקצית מחיקה מהשרת
-        axios.delete(`${url}${localStorage.getItem('status')}/${localStorage.getItem('user').id}`)
+        let storageStatus = localStorage.getItem('status')
+        let status = storageStatus == 'employer'?'job':'candidate'? 'candidate':'';
+        axios.delete(`${url}${status}/${localStorage.getItem('realUser').id}`)
             .then(logOut())
     }
 
@@ -149,10 +151,9 @@ const ResponsiveAppBar = () => {
                         {/* ))} */}
                     </Box>
 
-                    {currUser != null && localStorage.getItem('user') != null ?
+                    {currUser != null && localStorage.getItem('user') != null && localStorage.getItem('status') !== 'manager' ?
                         <>
-
-                            <Typography sx={{ margin: 3 }} textAlign="center">{currUser.name}</Typography>
+                            <Typography sx={{ margin: 3 }} textAlign="center">{currUser.name_company}</Typography>
                             <Box sx={{ flexGrow: 0 }}>
                                 <Tooltip title="פתח תפריט">
                                     <IconButton
