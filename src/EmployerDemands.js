@@ -70,8 +70,12 @@ const EmployerDemands = () => {
                 ]
                 
             }
-            axios.post(url, send).then(response => {
-                console.log(response);
+            axios.post(url, send).then(result => {
+                console.log(result)
+                    let data = result.data.data
+                    console.log(data)
+                    localStorage.setItem('realUser',JSON.stringify(data))
+                    navigate('/') 
             }).then(
                 swal.fire({
                     title: '',
@@ -79,11 +83,10 @@ const EmployerDemands = () => {
                     icon: 'success',
                     confirmButtonText: 'חזרה לדף הבית',
                     confirmButtonColor: '#3085d6',
-                }).then(() => {
-                    localStorage.setItem('realUser',JSON.stringify(send))
-                    navigate('/') 
                 })
             )
+           
+            
         }
     });
 
@@ -124,7 +127,8 @@ const EmployerDemands = () => {
 
     const addAbility = (e) => {       
         debugger
-        setGradedAbilities([...gradedAbilities,JSON.parse(e.target.value)])
+
+        setGradedAbilities([...gradedAbilities,e.target.value])
         let a = shownAbilities.slice(0, e.target.id)
         let b = shownAbilities.slice(parseInt(e.target.id) + 1, shownAbilities.length)
         setShownAbilities([...b, ...a])
@@ -196,9 +200,10 @@ const EmployerDemands = () => {
                                             name="abilities"
                                             value={values.abilities}
                                             renderValue={(selected) => (
-                                                <div>{(selected).map((value, index) => (
-                                                    <Chip key={index} label={JSON.parse(value).name_req} />
-                                                ))}</div>
+                                                <div>{(selected).map((value, index) => {
+                                                    const parseVal=  value.name_req? value: JSON.parse(value)
+                                                    return( <Chip key={index} label={parseVal.name_req} />)
+                                                })}</div>
                                             )}
                                             MenuProps={MenuProps}
                                             onChange={handleChange}

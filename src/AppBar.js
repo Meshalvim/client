@@ -48,8 +48,11 @@ const ResponsiveAppBar = () => {
         //DELETE
         // לקרוא לפונקצית מחיקה מהשרת
         let storageStatus = localStorage.getItem('status')
+        let realUser = JSON.parse(localStorage.getItem('realUser'))
+        console.log(realUser)
         let status = storageStatus == 'employer'?'job':'candidate'? 'candidate':'';
-        axios.delete(`${url}${status}/${localStorage.getItem('realUser').id}`)
+        let id = storageStatus == 'employer'? realUser.Company.id_company: realUser.Candidate.id_candidate
+        axios.delete(`${url}${status}/${id}`)
             .then(logOut())
     }
 
