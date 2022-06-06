@@ -26,18 +26,20 @@ export default function DenseTable() {
   const algorithm = () => {
     setShowBackdrop(true)
     console.log('start ' + showBackdrop)
-    getRiverInformation().then(
-      d => setShowBackdrop(d)
-    )
+    axios.get(url).then(res => {
+      //resolve = true
+      setRows(res.data.data)
+      setShowBackdrop(false)
+    })
   }
 
   const getRiverInformation = () => {
-    return new Promise((resolve) => {
+    //return new Promise((resolve) => {
       axios.get(url).then(res => {
-        resolve = true
-        setRows(res.data)
+        //resolve = true
+        setRows(res.data.data)
       })
-    })
+    //})
   }
 
   React.useEffect(() => {
