@@ -27,7 +27,7 @@ const SignInEmployer = (props) => {
         validationSchema,
         onSubmit: (values) => {
             //values צריך לשלוח את   
-            localStorage.setItem('user',{Company: JSON.stringify(values)})
+            localStorage.setItem('user',JSON.stringify({Company: values}))
             {
                 new swal({
                     title: `שלום ${values.name_company} `,

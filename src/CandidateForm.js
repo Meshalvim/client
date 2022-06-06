@@ -34,7 +34,6 @@ const CandidateForm = () => {
         },
         validationSchema,
         onSubmit: (values) => {
-            debugger
             let sendAbilities = [];
             for (let i = 0; i < abilities.length; i++) {
                 sendAbilities.push({
