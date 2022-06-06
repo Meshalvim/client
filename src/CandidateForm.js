@@ -39,7 +39,7 @@ const CandidateForm = () => {
                 sendAbilities[i] = {
                     id_candidate: '',
                     id_req: abilities[i].id_req,
-                    num_priority: i
+                    num_priority: i+1
                 }
             }
             const send = {

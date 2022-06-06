@@ -16,21 +16,21 @@ const Manager = () => {
     const [enable, setEnable] = useState(true)
     const [showBackdrop, setShowBackdrop] = useState(false)
     const password = "manager1234"
-    const algorithm = () => {
-        setShowBackdrop(true)
-        console.log('start ' + showBackdrop)
-        getRiverInformation().then(
-            d => setShowBackdrop(d)
-        ).then(() => { navigate('../scheduling') })
-    }
+    // const algorithm = () => {
+    //     setShowBackdrop(true)
+    //     console.log('start ' + showBackdrop)
+    //     getRiverInformation().then(
+    //         d => setShowBackdrop(d)
+    //     ).then(() => { navigate('../scheduling') })
+    // }
 
-    const getRiverInformation = () => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(false)
-            }, 10000)
-        })
-    }
+    // const getRiverInformation = () => {
+    //     return new Promise((resolve) => {
+    //         setTimeout(() => {
+    //             resolve(false)
+    //         }, 10000)
+    //     })
+    // }
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
         initialValues: {
             password: '',
@@ -140,19 +140,19 @@ const Manager = () => {
                     variant="contained"
                     color="success"
                     disabled={enable}
-                    onClick={() => { algorithm() }}
+                    onClick={() => { navigate('../scheduling') }}
                 >
                     לשיבוץ עובדים על פי הנתונים שנשמרו ...
                 </Button>
             </Grid>
-            <Backdrop
+            {/* <Backdrop
 
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={showBackdrop}
             >
                 <CircularProgress color="inherit" />
                 <h1 width='100vw'>אנא המתן...</h1>
-            </Backdrop>
+            </Backdrop> */}
         </>
     );
 }

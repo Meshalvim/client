@@ -7,25 +7,50 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, Backdrop, CircularProgress } from '@mui/material';
 import Swal from "sweetalert2";
 import { Icon, IconButton } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import axios from 'axios';
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 export default function DenseTable() {
   const url = `http://localhost:64672/api/schedule`
   const [company, setCompany] = React.useState('חברה')
   const [candidate, setCandidate] = React.useState('מועמד')
-
   const [rows, setRows] = React.useState([])
+  const navigate = useNavigate()
+  const [showBackdrop, setShowBackdrop] = useState(false)
+
+  const algorithm = () => {
+    setShowBackdrop(true)
+    console.log('start ' + showBackdrop)
+    getRiverInformation().then(
+      d => setShowBackdrop(d)
+    )
+  }
+
+  const getRiverInformation = () => {
+    return new Promise((resolve) => {
+      axios.get(url).then(res => {
+        resolve = true
+        setRows(res.data)
+      })
+    })
+  }
 
   React.useEffect(() => {
-    let c;
-    axios.get(url).then(res => {
-      setRows(res.data)
-    })
+    debugger
+    algorithm()
   }, [])
+  // React.useEffect(() => {
+  //   let c;
+  //   axios.get(url).then(res => {
+  //     //אנא המתן
+  //     setRows(res.data)
+  //   })
+  // }, [])
   const onClickRemove = (id) => {
     Swal.fire({
       title: '',
@@ -52,6 +77,14 @@ export default function DenseTable() {
 
   return (
     <>
+      <Backdrop
+
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={showBackdrop}
+      >
+        <CircularProgress color="inherit" />
+        <h1 width='100vw'>אנא המתן...</h1>
+      </Backdrop>
       <TableContainer component={Paper}
         sx={{
           p: 5,
