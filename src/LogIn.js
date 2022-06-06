@@ -44,6 +44,7 @@ const LogIn = () => {
             }
             debugger
             axios.post(url, details).then((response) => {
+                debugger
                 if (response.data.data === null)
                     Swal.fire({
                         title: 'שגיאה!',
@@ -64,6 +65,17 @@ const LogIn = () => {
                             }
                     }
                     )
+                else if(response.data.data.Candidate != null)
+                {
+                    localStorage.setItem('user',JSON.stringify(response.data.data))
+                    localStorage.setItem('status','candidate')
+                    navigate('../candidateForm')
+                }
+                else{
+                    localStorage.setItem('user', JSON.stringify(response.data.data))
+                    localStorage.setItem('status','employer')
+                    navigate('../employerDemands')
+                }
             })
         }
     })

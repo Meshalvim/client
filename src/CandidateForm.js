@@ -34,33 +34,35 @@ const CandidateForm = () => {
         },
         validationSchema,
         onSubmit: (values) => {
+            debugger
             let sendAbilities=[];
             for (let i = 0; i < abilities.length; i++) {
-                sendAbilities[i] = {
-                    id_candidate: '',
+                sendAbilities.push({
                     id_req: abilities[i].id_req,
                     num_priority: i
-                }
+                })
             }
             const send = {
                 /* public int id_candidate { get; set; } האם בשרת יש השמה של משתנה זה? ז*/
                 Candidate: {
-                    Id_number: (JSON.parse(localStorage.getItem('user'))).Id_number,
-                    name_: (JSON.parse(localStorage.getItem('user'))).name_,
-                    phone: (JSON.parse(localStorage.getItem('user'))).phone,
-                    email: (JSON.parse(localStorage.getItem('user'))).email,
-                    id_city: (JSON.parse(localStorage.getItem('user'))).id_city,
-                    password_: (JSON.parse(localStorage.getItem('user'))).password_,
+                    Id_number: (JSON.parse(localStorage.getItem('user'))).Candidate.Id_number,
+                    name_: (JSON.parse(localStorage.getItem('user'))).Candidate.name_,
+                    phone: (JSON.parse(localStorage.getItem('user'))).Candidate.phone,
+                    email: (JSON.parse(localStorage.getItem('user'))).Candidate.email,
+                    id_city: (JSON.parse(localStorage.getItem('user'))).Candidate.id_city,
+                    password_: (JSON.parse(localStorage.getItem('user'))).Candidate.password_,
                     ...values,
                 },
                 /* public int id_candidate { get; set; } האם בשרת יש השמה של משתנה זה? ז*/
-                FavoriteReqs: sendAbilities
+                FavoriteReqs:[ ...sendAbilities]
             }
             axios.post(url, send).then(response => {
                 console.log(response);
-                if(response==true)
-                {       new swal({
-                    title: '',
+                if(response.data.status==true)
+                {
+                    localStorage.setItem('user',JSON.stringify(response.data.data))      
+                    new swal({
+                    title: 'תודה על ההשתתפות',
                     icon: 'success',
                     text: 'פרטיך נקלטו בהצלחה במערכת!!!',
                     confirmButtonText: 'חזרה לדף הבית',

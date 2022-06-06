@@ -39,14 +39,14 @@ const EmployerDemands = () => {
 
             const send = {
                 Company: {
-                    password_company: JSON.parse(localStorage.getItem('user')).password,
-                    name_company: JSON.parse(localStorage.getItem('user')).name_company
+                    password_company: JSON.parse(localStorage.getItem('user')).Company.password_company,
+                    name_company: JSON.parse(localStorage.getItem('user')).Company.name_company
                 },
                 Job: {
                     age_range: values.age_range,
                     seniority_range: values.seniority_range,
                     //id_company in the C#
-                    id_city: JSON.parse(localStorage.getItem('user')).id_city,
+                    id_city: JSON.parse(localStorage.getItem('user')).Job.id_city,
                     id_gender: values.id_gender,
                     amount: values.amount,
                 },
@@ -82,7 +82,7 @@ const EmployerDemands = () => {
                         confirmButtonText: 'חזרה לדף הבית',
                         confirmButtonColor: '#3085d6',
                     }).then(() => {
-                        localStorage.setItem('realUser', JSON.stringify(data))
+                        localStorage.setItem('user', JSON.stringify(data))
                         navigate('/')
                     })
                 }
@@ -130,6 +130,7 @@ const EmployerDemands = () => {
 
     useEffect(() => {
         axios.get(uri).then(res => {
+            console.log(res.data.data)
             setAbilitiesArr(res.data.data)
         })
     })
@@ -144,7 +145,7 @@ const EmployerDemands = () => {
 
     const addAbility = (e) => {
         debugger
-        setGradedAbilities([...gradedAbilities, JSON.parse(e.target.value)])
+        setGradedAbilities([...gradedAbilities, e.target.outerText])
         let a = shownAbilities.slice(0, e.target.id)
         let b = shownAbilities.slice(parseInt(e.target.id) + 1, shownAbilities.length)
         setShownAbilities([...b, ...a])
@@ -217,8 +218,7 @@ const EmployerDemands = () => {
                                             value={values.abilities}
                                             renderValue={(selected) => (
                                                 <div>{(selected).map((value, index) => {
-                                                    const parseVal = value.name_req ? value : JSON.parse(value)
-                                                    return (<Chip key={index} label={parseVal.name_req} />)
+                                                    return (<Chip key={index} label={value} />)
                                                 })}</div>
                                             )}
                                             MenuProps={MenuProps}
@@ -227,25 +227,26 @@ const EmployerDemands = () => {
                                             error={errors.abilities && touched.abilities}>
                                             {
                                                 // console.log(abilitiesArr)
-                                                abilitiesArr && abilitiesArr.map((ability, index) => (
-                                                    <MenuItem onClick={() => { cancelGrade() }}
-                                                        key={index} value={JSON.stringify(ability)} >
+                                                abilitiesArr && abilitiesArr.map((ability, index) => {
+                                                    debugger
+                                                    return (<MenuItem onClick={() => { cancelGrade() }}
+                                                        key={index} value={ability.name_req} >
                                                         <Checkbox onChange={(e) => {
                                                             debugger
                                                             if (e.target.checked) {
                                                                 console.log("add " + JSON.stringify(shownAbilities))
                                                                 debugger
-                                                                setShownAbilities([...values.abilities, ability])
+                                                                setShownAbilities([...values.abilities, ability.name_req])
                                                             }
                                                             else {
                                                                 debugger
                                                                 console.log("less " + shownAbilities)
-                                                                setShownAbilities(values.abilities.filter((a) => a.id_req != ability.id_req))
+                                                                setShownAbilities(values.abilities.filter((a) => a != ability))
                                                             }
-                                                        }} checked={values.abilities.indexOf(ability.name_req) != -1} />
-                                                        <ListItemText primary={ability.name_req} />
-                                                    </MenuItem>
-                                                ))}
+                                                        }} checked={values.abilities.indexOf(ability) != -1} />
+                                                        <ListItemText primary={ability} />
+                                                    </MenuItem>)
+                                            })}
                                         </Select>
                                     </FormControl>
                                     {errors.abilities && touched.abilities && <Alert severity="error">{errors.abilities}</Alert>}
@@ -262,8 +263,8 @@ const EmployerDemands = () => {
                                             <Grid container direction='row'>
                                                 {shownAbilities.map((ability, index) => {
                                                     return (
-                                                        <Button sx={{ color: '#02c298' }} value={ability} id={index} key={index} onClick={(e) => addAbility(e)}>
-                                                            {ability.name_req}
+                                                        <Button sx={{ color: '#02c298' }} id={index} key={index} onClick={(e) => addAbility(e)}>
+                                                            {ability}
                                                         </Button>
                                                     )
                                                 })}
@@ -276,13 +277,14 @@ const EmployerDemands = () => {
                                                 <ol>
                                                     {gradedAbilities.map((ability, index) => {
                                                         //console.log('values: ' + index)
-                                                        return (<li key={index}><Grid>{ability.name_req}</Grid></li>)
+                                                        return (<li key={index}><Grid>{ability}</Grid></li>)
                                                     })}
                                                 </ol>
                                             </Grid>
                                         </Grid>
                                     </Grid>
                                 }
+
                                 <Grid item sx={{
                                     // p: 2,
                                     margin: 'auto',
