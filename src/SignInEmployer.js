@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Grid, FormLabel, Button, Alert, IconButton, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useFormik } from "formik";
 import * as Yup from "yup"
@@ -9,25 +9,28 @@ import axios from 'axios';
 
 const validationSchema = Yup.object({
     name_company: Yup.string().required('שם זהו שדה חובה'),
-    password: Yup.string().required('סיסמא זהו שדה חובה'),
+    password_company: Yup.string().required('סיסמא זהו שדה חובה'),
     id_city: Yup.string().required('עיר זהו שדה חובה'),
 })
 
-const SignInEmployer = () => {
+const SignInEmployer = (props) => {
+    
+    const location = useLocation()
 
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
-        initialValues: {
-            name_company: '',
-            password: '',
-            id_city: '',
-        },  
+        initialValues: location.state != null ? { ...location.state.user.Company, ...location.state.user.Job} :
+            {
+                name_company: '',
+                password_company: '',
+                id_city: '',
+            },
         validationSchema,
         onSubmit: (values) => {
             //values צריך לשלוח את   
-            localStorage.setItem('user', JSON.stringify(values))
+            localStorage.setItem('user',{Company: JSON.stringify(values)})
             {
                 new swal({
-                    title:`שלום ${values.name_company} `,
+                    title: `שלום ${values.name_company} `,
                     icon: 'success',
                     text: 'פרטיך נקלטו בהצלחה במערכת',
                     confirmButtonText: 'המשך',
@@ -46,11 +49,12 @@ const SignInEmployer = () => {
     const [name, setName] = useState('')
     const navigate = useNavigate();
     const [cities, setCities] = useState([])
-    const uri = `http://localhost:64672/api/cities`
+    const url=`http://localhost:64672/api/`
+    const uriGetCities = `cities`
 
     useEffect(() => {
         let c;
-        axios.get(uri).then(res => {
+        axios.get(`${url}${uriGetCities}`).then(res => {
             setCities(res.data)
         })
     })
@@ -59,7 +63,33 @@ const SignInEmployer = () => {
         setStatus(event.target.value);
     }
 
+    const editDetailsPut = () => {
+        //PUT(values, id)
+        //
+        const savedUser= localStorage.getItem('user')
+        debugger
+        axios.put(`${url}job/${values.name_company}`,{
+            Company:{
+                name_company: values.name_company,
+                password_company: values.password_company,
+            }, 
+            Job: {
+                id_city: values.id_city
+            } }).then(
+        new swal({
+            title: 'שלום ' + values.name_company + '!!!',
+            icon: 'success',
+            text: 'פרטיך עודכנו בהצלחה במערכת!!!',
+            confirmButtonText: 'חזרה לדף הבית',
+            confirmButtonColor: '#3085d6',
+        }).then(
+            (result) => {
+                if (result.isConfirmed) {
+                    navigate('/')
+                }
+            }))
 
+    }
     return (
 
         <form onSubmit={handleSubmit}>
@@ -112,6 +142,7 @@ const SignInEmployer = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.name_company}
+                                disable={location.state}
                             />
                             {errors.name_company && touched.name_company && <Alert severity="error">{errors.name_company}</Alert>}
                         </Grid>
@@ -122,17 +153,17 @@ const SignInEmployer = () => {
                         }}>
                             <TextField
                                 fullWidth
-                                error={errors.password && touched.password}
-                                id="password"
+                                error={errors.password_company && touched.password_company}
+                                id="password_company"
                                 type="password"
                                 label="סיסמא"
                                 variant="standard"
                                 autoComplete='false'
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.password}
+                                value={values.password_company}
                             />
-                            {errors.password && touched.password && <Alert severity="error">{errors.password}</Alert>}
+                            {errors.password_company && touched.password_company && <Alert severity="error">{errors.password_company}</Alert>}
                         </Grid>
 
                         {/* <Grid item sx={{
@@ -184,12 +215,20 @@ const SignInEmployer = () => {
                                 p: 1,
                                 margin: 'auto',
                             }}>
-                                <Button
-                                    type='submit'
-                                    disabled={!dirty || !isValid}
-                                    variant="contained"
-                                    sx={{ backgroundColor: '#02c298' }}
-                                >להרשמה</Button>
+                                {location.state ?
+
+                                    <Button
+                                        onClick={editDetailsPut}
+                                        disabled={!isValid}
+                                        variant="contained"
+                                        sx={{ backgroundColor: '#02c298' }}
+                                    >לעדכון פרטים</Button> :
+                                    <Button
+                                        type='submit'
+                                        disabled={!dirty || !isValid}
+                                        variant="contained"
+                                        sx={{ backgroundColor: '#02c298' }}
+                                    >להרשמה</Button>}
                             </Grid>
 
                             <Grid item sx={{

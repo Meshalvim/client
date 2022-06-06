@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Grid, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Alert, IconButton, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useFormik } from "formik";
 import * as Yup from "yup"
 import axios from 'axios';
-
-import { useLocation } from 'react-router-dom';
 
 const validationSchema = Yup.object({
     name_: Yup.string().required('שם זהו שדה חובה'),
@@ -23,7 +21,7 @@ const SignInWorker = (props) => {
 
     const { handleSubmit, handleChange, handleBlur, values, errors, touched, dirty, isValid } = useFormik({
         initialValues:
-            location.state != null ? location.state.user :
+            location.state != null ? location.state.user.Candidate :
                 {
                     name_: '',
                     password_: '',
@@ -35,23 +33,23 @@ const SignInWorker = (props) => {
         ,
         validationSchema,
         onSubmit: (values) => {
-            localStorage.setItem('user', JSON.stringify(values))
-                new swal({
-                    title:`שלום ${values.name_} !!!`,
-                    icon: 'success',
-                    text: 'פרטיך נקלטו בהצלחה במערכת!!!',
-                    confirmButtonText: 'המשך',
-                    confirmButtonColor: '#3085d6',
-                }).then(
-                    (result) => {
-                        if (result.isConfirmed) {
-                            navigate('../candidateForm')
-                        }
-                    })
+            localStorage.setItem('user', JSON.stringify({ Candidate: values }))
+            new swal({
+                title: `שלום ${values.name_} !!!`,
+                icon: 'success',
+                text: 'פרטיך נקלטו בהצלחה במערכת!!!',
+                confirmButtonText: 'המשך',
+                confirmButtonColor: '#3085d6',
+            }).then(
+                (result) => {
+                    if (result.isConfirmed) {
+                        navigate('../candidateForm')
+                    }
+                })
         }
     })
 
-    const url = `http://localhost:64672/api/cities`
+    const urlCities = `http://localhost:64672/api/cities`
 
     const [status, setStatus] = useState('employer');
     const [name, setName] = useState('')
@@ -59,7 +57,7 @@ const SignInWorker = (props) => {
 
     useEffect(() => {
         let c;
-        axios.get(url).then(res => {
+        axios.get(urlCities).then(res => {
             setCities(res.data)
         })
     }, [5])
@@ -73,20 +71,36 @@ const SignInWorker = (props) => {
     const editDetailsPut = () => {
         //PUT(values, id)
         //
-        debugger
-        localStorage.setItem('user', JSON.stringify(values))
-        new swal({
-            title: 'שלום ' + values.name_ + '!!!',
-            icon: 'success',
-            text: 'פרטיך עודכנו בהצלחה במערכת!!!',
-            confirmButtonText: 'המשך לעריכת טופס הדרישות',
-            confirmButtonColor: '#3085d6',
+        axios.put(`http://localhost:64672/api/candidate/${values.name_}`, {
+            Candidate: values,
         }).then(
-            (result) => {
-                if (result.isConfirmed) {
-                    navigate('../candidateForm')
-                }
-            })
+            new swal({
+                title: 'שלום ' + values.name_ + '!!!',
+                icon: 'success',
+                text: 'פרטיך עודכנו בהצלחה במערכת!!!',
+                confirmButtonText: 'חזרה לדף הבית',
+                confirmButtonColor: '#3085d6',
+            }).then(
+                (result) => {
+                    if (result.isConfirmed) {
+                        navigate('/')
+                    }
+                }))
+
+        // debugger
+        // localStorage.setItem('user', JSON.stringify({ Candidate: values }))
+        // new swal({
+        //     title: 'שלום ' + values.name_ + '!!!',
+        //     icon: 'success',
+        //     text: 'פרטיך עודכנו בהצלחה במערכת!!!',
+        //     confirmButtonText: 'המשך לעריכת טופס הדרישות',
+        //     confirmButtonColor: '#3085d6',
+        // }).then(
+        //     (result) => {
+        //         if (result.isConfirmed) {
+        //             navigate('/')
+        //         }
+        //     })
 
     }
 
@@ -142,6 +156,7 @@ const SignInWorker = (props) => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.name_}
+                                    disable={location.state}
                                 />
                                 {errors.name_ && touched.name_ && <Alert severity="error">{errors.name_}</Alert>}
                             </Grid>

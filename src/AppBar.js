@@ -47,23 +47,30 @@ const ResponsiveAppBar = () => {
     const deleteUser = () => {
         //DELETE
         // לקרוא לפונקצית מחיקה מהשרת
+        debugger
         let storageStatus = localStorage.getItem('status')
+        let user = JSON.parse(localStorage.getItem('user'))
+        console.log("saved user: "+user)
         let status = storageStatus == 'employer'?'job':'candidate'? 'candidate':'';
-        axios.delete(`${url}${status}/${localStorage.getItem('realUser').id}`)
+        let name = storageStatus == 'employer'? user.Company.name_company: user.Candidate.name_
+        axios.delete(`${url}${status}/${name}`)
             .then(logOut())
     }
 
     const editDetails = () => {
         //GET
         debugger
+        let storageStatus = localStorage.getItem('status')
         const user = JSON.parse(localStorage.getItem('user'))
-        const uri = url + localStorage.getItem('status')
+        let status = storageStatus == 'employer'?'job':'candidate'? 'candidate':'';
+        let name = storageStatus == 'employer'? user.Company.name_company: user.Candidate.name_
+        const uri = `${url}${status}/${name}`
         axios.get(uri)
-            .then(() => {
+            .then((response) => {
                 if (localStorage.getItem('status') === 'candidate')
-                    navigate('/signInWorker', { state: { user: user } })
+                    navigate('/signInWorker', { state: { user: response.data.data } })
                 else
-                    navigate('/SignInEmployer', { state: { user: user } })
+                    navigate('/SignInEmployer', { state: { user: response.data.data } })
             })
         //לנווט לטופס הרשמה עם פרופס של המשתמש עפ"י הסטטוס שבלוקל סטורג
     }
@@ -78,7 +85,7 @@ const ResponsiveAppBar = () => {
                         onClick={() => navigate('/')}
                         // color='success'
                         // sx={{color:'white'}}
-                        aria-label="add to shopping cart">
+                        aria-label="home page">
                         <HomeRoundedIcon />
                     </IconButton>
 
@@ -153,7 +160,9 @@ const ResponsiveAppBar = () => {
 
                     {currUser != null && localStorage.getItem('user') != null && localStorage.getItem('status') !== 'manager' ?
                         <>
-                            <Typography sx={{ margin: 3 }} textAlign="center">{currUser.name_company}</Typography>
+                            <Typography sx={{ margin: 3 }} textAlign="center">
+                            {currUser.Company==null? currUser.Candidate.name_: currUser.Company.name_company}
+                            </Typography>
                             <Box sx={{ flexGrow: 0 }}>
                                 <Tooltip title="פתח תפריט">
                                     <IconButton

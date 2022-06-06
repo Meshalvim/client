@@ -44,16 +44,41 @@ const LogIn = () => {
             }
             debugger
             axios.post(url, details).then((response) => {
-                
+                debugger
+                if (response.data.data === null)
+                    Swal.fire({
+                        title: 'שגיאה!',
+                        icon: 'warning',
+                        text: 'משתמש לא קיים!',
+                        confirmButtonText: 'מעבר לרישום',
+                        showCancelButton: true,
+                        cancelButtonText: 'להזנת הפרטים מחדש',
+                        cancelButtonClass: 'btn-danger',
+                        confirmButtonColor: '#3085d6',
+                    }).then((result) => {
+                        if (result.isConfirmed)
+                            navigate('/')
+                        else
+                            values = {
+                                name: '',
+                                password: '',
+                            }
+                    }
+                    )
+                else if(response.data.data.Candidate != null)
+                {
+                    localStorage.setItem('user',JSON.stringify(response.data.data))
+                    localStorage.setItem('status','candidate')
+                    navigate('../candidateForm')
+                }
+                else{
+                    localStorage.setItem('user', JSON.stringify(response.data.data))
+                    localStorage.setItem('status','employer')
+                    navigate('../employerDemands')
+                }
             })
         }
     })
-
-    const getJobs = () => {
-
-    }
-
-
     //     if (result.json == null) {
     //         Swal.fire({
     //             title: 'שגיאה!',
